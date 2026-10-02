@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LexiCore 80/20 - Aprendizaje Acelerado de Inglés</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            },
+            accent: {
+              green: '#10b981',
+              amber: '#f59e0b',
+              rose: '#f43f5e'
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200">
+
+  <!-- ========================================================================
+       TOP NAVBAR
+       ======================================================================== -->
+  <header class="sticky top-0 z-40 w-full border-b border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Brand & Logo -->
+      <div class="flex items-center gap-3 cursor-pointer" onclick="NavigationController.navigateTo('dashboard')">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-emerald-400 flex items-center justify-center text-white shadow-lg shadow-indigo-500/20">
+          <i data-lucide="zap" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-indigo-600 to-emerald-500 bg-clip-text text-transparent">
+              LexiCore
+            </span>
+            <span class="text-xs px-2 py-0.5 rounded-full font-bold bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
+              80/20
+            </span>
+          </div>
+          <p class="text-[10px] text-slate-500 dark:text-slate-400 font-medium tracking-wider uppercase">Oxford 3000 • GSL</p>
+        </div>
+      </div>
+
+      <!-- Quick Stats & Controls in Header -->
+      <div class="flex items-center gap-2 sm:gap-4">
+        <!-- Daily Streak -->
+        <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 text-amber-600 dark:text-amber-400 font-bold text-xs sm:text-sm" title="Racha de días consecutivos estudiando">
+          <span class="flame-anim text-base">🔥</span>
+          <span id="header-streak-count">0</span>
+          <span class="hidden sm:inline font-medium text-xs text-amber-700/80 dark:text-amber-300/80">días</span>
+        </div>
+
+        <!-- 80/20 Target Coverage -->
+        <div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 text-emerald-600 dark:text-emerald-400 font-bold text-xs" title="Porcentaje estimado de comprensión del inglés cotidiano alcanzado">
+          <i data-lucide="target" class="w-4 h-4"></i>
+          <span>Cobertura: <strong id="header-coverage-pct">0%</strong></span>
+        </div>
+
+        <!-- Daily Goal Pill -->
+        <div class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-xs font-semibold">
+          <i data-lucide="check-circle" class="w-4 h-4 text-indigo-500"></i>
+          <span id="header-daily-count">0/10</span>
+        </div>
+
+        <!-- Dark / Light Mode Switcher -->
+        <button id="theme-toggle-btn" class="p-2 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Cambiar tema">
+          <i data-lucide="sun" class="w-5 h-5 hidden dark:block text-amber-400"></i>
+          <i data-lucide="moon" class="w-5 h-5 block dark:hidden text-indigo-600"></i>
+        </button>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-toggle" class="p-2 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 lg:hidden">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       MAIN APP WRAPPER: SIDEBAR + CONTENT VIEWS
+       ======================================================================== -->
+  <div class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 flex gap-6">
+
+    <!-- DESKTOP SIDEBAR NAVIGATION -->
+    <aside class="hidden lg:flex flex-col w-64 shrink-0 gap-2">
+      <nav class="sticky top-24 flex flex-col gap-1.5 p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm">
+        
+        <button onclick="NavigationController.navigateTo('dashboard')" id="nav-btn-dashboard" class="nav-tab active flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm transition-all text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60">
+          <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+          <span>Dashboard</span>
+        </button>
+
+        <button onclick="NavigationController.navigateTo('flashcards')" id="nav-btn-flashcards" class="nav-tab flex items-center justify-between px-4 py-3 rounded-xl font-semibold text-sm transition-all text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <div class="flex items-center gap-3">
+            <i data-lucide="layers" class="w-5 h-5"></i>
+            <span>Flashcards SRS</span>
+          </div>
+          <span id="nav-due-badge" class="hidden px-2 py-0.5 rounded-full text-xs font-bold bg-amber-500 text-white">0</span>
+        </button>
+
+        <button onclick="NavigationController.navigateTo('chunks')" id="nav-btn-chunks" class="nav-tab flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm transition-all text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <i data-lucide="message-square-quote" class="w-5 h-5"></i>
+          <span>Frases & Chunks</span>
+        </button>
+
+        <button onclick="NavigationController.navigateTo('quiz')" id="nav-btn-quiz" class="nav-tab flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm transition-all text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <i data-lucide="sparkles" class="w-5 h-5 text-amber-500"></i>
+          <span>Quiz Rápido</span>
+        </button>
+
+        <button onclick="NavigationController.navigateTo('explorer')" id="nav-btn-explorer" class="nav-tab flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm transition-all text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <i data-lucide="book-marked" class="w-5 h-5"></i>
+          <span>Explorador 80/20</span>
+        </button>
+
+        <button onclick="NavigationController.navigateTo('tech')" id="nav-btn-tech" class="nav-tab flex items-center justify-between px-4 py-3 rounded-xl font-semibold text-sm transition-all text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <div class="flex items-center gap-3">
+            <i data-lucide="terminal" class="w-5 h-5 text-emerald-500"></i>
+            <span>Tech & Dev English</span>
+          </div>
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-800">DEV</span>
+        </button>
+
+        <button onclick="NavigationController.navigateTo('settings')" id="nav-btn-settings" class="nav-tab flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm transition-all text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <i data-lucide="sliders" class="w-5 h-5"></i>
+          <span>Ajustes & Respaldo</span>
+        </button>
+
+        <!-- Pareto 80/20 Mini Explainer Card -->
+        <div class="mt-4 p-3.5 rounded-xl bg-gradient-to-br from-indigo-500/10 via-emerald-500/10 to-transparent border border-indigo-200/50 dark:border-indigo-800/40 text-xs">
+          <div class="flex items-center gap-1.5 font-bold text-indigo-700 dark:text-indigo-300 mb-1">
+            <i data-lucide="lightbulb" class="w-4 h-4"></i>
+            <span>Principio 80/20</span>
+          </div>
+          <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+            Las 1.000 palabras más frecuentes de Oxford cubren el <strong>80%</strong> del inglés hablado. ¡Enfócate en la máxima rentabilidad!
+          </p>
+        </div>
+
+      </nav>
+    </aside>
+
+    <!-- MOBILE OFF-CANVAS / DRAWER (HIDDEN BY DEFAULT) -->
+    <div id="mobile-menu-drawer" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm hidden lg:hidden">
+      <div class="w-72 bg-white dark:bg-slate-900 h-full p-5 flex flex-col justify-between shadow-2xl">
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+            <span class="font-extrabold text-lg text-indigo-600 dark:text-indigo-400">Menú Principal</span>
+            <button id="mobile-menu-close" class="p-1 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
+              <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+          </div>
+          <nav class="flex flex-col gap-1">
+            <button onclick="NavigationController.navigateTo('dashboard'); NavigationController.toggleMobileMenu(false);" class="mobile-nav-btn flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm text-left">
+              <i data-lucide="layout-dashboard" class="w-5 h-5"></i> Dashboard
+            </button>
+            <button onclick="NavigationController.navigateTo('flashcards'); NavigationController.toggleMobileMenu(false);" class="mobile-nav-btn flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm text-left">
+              <i data-lucide="layers" class="w-5 h-5"></i> Flashcards SRS
+            </button>
+            <button onclick="NavigationController.navigateTo('chunks'); NavigationController.toggleMobileMenu(false);" class="mobile-nav-btn flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm text-left">
+              <i data-lucide="message-square-quote" class="w-5 h-5"></i> Frases & Chunks
+            </button>
+            <button onclick="NavigationController.navigateTo('quiz'); NavigationController.toggleMobileMenu(false);" class="mobile-nav-btn flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm text-left">
+              <i data-lucide="sparkles" class="w-5 h-5 text-amber-500"></i> Quiz Rápido
+            </button>
+            <button onclick="NavigationController.navigateTo('explorer'); NavigationController.toggleMobileMenu(false);" class="mobile-nav-btn flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm text-left">
+              <i data-lucide="book-marked" class="w-5 h-5"></i> Explorador 80/20
+            </button>
+            <button onclick="NavigationController.navigateTo('tech'); NavigationController.toggleMobileMenu(false);" class="mobile-nav-btn flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm text-left">
+              <i data-lucide="terminal" class="w-5 h-5 text-emerald-500"></i> Tech & Dev English
+            </button>
+            <button onclick="NavigationController.navigateTo('settings'); NavigationController.toggleMobileMenu(false);" class="mobile-nav-btn flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm text-left">
+              <i data-lucide="sliders" class="w-5 h-5"></i> Ajustes & Respaldo
+            </button>
+          </nav>
+        </div>
+        <p class="text-xs text-center text-slate-400">LexiCore 80/20 • Local SPA</p>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         MAIN CONTENT CONTAINER (SWITCHABLE VIEWS)
+         ====================================================================== -->
+    <main class="flex-1 min-w-0">
+
+      <!-- ====================================================================
+           VIEW 1: DASHBOARD
+           ==================================================================== -->
+      <section id="view-dashboard" class="view-panel space-y-6">
+        
+        <!-- Welcome Hero -->
+        <div class="relative overflow-hidden p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-indigo-900 via-indigo-800 to-slate-900 text-white shadow-xl">
+          <div class="relative z-10 max-w-2xl space-y-3">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Regla del 80/20 Activa
+            </span>
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-tight">
+              Aprende el 20% del vocabulario que genera el 80% de la fluidez
+            </h1>
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              Basado en el corpus Oxford 3000 / GSL y repetición espaciada inteligente (SRS). Retén palabras para siempre con frases contextuales reales.
+            </p>
+            <div class="pt-2 flex flex-wrap gap-3">
+              <button onclick="NavigationController.navigateTo('flashcards')" class="btn-duo-primary px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm flex items-center gap-2 shadow-lg">
+                <i data-lucide="play" class="w-4 h-4 fill-white"></i>
+                <span id="dash-btn-study-text">Comenzar Repaso</span>
+              </button>
+              <button onclick="NavigationController.navigateTo('chunks')" class="px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-sm backdrop-blur-sm border border-white/20 flex items-center gap-2 transition-all">
+                <i data-lucide="message-square-quote" class="w-4 h-4"></i>
+                <span>Modo Chunks & Oraciones</span>
+              </button>
+            </div>
+          </div>
+          <!-- Decorative Background Shapes -->
+          <div class="absolute -right-8 -bottom-8 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
+          <div class="absolute right-12 top-0 w-48 h-48 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
+        </div>
+
+        <!-- 80/20 Coverage Progress Card -->
+        <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <h2 class="text-lg font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                <i data-lucide="pie-chart" class="w-5 h-5 text-indigo-500"></i>
+                <span>Cobertura del Vocabulario Cotidiano</span>
+              </h2>
+              <p class="text-xs text-slate-500 dark:text-slate-400">
+                Ponderación basada en palabras dominadas (100%) y en aprendizaje (40%). Meta: 80%.
+              </p>
+            </div>
+            <div class="text-left sm:text-right">
+              <span id="dash-coverage-percent" class="text-3xl font-black text-emerald-500">0%</span>
+              <span class="text-xs text-slate-400"> / 80% Meta</span>
+            </div>
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="w-full bg-slate-100 dark:bg-slate-800 h-4 rounded-full overflow-hidden p-0.5 border border-slate-200 dark:border-slate-700/60">
+            <div id="dash-coverage-bar" class="h-full rounded-full bg-gradient-to-r from-indigo-500 via-emerald-400 to-emerald-500 transition-all duration-700 ease-out" style="width: 0%;"></div>
+          </div>
+
+          <div class="flex items-center justify-between text-xs text-slate-500 font-medium">
+            <span>0% (Principiante)</span>
+            <span class="text-indigo-500 font-semibold">40% (Conversación Simple)</span>
+            <span class="text-emerald-500 font-bold">80% (Fluidez Cotidiana)</span>
+          </div>
+        </div>
+
+        <!-- 4 Key Stat Metric Cards Grid -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          
+          <!-- Stat 1: Dominadas -->
+          <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+            <div class="flex items-center justify-between text-emerald-500">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Dominadas</span>
+              <div class="p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/50">
+                <i data-lucide="award" class="w-5 h-5 text-emerald-500"></i>
+              </div>
+            </div>
+            <div class="mt-3">
+              <span id="dash-stat-mastered" class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100">0</span>
+              <span class="text-xs text-slate-400 ml-1">palabras</span>
+            </div>
+          </div>
+
+          <!-- Stat 2: En Aprendizaje -->
+          <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+            <div class="flex items-center justify-between text-amber-500">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">En Aprendizaje</span>
+              <div class="p-2 rounded-xl bg-amber-50 dark:bg-amber-950/50">
+                <i data-lucide="repeat" class="w-5 h-5 text-amber-500"></i>
+              </div>
+            </div>
+            <div class="mt-3">
+              <span id="dash-stat-learning" class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100">0</span>
+              <span class="text-xs text-slate-400 ml-1">palabras</span>
+            </div>
+          </div>
+
+          <!-- Stat 3: Pendientes Hoy (SRS Due) -->
+          <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+            <div class="flex items-center justify-between text-rose-500">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Por Repasar Hoy</span>
+              <div class="p-2 rounded-xl bg-rose-50 dark:bg-rose-950/50">
+                <i data-lucide="clock" class="w-5 h-5 text-rose-500"></i>
+              </div>
+            </div>
+            <div class="mt-3">
+              <span id="dash-stat-due" class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100">0</span>
+              <span class="text-xs text-slate-400 ml-1">pendientes</span>
+            </div>
+          </div>
+
+          <!-- Stat 4: Por Aprender / Nuevas -->
+          <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+            <div class="flex items-center justify-between text-indigo-500">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Total Catálogo</span>
+              <div class="p-2 rounded-xl bg-indigo-50 dark:bg-indigo-950/50">
+                <i data-lucide="book-open" class="w-5 h-5 text-indigo-500"></i>
+              </div>
+            </div>
+            <div class="mt-3">
+              <span id="dash-stat-total" class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100">52</span>
+              <span class="text-xs text-slate-400 ml-1">palabras 80/20</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- CEFR Levels Breakdown Cards -->
+        <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+          <div class="flex items-center justify-between">
+            <h2 class="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+              <i data-lucide="bar-chart-2" class="w-5 h-5 text-indigo-500"></i>
+              <span>Progreso por Nivel del MCER</span>
+            </h2>
+            <span class="text-xs text-slate-400">A1 a B2</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="dash-cefr-grid">
+            <!-- Rellenado dinámicamente por app.js -->
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ====================================================================
+           VIEW 2: SMART FLASHCARDS SRS
+           ==================================================================== -->
+      <section id="view-flashcards" class="view-panel hidden space-y-6">
+        
+        <!-- Flashcard Control Bar -->
+        <div class="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+          
+          <!-- Session Counter -->
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Sesión:</span>
+            <span id="fc-progress-counter" class="text-sm font-extrabold text-indigo-600 dark:text-indigo-400">Tarjeta 1 de 15</span>
+          </div>
+
+          <!-- TTS Speech Controls -->
+          <div class="flex items-center gap-3">
+            <!-- Rate Speed Toggle -->
+            <div class="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-semibold">
+              <button id="fc-speed-slow" onclick="TTSEngine.setRate(0.8)" class="px-2.5 py-1 rounded-lg transition-all text-slate-600 dark:text-slate-400">0.8x</button>
+              <button id="fc-speed-normal" onclick="TTSEngine.setRate(1.0)" class="px-2.5 py-1 rounded-lg bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-400 shadow-sm">1.0x</button>
+            </div>
+
+            <!-- Voice Accent Selector -->
+            <select id="fc-voice-accent" onchange="TTSEngine.setAccent(this.value)" class="text-xs bg-slate-100 dark:bg-slate-800 border-none rounded-xl px-3 py-1.5 font-semibold text-slate-700 dark:text-slate-300 focus:ring-2 focus:ring-indigo-500">
+              <option value="en-US">🇺🇸 Inglés (US)</option>
+              <option value="en-GB">🇬🇧 Inglés (UK)</option>
+            </select>
+
+            <!-- Flip Trigger Button -->
+            <button onclick="FlashcardController.flipCurrentCard()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-indigo-950 text-indigo-600 dark:text-indigo-400 transition-colors" title="Girar Tarjeta (Espacio)">
+              <i data-lucide="rotate-cw" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3D Interactive Flashcard Area -->
+        <div class="card-scene mx-auto max-w-2xl">
+          <div id="flashcard-element" class="flashcard-3d" onclick="FlashcardController.handleCardClick(event)">
+            
+            <!-- FRONT OF CARD -->
+            <div class="card-face card-front p-8 bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 shadow-xl">
+              
+              <!-- Front Header: Badges & Rank -->
+              <div class="flex items-center justify-between w-full">
+                <div class="flex items-center gap-2">
+                  <span id="fc-front-level" class="px-2.5 py-1 rounded-lg text-xs font-bold badge-level-a1">A1</span>
+                  <span id="fc-front-pos" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">verb</span>
+                </div>
+                <span id="fc-front-rank" class="text-xs font-mono font-medium text-slate-400">#44 Oxford 3000</span>
+              </div>
+
+              <!-- Front Center: Big Word, Phonetic & Audio Play -->
+              <div class="my-auto text-center space-y-4">
+                <h2 id="fc-front-word" class="text-4xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-slate-100">
+                  agree
+                </h2>
+                
+                <p id="fc-front-phonetic" class="text-base sm:text-lg font-mono text-indigo-600 dark:text-indigo-400 font-medium">
+                  /əˈɡriː/
+                </p>
+
+                <div class="pt-2 flex justify-center">
+                  <button id="fc-front-audio-btn" onclick="FlashcardController.playCurrentWordAudio(event)" class="w-14 h-14 rounded-full bg-indigo-50 dark:bg-indigo-950/70 border border-indigo-200 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400 flex items-center justify-center hover:scale-105 active:scale-95 transition-all shadow-md group">
+                    <i data-lucide="volume-2" class="w-7 h-7 group-hover:scale-110 transition-transform"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Front Footer: Flip Hint -->
+              <div class="w-full text-center pt-4 border-t border-slate-100 dark:border-slate-800/80">
+                <span class="inline-flex items-center gap-1.5 text-xs text-slate-400 font-medium">
+                  <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                  Haz clic o presiona <kbd class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">Espacio</kbd> para voltear
+                </span>
+              </div>
+
+            </div>
+
+            <!-- BACK OF CARD -->
+            <div class="card-face card-back p-6 sm:p-8 bg-gradient-to-b from-white via-white to-slate-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 border-2 border-indigo-500/40 dark:border-indigo-500/40 shadow-xl overflow-y-auto">
+              
+              <!-- Back Header: Meaning & Collocation -->
+              <div class="w-full space-y-3 pb-4 border-b border-slate-100 dark:border-slate-800">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Significado en Español</span>
+                  <span id="fc-back-category" class="text-xs px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 font-medium">General</span>
+                </div>
+                <h3 id="fc-back-meaning" class="text-2xl font-black text-slate-900 dark:text-slate-100">
+                  estar de acuerdo, concordar
+                </h3>
+
+                <!-- Collocation pill -->
+                <div class="p-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/60 text-xs text-indigo-900 dark:text-indigo-200 flex items-start gap-2">
+                  <i data-lucide="link-2" class="w-4 h-4 shrink-0 text-indigo-500 mt-0.5"></i>
+                  <div>
+                    <span class="font-bold">Colocación clave: </span>
+                    <span id="fc-back-collocation" class="font-medium">agree with (someone) / agree on (something)</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Back Center: Example Sentences -->
+              <div class="my-4 space-y-3 w-full">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Oraciones en Contexto Real:</span>
+
+                <!-- Sentence 1 -->
+                <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60 flex items-start justify-between gap-3">
+                  <div class="space-y-1 flex-1">
+                    <p id="fc-sentence-1-en" class="text-sm font-semibold text-slate-900 dark:text-slate-100 leading-snug">
+                      I completely agree with your opinion.
+                    </p>
+                    <p id="fc-sentence-1-es" class="text-xs text-slate-500 dark:text-slate-400">
+                      Estoy completamente de acuerdo con tu opinión.
+                    </p>
+                  </div>
+                  <button id="fc-sentence-1-audio" onclick="FlashcardController.playSentenceAudio(1, event)" class="p-2 rounded-lg text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 dark:hover:bg-indigo-950 transition-colors shrink-0">
+                    <i data-lucide="volume-2" class="w-4 h-4"></i>
+                  </button>
+                </div>
+
+                <!-- Sentence 2 -->
+                <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60 flex items-start justify-between gap-3">
+                  <div class="space-y-1 flex-1">
+                    <p id="fc-sentence-2-en" class="text-sm font-semibold text-slate-900 dark:text-slate-100 leading-snug">
+                      We agreed on the project deadline.
+                    </p>
+                    <p id="fc-sentence-2-es" class="text-xs text-slate-500 dark:text-slate-400">
+                      Nos pusimos de acuerdo sobre la fecha límite del proyecto.
+                    </p>
+                  </div>
+                  <button id="fc-sentence-2-audio" onclick="FlashcardController.playSentenceAudio(2, event)" class="p-2 rounded-lg text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 dark:hover:bg-indigo-950 transition-colors shrink-0">
+                    <i data-lucide="volume-2" class="w-4 h-4"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Back Footer: Volver al frente -->
+              <div class="text-center pt-2">
+                <span class="text-[11px] text-slate-400 font-medium">Selecciona tu nivel de retención abajo</span>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!-- SRS Evaluation Buttons -->
+        <div class="max-w-2xl mx-auto space-y-3">
+          <div class="grid grid-cols-3 gap-3 sm:gap-4">
+            
+            <!-- Rating: Difícil -->
+            <button onclick="FlashcardController.submitRating('hard')" class="btn-duo-danger p-3 sm:p-4 rounded-2xl bg-rose-500 hover:bg-rose-400 text-white font-bold flex flex-col items-center justify-center gap-1 shadow-md">
+              <span class="text-sm sm:text-base">Difícil</span>
+              <span class="text-[10px] sm:text-xs opacity-90 font-medium">Repasar hoy (1)</span>
+            </button>
+
+            <!-- Rating: Bien -->
+            <button onclick="FlashcardController.submitRating('good')" class="btn-duo-warning p-3 sm:p-4 rounded-2xl bg-amber-500 hover:bg-amber-400 text-white font-bold flex flex-col items-center justify-center gap-1 shadow-md">
+              <span class="text-sm sm:text-base">Bien</span>
+              <span class="text-[10px] sm:text-xs opacity-90 font-medium">En 3 días (2)</span>
+            </button>
+
+            <!-- Rating: Fácil -->
+            <button onclick="FlashcardController.submitRating('easy')" class="btn-duo-success p-3 sm:p-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-white font-bold flex flex-col items-center justify-center gap-1 shadow-md">
+              <span class="text-sm sm:text-base">Fácil</span>
+              <span class="text-[10px] sm:text-xs opacity-90 font-medium">En 7 días (3)</span>
+            </button>
+
+          </div>
+
+          <!-- Keyboard Shortcuts Bar -->
+          <div class="hidden sm:flex items-center justify-center gap-4 text-xs text-slate-400 py-1 font-medium">
+            <span><kbd class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-[10px]">Espacio</kbd> Voltear</span>
+            <span><kbd class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-[10px]">1</kbd> Difícil</span>
+            <span><kbd class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-[10px]">2</kbd> Bien</span>
+            <span><kbd class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-[10px]">3</kbd> Fácil</span>
+            <span><kbd class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-[10px]">A</kbd> Audio</span>
+          </div>
+        </div>
+
+        <!-- Session Finished Modal / Card (Hidden by default) -->
+        <div id="fc-finished-card" class="hidden max-w-xl mx-auto p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-center space-y-4 shadow-xl">
+          <div class="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-500 mx-auto flex items-center justify-center">
+            <i data-lucide="check-check" class="w-8 h-8"></i>
+          </div>
+          <h3 class="text-2xl font-black text-slate-900 dark:text-slate-100">¡Sesión de Repaso Completada!</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400">
+            Has repasado todas las palabras asignadas para este lote. ¡Tu memoria a largo plazo te lo agradecerá!
+          </p>
+          <div class="flex justify-center gap-3 pt-2">
+            <button onclick="FlashcardController.startNewSession()" class="btn-duo-primary px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm">
+              Repasar Otro Lote
+            </button>
+            <button onclick="NavigationController.navigateTo('dashboard')" class="px-6 py-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold text-sm">
+              Ir al Dashboard
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ====================================================================
+           VIEW 3: FRASES & CHUNKS (CONTEXTO REAL)
+           ==================================================================== -->
+      <section id="view-chunks" class="view-panel hidden space-y-6">
+        
+        <!-- Mode Switcher Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+          <div>
+            <h2 class="text-lg font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+              <i data-lucide="message-square-quote" class="w-5 h-5 text-indigo-500"></i>
+              <span>Language Chunks & Contexto Real</span>
+            </h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400">
+              No memorices palabras sueltas. Asimila oraciones y colocaciones naturales.
+            </p>
+          </div>
+
+          <!-- Mode Toggle Tabs -->
+          <div class="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-semibold">
+            <button id="chunk-tab-reader" onclick="ChunksController.setMode('reader')" class="px-3.5 py-1.5 rounded-lg bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-400 shadow-sm">
+              Lector & Dictado
+            </button>
+            <button id="chunk-tab-cloze" onclick="ChunksController.setMode('cloze')" class="px-3.5 py-1.5 rounded-lg text-slate-600 dark:text-slate-400">
+              Rellenar Espacio (Cloze)
+            </button>
+          </div>
+        </div>
+
+        <!-- Exercise Card Container -->
+        <div class="max-w-3xl mx-auto p-6 sm:p-10 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl space-y-6">
+          
+          <!-- Category & Word Anchor Tag -->
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span id="chunk-level-badge" class="px-2.5 py-0.5 rounded-md text-xs font-bold badge-level-a2">A2</span>
+              <span id="chunk-collocation-tag" class="text-xs font-medium text-slate-500">Colocación: agree with</span>
+            </div>
+            <button onclick="ChunksController.playCurrentSentenceAudio()" class="w-10 h-10 rounded-full bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center hover:scale-105 active:scale-95 transition-all">
+              <i data-lucide="volume-2" class="w-5 h-5"></i>
+            </button>
+          </div>
+
+          <!-- The Sentence Display -->
+          <div class="py-4 text-center space-y-4">
+            <!-- Reader text display -->
+            <div id="chunk-display-en" class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-slate-100 leading-relaxed">
+              I completely <span class="text-indigo-600 underline decoration-indigo-400 underline-offset-8">agree</span> with your opinion.
+            </div>
+
+            <!-- Spanish Translation (Toggleable) -->
+            <div id="chunk-display-es-box" class="pt-2">
+              <p id="chunk-display-es" class="text-base text-slate-500 dark:text-slate-400 font-medium italic transition-all">
+                Estoy completamente de acuerdo con tu opinión.
+              </p>
+            </div>
+          </div>
+
+          <!-- Cloze Interactive Challenge Area (Only in Cloze Mode) -->
+          <div id="chunk-cloze-area" class="hidden space-y-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+            <p class="text-xs font-bold uppercase tracking-wider text-center text-slate-400">
+              Selecciona la palabra que completa correctamente la oración:
+            </p>
+            <div id="chunk-options-grid" class="grid grid-cols-2 gap-3 max-w-lg mx-auto">
+              <!-- Botones generados dinámicamente -->
+            </div>
+            <div id="chunk-feedback-message" class="text-center font-bold text-sm min-h-[24px]"></div>
+          </div>
+
+          <!-- Bottom Action Buttons -->
+          <div class="flex flex-wrap items-center justify-between gap-3 pt-6 border-t border-slate-100 dark:border-slate-800">
+            <button id="chunk-toggle-trans-btn" onclick="ChunksController.toggleTranslationVisibility()" class="px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold text-xs flex items-center gap-2">
+              <i data-lucide="eye-off" class="w-4 h-4"></i>
+              <span id="chunk-trans-btn-label">Ocultar Traducción</span>
+            </button>
+
+            <div class="flex items-center gap-2">
+              <button onclick="ChunksController.prevSentence()" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700">
+                <i data-lucide="chevron-left" class="w-5 h-5"></i>
+              </button>
+              <button onclick="ChunksController.nextSentence()" class="btn-duo-primary px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs flex items-center gap-1.5">
+                <span>Siguiente Oración</span>
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ====================================================================
+           VIEW 4: QUIZ RÁPIDO
+           ==================================================================== -->
+      <section id="view-quiz" class="view-panel hidden space-y-6">
+        
+        <!-- Quiz Main Card -->
+        <div id="quiz-active-card" class="max-w-2xl mx-auto p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl space-y-6">
+          
+          <!-- Quiz Top Info -->
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400">
+                Pregunta <span id="quiz-current-q">1</span> de 10
+              </span>
+              <span id="quiz-mode-pill" class="text-xs font-semibold text-slate-400">Inglés ➔ Español</span>
+            </div>
+            <div class="flex items-center gap-1 text-sm font-black text-indigo-600 dark:text-indigo-400">
+              <i data-lucide="trophy" class="w-4 h-4 text-amber-500"></i>
+              <span id="quiz-score-display">Puntos: 0</span>
+            </div>
+          </div>
+
+          <!-- Question Prompt -->
+          <div class="text-center py-6 space-y-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">¿Cuál es el significado correcto?</span>
+            <h2 id="quiz-question-word" class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-slate-100">
+              acquire
+            </h2>
+            <button onclick="QuizController.playQuestionAudio()" class="inline-flex items-center gap-1 text-xs text-indigo-500 font-semibold hover:underline pt-1">
+              <i data-lucide="volume-2" class="w-4 h-4"></i> Escuchar pronunciación
+            </button>
+          </div>
+
+          <!-- Multiple Choice Options (4 Buttons) -->
+          <div id="quiz-options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <!-- Botones inyectados dinámicamente -->
+          </div>
+
+          <!-- Progress Bar inside Quiz -->
+          <div class="w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+            <div id="quiz-progress-bar" class="h-full bg-indigo-600 transition-all duration-300" style="width: 10%;"></div>
+          </div>
+
+        </div>
+
+        <!-- Quiz Results Card (Hidden until finished) -->
+        <div id="quiz-results-card" class="hidden max-w-xl mx-auto p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl text-center space-y-6">
+          <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-amber-400 to-amber-500 text-white flex items-center justify-center mx-auto shadow-lg shadow-amber-500/30">
+            <i data-lucide="award" class="w-10 h-10"></i>
+          </div>
+          <div>
+            <h3 class="text-2xl font-black text-slate-900 dark:text-slate-100">¡Desafío Completado!</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Este es tu rendimiento en el simulador 80/20:</p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+            <div>
+              <span class="text-xs text-slate-400 font-semibold">Aciertos</span>
+              <p id="quiz-final-correct" class="text-2xl font-black text-emerald-500">8 / 10</p>
+            </div>
+            <div>
+              <span class="text-xs text-slate-400 font-semibold">Precisión</span>
+              <p id="quiz-final-pct" class="text-2xl font-black text-indigo-500">80%</p>
+            </div>
+          </div>
+
+          <div class="flex justify-center gap-3">
+            <button onclick="QuizController.restartQuiz()" class="btn-duo-primary px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm">
+              Intentar Otro Quiz
+            </button>
+            <button onclick="NavigationController.navigateTo('dashboard')" class="px-6 py-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold text-sm">
+              Ir al Inicio
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ====================================================================
+           VIEW 5: EXPLORADOR Y DICCIONARIO 80/20
+           ==================================================================== -->
+      <section id="view-explorer" class="view-panel hidden space-y-6">
+        
+        <!-- Search & Filter Controls -->
+        <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+          
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+            <!-- Reactive Search Input -->
+            <div class="relative flex-1">
+              <i data-lucide="search" class="w-5 h-5 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+              <input type="text" id="explorer-search-input" oninput="ExplorerController.handleSearch(this.value)" placeholder="Buscar palabra en inglés o significado en español..." class="w-full pl-11 pr-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+
+            <!-- Results Counter Indicator -->
+            <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 shrink-0">
+              Mostrando <span id="explorer-counter" class="text-indigo-600 dark:text-indigo-400 font-bold">52</span> palabras
+            </div>
+          </div>
+
+          <!-- Filter Pills Toolbar -->
+          <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+            <!-- CEFR Level Filters -->
+            <div class="flex flex-wrap items-center gap-1.5" id="explorer-level-filters">
+              <span class="text-xs font-bold text-slate-400 mr-1">Nivel:</span>
+              <button onclick="ExplorerController.setLevelFilter('ALL')" class="exp-lvl-btn active px-3 py-1 rounded-lg text-xs font-bold bg-indigo-600 text-white">Todos</button>
+              <button onclick="ExplorerController.setLevelFilter('A1')" class="exp-lvl-btn px-3 py-1 rounded-lg text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">A1</button>
+              <button onclick="ExplorerController.setLevelFilter('A2')" class="exp-lvl-btn px-3 py-1 rounded-lg text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">A2</button>
+              <button onclick="ExplorerController.setLevelFilter('B1')" class="exp-lvl-btn px-3 py-1 rounded-lg text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">B1</button>
+              <button onclick="ExplorerController.setLevelFilter('B2')" class="exp-lvl-btn px-3 py-1 rounded-lg text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">B2</button>
+            </div>
+
+            <!-- Status Dropdown Filter -->
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-slate-400">Estado:</span>
+              <select id="explorer-status-filter" onchange="ExplorerController.setStatusFilter(this.value)" class="text-xs bg-slate-100 dark:bg-slate-800 border-none rounded-xl px-3 py-1.5 font-semibold text-slate-700 dark:text-slate-300 focus:ring-2 focus:ring-indigo-500">
+                <option value="ALL">Todos los estados</option>
+                <option value="new">Por aprender</option>
+                <option value="learning">En aprendizaje</option>
+                <option value="mastered">Dominadas</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Words Grid Container -->
+        <div id="explorer-words-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Tarjetas inyectadas dinámicamente -->
+        </div>
+
+        <!-- Empty Results Message -->
+        <div id="explorer-empty-msg" class="hidden text-center py-12 space-y-2">
+          <i data-lucide="search-x" class="w-12 h-12 text-slate-400 mx-auto"></i>
+          <h4 class="text-base font-bold text-slate-700 dark:text-slate-300">No se encontraron palabras</h4>
+          <p class="text-xs text-slate-400">Prueba ajustando el término de búsqueda o los filtros seleccionados.</p>
+        </div>
+
+      </section>
+
+      <!-- ====================================================================
+           VIEW 6: AJUSTES & RESPALDO
+           ==================================================================== -->
+      <section id="view-settings" class="view-panel hidden space-y-6">
+        
+        <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+          <h2 class="text-lg font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+            <i data-lucide="sliders" class="w-5 h-5 text-indigo-500"></i>
+            <span>Preferencias y Configuración Local</span>
+          </h2>
+
+          <div class="divide-y divide-slate-100 dark:divide-slate-800 space-y-5">
+            
+            <!-- TTS Voice Accent -->
+            <div class="pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <span class="text-sm font-bold text-slate-800 dark:text-slate-200">Acento de Pronunciación (TTS)</span>
+                <p class="text-xs text-slate-400">Variante del sintetizador nativo del navegador</p>
+              </div>
+              <select id="settings-voice-select" onchange="SettingsController.updateVoice(this.value)" class="text-xs bg-slate-100 dark:bg-slate-800 border-none rounded-xl px-3 py-2 font-semibold">
+                <option value="en-US">Inglés Estadounidense (en-US)</option>
+                <option value="en-GB">Inglés Británico (en-GB)</option>
+              </select>
+            </div>
+
+            <!-- Speech Rate -->
+            <div class="pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <span class="text-sm font-bold text-slate-800 dark:text-slate-200">Velocidad de Lectura</span>
+                <p class="text-xs text-slate-400">0.8x facilita la discriminación fonética; 1.0x es natural</p>
+              </div>
+              <div class="flex items-center gap-3">
+                <input type="range" id="settings-rate-slider" min="0.7" max="1.2" step="0.1" value="1.0" oninput="SettingsController.updateRate(this.value)" class="w-32 accent-indigo-600">
+                <span id="settings-rate-display" class="text-xs font-mono font-bold text-indigo-600">1.0x</span>
+              </div>
+            </div>
+
+            <!-- Daily Target Goal -->
+            <div class="pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <span class="text-sm font-bold text-slate-800 dark:text-slate-200">Meta Diaria de Repaso</span>
+                <p class="text-xs text-slate-400">Cantidad recomendada de tarjetas por jornada</p>
+              </div>
+              <select id="settings-goal-select" onchange="SettingsController.updateDailyGoal(this.value)" class="text-xs bg-slate-100 dark:bg-slate-800 border-none rounded-xl px-3 py-2 font-semibold">
+                <option value="5">5 palabras / día (Suave)</option>
+                <option value="10" selected>10 palabras / día (Recomendado 80/20)</option>
+                <option value="15">15 palabras / día (Acelerado)</option>
+                <option value="25">25 palabras / día (Intensivo)</option>
+              </select>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Data Management & Backups -->
+        <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+          <h2 class="text-lg font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+            <i data-lucide="database" class="w-5 h-5 text-indigo-500"></i>
+            <span>Respaldo y Persistencia (localStorage)</span>
+          </h2>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+            Todo tu progreso se conserva en tu navegador. Puedes exportar una copia de seguridad en JSON para transferirla a otro equipo o importar tu avance previo.
+          </p>
+
+          <div class="flex flex-wrap gap-3 pt-2">
+            <button onclick="StorageEngine.exportProgressAsJSON()" class="px-4 py-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 font-bold text-xs flex items-center gap-2">
+              <i data-lucide="download" class="w-4 h-4"></i>
+              <span>Exportar Progreso (JSON)</span>
+            </button>
+
+            <label class="px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold text-xs flex items-center gap-2 cursor-pointer">
+              <i data-lucide="upload" class="w-4 h-4"></i>
+              <span>Importar Progreso (JSON)</span>
+              <input type="file" id="import-json-input" accept=".json" onchange="SettingsController.handleImportJSON(event)" class="hidden">
+            </label>
+
+            <button onclick="SettingsController.promptReset()" class="px-4 py-2.5 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 text-rose-600 dark:text-rose-400 hover:bg-rose-100 font-bold text-xs flex items-center gap-2 ml-auto">
+              <i data-lucide="trash-2" class="w-4 h-4"></i>
+              <span>Reiniciar Progreso</span>
+      </section>
+
+      <!-- ====================================================================
+           VIEW 7: TECH & DEV ENGLISH (SECCIÓN INDEPENDIENTE PARA IT & DEV)
+           ==================================================================== -->
+      <section id="view-tech" class="view-panel hidden space-y-6">
+        
+        <!-- Tech Hub Welcome Banner & Mini Stats -->
+        <div class="relative overflow-hidden p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-emerald-950 text-white shadow-xl border border-emerald-500/20">
+          <div class="relative z-10 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <div class="flex items-center gap-2">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                  <i data-lucide="terminal" class="w-3.5 h-3.5"></i> DEV & TECH HUB
+                </span>
+                <span class="text-xs font-mono text-slate-400">Software Engineering • Standups • PRs • System Design</span>
+              </div>
+              
+              <!-- Interview Readiness Indicator -->
+              <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/80 border border-slate-700 text-xs">
+                <span class="text-slate-400">Interview Readiness:</span>
+                <span id="tech-header-readiness" class="font-mono font-extrabold text-emerald-400">0%</span>
+              </div>
+            </div>
+
+            <div>
+              <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-white flex items-center gap-2.5">
+                <span>Inglés para Ingenieros de Software & Entrevistas</span>
+              </h1>
+              <p class="text-slate-300 text-xs sm:text-sm max-w-3xl mt-1 leading-relaxed">
+                Domina la jerga técnica real de Silicon Valley y empresas globales: comunicación fluida en daily standups, pull requests, debates de arquitectura y respuestas de alto impacto con el método STAR.
+              </p>
+            </div>
+
+            <!-- Mini Tech Stats Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+              <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Términos Dominados</span>
+                <p id="tech-stat-mastered" class="text-xl font-mono font-black text-emerald-400">0</p>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">En Aprendizaje</span>
+                <p id="tech-stat-learning" class="text-xl font-mono font-black text-amber-400">0</p>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Por Repasar Hoy</span>
+                <p id="tech-stat-due" class="text-xl font-mono font-black text-rose-400">0</p>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Total Catálogo Dev</span>
+                <p id="tech-stat-total" class="text-xl font-mono font-black text-indigo-300">44</p>
+              </div>
+            </div>
+          </div>
+          <!-- Decorative shapes -->
+          <div class="absolute -right-10 -bottom-10 w-60 h-60 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        </div>
+
+        <!-- Tech Hub Sub-Navigation Tabs -->
+        <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+          <div class="flex items-center gap-2 bg-slate-100 dark:bg-slate-900 p-1.5 rounded-2xl border border-slate-200/80 dark:border-slate-800 text-xs font-bold">
+            <button id="tech-tab-btn-flashcards" onclick="TechHubController.setSubTab('flashcards')" class="px-4 py-2 rounded-xl bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-sm transition-all flex items-center gap-2">
+              <i data-lucide="layers" class="w-4 h-4"></i>
+              <span>Dev Flashcards</span>
+            </button>
+            <button id="tech-tab-btn-chunks" onclick="TechHubController.setSubTab('chunks')" class="px-4 py-2 rounded-xl text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-all flex items-center gap-2">
+              <i data-lucide="message-square-quote" class="w-4 h-4"></i>
+              <span>Frases & Chunks IT</span>
+            </button>
+            <button id="tech-tab-btn-quiz" onclick="TechHubController.setSubTab('quiz')" class="px-4 py-2 rounded-xl text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-all flex items-center gap-2">
+              <i data-lucide="sparkles" class="w-4 h-4 text-amber-500"></i>
+              <span>Quiz de Sistemas</span>
+            </button>
+          </div>
+          <span class="hidden sm:inline-block text-xs font-mono text-slate-400">Progreso 100% independiente</span>
+        </div>
+
+        <!-- ====================================================================
+             SUB-VIEW 1: TECH FLASHCARDS
+             ==================================================================== -->
+        <div id="tech-subview-flashcards" class="tech-subview space-y-6">
+          
+          <!-- Flashcard Control Bar -->
+          <div class="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Sesión Dev:</span>
+              <span id="tech-fc-counter" class="text-sm font-mono font-extrabold text-emerald-600 dark:text-emerald-400">Tarjeta 1 de 15</span>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <button onclick="TechFlashcardController.flipCurrentCard()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-emerald-50 dark:hover:bg-emerald-950 text-emerald-600 dark:text-emerald-400 transition-colors" title="Girar Tarjeta (Espacio)">
+                <i data-lucide="rotate-cw" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- 3D Interactive Flashcard Area -->
+          <div class="card-scene mx-auto max-w-2xl">
+            <div id="tech-flashcard-element" class="flashcard-3d" onclick="TechFlashcardController.handleCardClick(event)">
+              
+              <!-- FRONT OF TECH CARD -->
+              <div class="card-face card-front p-8 bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 shadow-xl">
+                
+                <div class="flex items-center justify-between w-full">
+                  <div class="flex items-center gap-2">
+                    <span id="tech-fc-front-category" class="px-2.5 py-1 rounded-lg text-xs font-bold badge-tech-sysdesign">System Design & Cloud</span>
+                    <span id="tech-fc-front-pos" class="px-2.5 py-1 rounded-lg text-xs font-mono font-semibold bg-slate-100 dark:bg-slate-800 text-slate-500">noun</span>
+                  </div>
+                  <span id="tech-fc-front-level" class="text-xs font-mono font-bold text-slate-400">B2 Tech</span>
+                </div>
+
+                <div class="my-auto text-center space-y-4">
+                  <h2 id="tech-fc-front-word" class="text-3xl sm:text-5xl font-black font-mono tracking-tight text-slate-900 dark:text-slate-100">
+                    trade-off
+                  </h2>
+                  
+                  <p id="tech-fc-front-phonetic" class="text-base sm:text-lg font-mono text-emerald-600 dark:text-emerald-400 font-medium">
+                    /ˈtreɪd.ɒf/
+                  </p>
+
+                  <div class="pt-2 flex justify-center">
+                    <button id="tech-fc-audio-btn" onclick="TechFlashcardController.playCurrentWordAudio(event)" class="w-14 h-14 rounded-full bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center hover:scale-105 active:scale-95 transition-all shadow-md group">
+                      <i data-lucide="volume-2" class="w-7 h-7 group-hover:scale-110 transition-transform"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="w-full text-center pt-4 border-t border-slate-100 dark:border-slate-800/80">
+                  <span class="inline-flex items-center gap-1.5 text-xs text-slate-400 font-medium">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5 text-emerald-500"></i>
+                    Haz clic o presiona <kbd class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">Espacio</kbd> para ver notas técnicas
+                  </span>
+                </div>
+
+              </div>
+
+              <!-- BACK OF TECH CARD -->
+              <div class="card-face card-back p-6 sm:p-8 bg-gradient-to-b from-white via-white to-slate-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 border-2 border-emerald-500/50 dark:border-emerald-500/50 shadow-xl overflow-y-auto">
+                
+                <div class="w-full space-y-3 pb-4 border-b border-slate-100 dark:border-slate-800">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Significado Técnico</span>
+                    <span id="tech-fc-back-category" class="text-xs font-mono px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 font-medium">System Design</span>
+                  </div>
+                  <h3 id="tech-fc-back-meaning" class="text-2xl font-black text-slate-900 dark:text-slate-100">
+                    compensación, equilibrio entre ventajas contrapuestas
+                  </h3>
+
+                  <!-- Interview / Pro Tip Box -->
+                  <div class="p-3 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-800/60 text-xs text-emerald-950 dark:text-emerald-200 flex items-start gap-2.5">
+                    <i data-lucide="lightbulb" class="w-4 h-4 shrink-0 text-emerald-500 mt-0.5"></i>
+                    <div>
+                      <span class="font-bold">Interview Pro-Tip: </span>
+                      <span id="tech-fc-back-tip" class="font-medium">En entrevistas de System Design, explica siempre qué ganas y qué sacrificas.</span>
+                    </div>
+                  </div>
+
+                  <!-- Collocation -->
+                  <div class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800/80 text-xs text-slate-700 dark:text-slate-300 flex items-center gap-2 font-mono">
+                    <i data-lucide="link-2" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                    <span>Colocación: <strong id="tech-fc-back-collocation" class="text-emerald-600 dark:text-emerald-400">evaluate trade-offs</strong></span>
+                  </div>
+                </div>
+
+                <!-- Example Technical Sentences -->
+                <div class="my-4 space-y-3 w-full">
+                  <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Uso Real en Ingeniería:</span>
+
+                  <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60 flex items-start justify-between gap-3">
+                    <div class="space-y-1 flex-1">
+                      <p id="tech-fc-s1-en" class="text-sm font-semibold text-slate-900 dark:text-slate-100 leading-snug">
+                        Every engineering decision involves trade-offs between speed and maintainability.
+                      </p>
+                      <p id="tech-fc-s1-es" class="text-xs text-slate-500 dark:text-slate-400">
+                        Cada decisión de ingeniería implica equilibrios entre velocidad y mantenibilidad.
+                      </p>
+                    </div>
+                    <button id="tech-fc-s1-audio" onclick="TechFlashcardController.playSentenceAudio(1, event)" class="p-2 rounded-lg text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-950 transition-colors shrink-0">
+                      <i data-lucide="volume-2" class="w-4 h-4"></i>
+                    </button>
+                  </div>
+
+                  <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60 flex items-start justify-between gap-3">
+                    <div class="space-y-1 flex-1">
+                      <p id="tech-fc-s2-en" class="text-sm font-semibold text-slate-900 dark:text-slate-100 leading-snug">
+                        We chose PostgreSQL over MongoDB because ACID compliance was an essential trade-off.
+                      </p>
+                      <p id="tech-fc-s2-es" class="text-xs text-slate-500 dark:text-slate-400">
+                        Elegimos PostgreSQL sobre MongoDB porque el cumplimiento ACID era un compromiso esencial.
+                      </p>
+                    </div>
+                    <button id="tech-fc-s2-audio" onclick="TechFlashcardController.playSentenceAudio(2, event)" class="p-2 rounded-lg text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-950 transition-colors shrink-0">
+                      <i data-lucide="volume-2" class="w-4 h-4"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="text-center pt-2">
+                  <span class="text-[11px] text-slate-400 font-medium">Evalúa tu dominio técnico abajo</span>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Tech SRS Evaluation Buttons -->
+          <div class="max-w-2xl mx-auto space-y-3">
+            <div class="grid grid-cols-3 gap-3 sm:gap-4">
+              <button onclick="TechFlashcardController.submitRating('hard')" class="btn-duo-danger p-3 sm:p-4 rounded-2xl bg-rose-500 hover:bg-rose-400 text-white font-bold flex flex-col items-center justify-center gap-1 shadow-md">
+                <span class="text-sm sm:text-base">Difícil</span>
+                <span class="text-[10px] sm:text-xs opacity-90 font-medium">Repasar hoy (1)</span>
+              </button>
+
+              <button onclick="TechFlashcardController.submitRating('good')" class="btn-duo-warning p-3 sm:p-4 rounded-2xl bg-amber-500 hover:bg-amber-400 text-white font-bold flex flex-col items-center justify-center gap-1 shadow-md">
+                <span class="text-sm sm:text-base">Bien</span>
+                <span class="text-[10px] sm:text-xs opacity-90 font-medium">En 3 días (2)</span>
+              </button>
+
+              <button onclick="TechFlashcardController.submitRating('easy')" class="btn-duo-success p-3 sm:p-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-white font-bold flex flex-col items-center justify-center gap-1 shadow-md">
+                <span class="text-sm sm:text-base">Fácil</span>
+                <span class="text-[10px] sm:text-xs opacity-90 font-medium">En 7 días (3)</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Finished Tech Session Card -->
+          <div id="tech-fc-finished-card" class="hidden max-w-xl mx-auto p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-center space-y-4 shadow-xl">
+            <div class="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-500 mx-auto flex items-center justify-center">
+              <i data-lucide="check-check" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-2xl font-black text-slate-900 dark:text-slate-100">¡Sesión de Términos Dev Completada!</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400">
+              Has repasado todos los conceptos técnicos asignados para este lote. ¡Tu vocabulario de ingeniería se consolida!
+            </p>
+            <div class="flex justify-center gap-3 pt-2">
+              <button onclick="TechFlashcardController.startNewSession()" class="btn-duo-primary px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm">
+                Repasar Otro Lote Dev
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ====================================================================
+             SUB-VIEW 2: TECH CHUNKS & INTERVIEW PHRASING
+             ==================================================================== -->
+        <div id="tech-subview-chunks" class="tech-subview hidden space-y-6">
+          
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+            <div>
+              <h3 class="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                <i data-lucide="code" class="w-5 h-5 text-emerald-500"></i>
+                <span>Frases de Entrevistas, Standups & PR Reviews</span>
+              </h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Aprende expresiones completas listas para usar en reuniones técnicas en inglés.</p>
+            </div>
+
+            <!-- Mode Toggle Tabs -->
+            <div class="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-semibold">
+              <button id="tech-chunk-tab-reader" onclick="TechChunksController.setMode('reader')" class="px-3.5 py-1.5 rounded-lg bg-white dark:bg-slate-700 text-emerald-600 dark:text-emerald-400 shadow-sm">
+                Lector de Contexto
+              </button>
+              <button id="tech-chunk-tab-cloze" onclick="TechChunksController.setMode('cloze')" class="px-3.5 py-1.5 rounded-lg text-slate-600 dark:text-slate-400">
+                Rellenar Espacio (Cloze)
+              </button>
+            </div>
+          </div>
+
+          <!-- Tech Exercise Card -->
+          <div class="max-w-3xl mx-auto p-6 sm:p-10 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl space-y-6">
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span id="tech-chunk-cat-badge" class="px-2.5 py-0.5 rounded-md text-xs font-bold badge-tech-standup">Daily Standups & Agile</span>
+                <span id="tech-chunk-colloc-tag" class="text-xs font-mono text-slate-500">Colocación: raise a blocker</span>
+              </div>
+              <button onclick="TechChunksController.playCurrentSentenceAudio()" class="w-10 h-10 rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center hover:scale-105 active:scale-95 transition-all">
+                <i data-lucide="volume-2" class="w-5 h-5"></i>
+              </button>
+            </div>
+
+            <div class="py-4 text-center space-y-4">
+              <div id="tech-chunk-display-en" class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-slate-100 leading-relaxed font-sans">
+                I have no <span class="text-emerald-600 dark:text-emerald-400 underline decoration-emerald-400 underline-offset-8 font-black">blockers</span> today.
+              </div>
+
+              <div id="tech-chunk-display-es-box" class="pt-2">
+                <p id="tech-chunk-display-es" class="text-base text-slate-500 dark:text-slate-400 font-medium italic transition-all">
+                  No tengo ningún impedimento hoy.
+                </p>
+              </div>
+            </div>
+
+            <!-- Cloze Area -->
+            <div id="tech-chunk-cloze-area" class="hidden space-y-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+              <p class="text-xs font-bold uppercase tracking-wider text-center text-slate-400">
+                Selecciona el término técnico que completa la frase:
+              </p>
+              <div id="tech-chunk-options-grid" class="grid grid-cols-2 gap-3 max-w-lg mx-auto">
+                <!-- Botones generados dinámicamente -->
+              </div>
+              <div id="tech-chunk-feedback" class="text-center font-bold text-sm min-h-[24px]"></div>
+            </div>
+
+            <!-- Bottom Action Buttons -->
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-6 border-t border-slate-100 dark:border-slate-800">
+              <button id="tech-chunk-trans-btn" onclick="TechChunksController.toggleTranslationVisibility()" class="px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold text-xs flex items-center gap-2">
+                <i data-lucide="eye-off" class="w-4 h-4"></i>
+                <span id="tech-chunk-trans-label">Ocultar Traducción</span>
+              </button>
+
+              <div class="flex items-center gap-2">
+                <button onclick="TechChunksController.prevSentence()" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700">
+                  <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                </button>
+                <button onclick="TechChunksController.nextSentence()" class="btn-duo-success px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-1.5">
+                  <span>Siguiente Frase IT</span>
+                  <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ====================================================================
+             SUB-VIEW 3: TECH SPEED QUIZ
+             ==================================================================== -->
+        <div id="tech-subview-quiz" class="tech-subview hidden space-y-6">
+          
+          <div id="tech-quiz-active-card" class="max-w-2xl mx-auto p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl space-y-6">
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400">
+                  Pregunta <span id="tech-quiz-current-q">1</span> de 10
+                </span>
+                <span id="tech-quiz-cat-pill" class="text-xs font-semibold text-slate-400">System Design</span>
+              </div>
+              <div class="flex items-center gap-1 text-sm font-black text-emerald-600 dark:text-emerald-400">
+                <i data-lucide="trophy" class="w-4 h-4 text-amber-500"></i>
+                <span id="tech-quiz-score-display">Puntos: 0</span>
+              </div>
+            </div>
+
+            <div class="text-center py-6 space-y-2">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-400">¿Qué significa este concepto en ingeniería de software?</span>
+              <h2 id="tech-quiz-question-word" class="text-3xl sm:text-4xl font-mono font-black text-slate-900 dark:text-slate-100">
+                fault-tolerant
+              </h2>
+              <button onclick="TechQuizController.playQuestionAudio()" class="inline-flex items-center gap-1 text-xs text-emerald-500 font-semibold hover:underline pt-1">
+                <i data-lucide="volume-2" class="w-4 h-4"></i> Escuchar pronunciación
+              </button>
+            </div>
+
+            <div id="tech-quiz-options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <!-- Botones inyectados dinámicamente -->
+            </div>
+
+            <div class="w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+              <div id="tech-quiz-progress-bar" class="h-full bg-emerald-500 transition-all duration-300" style="width: 10%;"></div>
+            </div>
+
+          </div>
+
+          <!-- Tech Quiz Results Screen -->
+          <div id="tech-quiz-results-card" class="hidden max-w-xl mx-auto p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl text-center space-y-6">
+            <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-emerald-400 to-teal-500 text-white flex items-center justify-center mx-auto shadow-lg shadow-emerald-500/30">
+              <i data-lucide="award" class="w-10 h-10"></i>
+            </div>
+            <div>
+              <h3 class="text-2xl font-black text-slate-900 dark:text-slate-100">¡Evaluación Técnica Completada!</h3>
+              <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Este es tu resultado en el simulador de inglés para desarrolladores:</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+              <div>
+                <span class="text-xs text-slate-400 font-semibold">Aciertos</span>
+                <p id="tech-quiz-final-correct" class="text-2xl font-black text-emerald-500">9 / 10</p>
+              </div>
+              <div>
+                <span class="text-xs text-slate-400 font-semibold">Precisión Tech</span>
+                <p id="tech-quiz-final-pct" class="text-2xl font-black text-indigo-500">90%</p>
+              </div>
+            </div>
+
+            <div class="flex justify-center gap-3">
+              <button onclick="TechQuizController.restartQuiz()" class="btn-duo-success px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm">
+                Intentar Otro Quiz Dev
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- ========================================================================
+       MODAL: DETALLES DE PALABRA (DESDE EXPLORADOR)
+       ======================================================================== -->
+  <div id="word-detail-modal" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="max-w-lg w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl p-6 sm:p-8 space-y-5 animate-pop">
+      
+      <div class="flex items-start justify-between">
+        <div>
+          <div class="flex items-center gap-2">
+            <span id="modal-level-badge" class="px-2.5 py-0.5 rounded-md text-xs font-bold badge-level-a1">A1</span>
+            <span id="modal-pos-badge" class="px-2.5 py-0.5 rounded-md text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-500">verb</span>
+            <span id="modal-rank-badge" class="text-xs font-mono text-slate-400">#142</span>
+          </div>
+          <h3 id="modal-word-title" class="text-3xl font-black text-slate-900 dark:text-slate-100 mt-1">agree</h3>
+          <p id="modal-word-phonetic" class="text-sm font-mono text-indigo-500">/əˈɡriː/</p>
+        </div>
+        <button onclick="ExplorerController.closeDetailModal()" class="p-2 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+      </div>
+
+      <div class="p-4 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/60 space-y-1">
+        <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Significado:</span>
+        <p id="modal-meaning" class="text-lg font-bold text-slate-900 dark:text-slate-100">estar de acuerdo</p>
+      </div>
+
+      <div class="space-y-1">
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Colocación Común:</span>
+        <p id="modal-collocation" class="text-sm font-semibold text-slate-700 dark:text-slate-300">agree with / agree on</p>
+      </div>
+
+      <div class="space-y-3">
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Oraciones:</span>
+        <div id="modal-sentences-container" class="space-y-2">
+          <!-- Inyectadas dinámicamente -->
+        </div>
+      </div>
+
+      <div class="pt-2 flex justify-between items-center border-t border-slate-100 dark:border-slate-800">
+        <button id="modal-audio-btn" class="px-4 py-2 rounded-xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 font-bold text-xs flex items-center gap-2">
+          <i data-lucide="volume-2" class="w-4 h-4"></i> Escuchar Palabra
+        </button>
+        <button onclick="ExplorerController.closeDetailModal()" class="px-5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs">
+          Cerrar
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       TOAST NOTIFICATIONS CONTAINER
+       ======================================================================== -->
+  <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- Application Scripts -->
+  <script src="data.js"></script>
+  <script src="tech_data.js"></script>
+  <script src="storage.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

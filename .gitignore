@@ -1,0 +1,37 @@
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# IDE & Editor Files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# Logs and runtime data
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Node / Package Manager artifacts (if initialized)
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Local Backups / Exports (avoid committing personal user study backups)
+lexicore_backup_*.json
+backup_*.json
+*.tmp
+tmp/
+scratch/

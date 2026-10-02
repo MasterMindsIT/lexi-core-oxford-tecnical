@@ -1,0 +1,273 @@
+/* ==========================================================================
+   LexiCore 80/20 - Stylesheet Complementario
+   Efectos 3D de Flashcards, animaciones de fluidas, modo oscuro/claro y badges
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   3D FLASHCARD PERSPECTIVE & TRANSFORMS
+   ========================================================================== */
+.card-scene {
+  perspective: 1400px;
+  width: 100%;
+}
+
+.flashcard-3d {
+  width: 100%;
+  min-height: 420px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.2, 0.85, 0.35, 1.2);
+  cursor: pointer;
+}
+
+.flashcard-3d.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.card-front {
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+
+/* Prevenir interacción con elementos del reverso mientras está al frente */
+.flashcard-3d:not(.flipped) .card-back {
+  pointer-events: none;
+}
+.flashcard-3d.flipped .card-front {
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   ANIMACIONES & MICRO-INTERACCIONES
+   ========================================================================== */
+@keyframes flamePulse {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.12) rotate(-5deg);
+  }
+  75% {
+    transform: scale(1.08) rotate(4deg);
+  }
+}
+
+.flame-anim {
+  animation: flamePulse 2.4s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+@keyframes audioWave {
+  0% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(99, 102, 241, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+  }
+}
+
+.audio-playing {
+  animation: audioWave 1.2s infinite;
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.94) translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-pop {
+  animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes shakeX {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+.animate-shake {
+  animation: shakeX 0.4s ease-in-out;
+}
+
+/* ==========================================================================
+   BADGES & CEFR LEVELS
+   ========================================================================== */
+.badge-level-a1 {
+  background-color: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.badge-level-a2 {
+  background-color: rgba(14, 165, 233, 0.15);
+  color: #0ea5e9;
+  border: 1px solid rgba(14, 165, 233, 0.3);
+}
+
+.badge-level-b1 {
+  background-color: rgba(99, 102, 241, 0.15);
+  color: #6366f1;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.badge-level-b2 {
+  background-color: rgba(168, 85, 247, 0.15);
+  color: #a855f7;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+/* Estados de dominio */
+.status-pill-new {
+  background-color: rgba(100, 116, 139, 0.15);
+  color: #94a3b8;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.status-pill-learning {
+  background-color: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.status-pill-mastered {
+  background-color: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+/* Insignias para categorías Tech & Dev */
+.badge-tech-standup {
+  background-color: rgba(6, 182, 212, 0.15);
+  color: #06b6d4;
+  border: 1px solid rgba(6, 182, 212, 0.35);
+}
+
+.badge-tech-pr {
+  background-color: rgba(139, 92, 246, 0.15);
+  color: #8b5cf6;
+  border: 1px solid rgba(139, 92, 246, 0.35);
+}
+
+.badge-tech-sysdesign {
+  background-color: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+.badge-tech-interview {
+  background-color: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+/* ==========================================================================
+   SCROLLBAR & HELPERS
+   ========================================================================== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.3);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.5);
+}
+
+/* Glassmorphism sutil */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.dark .glass-panel {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Botones 3D táctiles inspirados en Duolingo */
+.btn-duo-primary {
+  box-shadow: 0 4px 0 #4f46e5;
+  transition: all 0.1s ease-in-out;
+}
+.btn-duo-primary:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #4f46e5;
+}
+
+.btn-duo-success {
+  box-shadow: 0 4px 0 #059669;
+  transition: all 0.1s ease-in-out;
+}
+.btn-duo-success:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #059669;
+}
+
+.btn-duo-warning {
+  box-shadow: 0 4px 0 #d97706;
+  transition: all 0.1s ease-in-out;
+}
+.btn-duo-warning:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #d97706;
+}
+
+.btn-duo-danger {
+  box-shadow: 0 4px 0 #dc2626;
+  transition: all 0.1s ease-in-out;
+}
+.btn-duo-danger:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #dc2626;
+}
