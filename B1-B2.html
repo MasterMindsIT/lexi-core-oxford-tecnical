@@ -1,0 +1,2075 @@
+<!DOCTYPE html>
+<html lang="es" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inglés Intermedio B1-B2 - Guía Didáctica | Kale Anders</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-light: #eff6ff;
+      --bg: #ffffff;
+      --bg-alt: #f8fafc;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --sidebar-bg: #f8fafc;
+      --card-bg: #ffffff;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-title: "Cambria", Georgia, serif;
+    }
+
+    .dark {
+      --primary: #2563eb;
+      --primary-light: #1e1b4b;
+      --bg: #0f172a;
+      --bg-alt: #1e293b;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border: #334155;
+      --sidebar-bg: #0b1120;
+      --card-bg: #1e293b;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-alt);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    /* Barra Superior Fija */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 24px;
+      gap: 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    }
+
+    .top-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-return-app {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--primary);
+      color: #ffffff;
+      border: 1px solid var(--primary);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13px;
+      text-decoration: none;
+      transition: all 0.2s;
+      white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .btn-return-app:hover {
+      opacity: 0.92;
+      transform: translateX(-2px);
+      color: #ffffff;
+    }
+
+    .btn-toc-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .brand-title {
+      font-weight: 800;
+      font-size: 16px;
+      color: var(--primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .nav-tabs-bar {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 4px 0;
+    }
+
+    .nav-tab {
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 8px;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+
+    .nav-tab:hover {
+      color: var(--text);
+      background: var(--bg-alt);
+    }
+
+    .nav-tab-active {
+      background: var(--primary) !important;
+      color: #ffffff !important;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-action {
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s;
+    }
+
+    .btn-action:hover {
+      background: var(--bg-alt);
+    }
+
+    .btn-print {
+      background: var(--primary);
+      color: white;
+      border: none;
+    }
+
+    .btn-print:hover {
+      opacity: 0.9;
+    }
+
+    /* Layout Principal: Sidebar + Contenido */
+    .app-layout {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      min-height: calc(100vh - 60px);
+    }
+
+    /* Barra Lateral de Contenidos (ToC) */
+    .sidebar-toc {
+      width: 330px;
+      flex-shrink: 0;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border);
+      padding: 24px 18px;
+      position: sticky;
+      top: 60px;
+      height: calc(100vh - 60px);
+      overflow-y: auto;
+    }
+
+    .sidebar-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 800;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .toc-search {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 12.5px;
+      margin-bottom: 14px;
+      outline: none;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .toc-item-h1 {
+      margin-top: 10px;
+    }
+
+    .toc-item-h1 a {
+      display: block;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--text);
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: background 0.15s;
+    }
+
+    .toc-item-h2 a {
+      display: block;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 4px 10px 4px 18px;
+      border-radius: 6px;
+      transition: all 0.15s;
+    }
+
+    .toc-item-h1 a:hover, .toc-item-h2 a:hover {
+      background: var(--border);
+      color: var(--text);
+    }
+
+    /* Contenedor del Documento Principal */
+    .doc-container {
+      flex: 1;
+      min-width: 0;
+      padding: 40px 60px 80px 60px;
+      background: var(--bg);
+    }
+
+    .doc-card {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* Portada de Documento */
+    .doc-hero {
+      text-align: center;
+      padding: 30px 20px 45px 20px;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: var(--font-title);
+      font-size: 38px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    /* Jerarquía Tipográfica */
+    .chapter-anchor, .section-anchor {
+      scroll-margin-top: 80px;
+    }
+
+    .chapter-separator {
+      margin-top: 60px;
+      padding-top: 30px;
+      border-top: 2px solid var(--border);
+    }
+
+    .doc-h1 {
+      font-family: var(--font-title);
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-top: 20px;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1.5px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .chapter-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 800;
+      color: var(--text-muted);
+      font-family: var(--font-main);
+    }
+
+    .doc-h2 {
+      font-family: var(--font-title);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 34px;
+      margin-bottom: 12px;
+    }
+
+    .doc-h3 {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-top: 22px;
+      margin-bottom: 8px;
+    }
+
+    .doc-p {
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    /* Listas con viñetas */
+    .doc-list {
+      margin: 12px 0 18px 24px;
+    }
+
+    .doc-list li {
+      margin-bottom: 6px;
+    }
+
+    /* Listas ordenadas / Pasos del método */
+    .doc-ordered-list {
+      margin: 14px 0 22px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .doc-ordered-list li {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-weight: 500;
+    }
+
+    /* Ejemplos Bilingües */
+    .bilingual-en {
+      color: var(--text);
+      font-size: 15.5px;
+      margin-top: 10px;
+      padding: 6px 12px;
+      background: var(--bg-alt);
+      border-left: 3px solid var(--primary);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .bilingual-es {
+      color: var(--text-muted);
+      font-size: 13.5px;
+      margin-bottom: 12px;
+      padding-left: 12px;
+      font-style: italic;
+    }
+
+    /* Cajas Callout / Book Note */
+    .callout-note {
+      background: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 18px 0;
+      display: flex;
+      gap: 12px;
+      font-style: italic;
+      color: var(--text);
+    }
+
+    .callout-icon {
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .callout-body {
+      flex: 1;
+    }
+
+    /* Ejercicios Guiados */
+    .exercise-subheading {
+      font-weight: 700;
+      margin-top: 16px;
+      margin-bottom: 6px;
+      color: var(--primary);
+    }
+
+    .exercise-question {
+      margin-top: 12px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .exercise-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 8px 0 8px 18px;
+    }
+
+    .opt-badge {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s;
+    }
+
+    .opt-badge:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .opt-badge.selected {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .exercise-answer-box {
+      margin: 6px 0 16px 18px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .ans-label {
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .btn-reveal {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      color: var(--primary);
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-reveal:hover {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .ans-text {
+      font-style: italic;
+      font-weight: 700;
+      color: #059669;
+      background: #ecfdf5;
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid #a7f3d0;
+    }
+
+    .hidden-answer {
+      display: none;
+    }
+
+    /* Inline Code */
+    code {
+      font-family: Consolas, Monaco, monospace;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 0.9em;
+      color: var(--primary);
+    }
+
+    /* Botón flotante para subir */
+    .btn-back-to-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s, transform 0.2s;
+      z-index: 90;
+    }
+
+    .btn-back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .btn-back-to-top:hover {
+      transform: translateY(-3px);
+    }
+
+    /* Drawer de ToC para Pantallas Pequeñas */
+    @media (max-width: 900px) {
+      .sidebar-toc {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 60px;
+        bottom: 0;
+        z-index: 99;
+        width: 300px;
+        box-shadow: 2px 0 15px rgba(0,0,0,0.2);
+      }
+
+      .sidebar-toc.open {
+        display: block;
+      }
+
+      .doc-container {
+        padding: 24px 20px 60px 20px;
+      }
+
+      .hero-title {
+        font-size: 28px;
+      }
+    }
+
+    /* Impresión / Guardar en PDF */
+    @media print {
+      body {
+        background: white;
+        color: black;
+        font-size: 10.5pt;
+      }
+
+      .top-header, .sidebar-toc, .btn-reveal, .btn-back-to-top {
+        display: none !important;
+      }
+
+      .doc-container {
+        padding: 0;
+      }
+
+      .chapter-anchor {
+        page-break-before: always;
+      }
+
+      .hidden-answer {
+        display: inline !important;
+      }
+
+      .bilingual-en {
+        background: none;
+        border-left: 2pt solid black;
+      }
+
+      @page {
+        margin: 1.5cm 1.2cm 1.5cm 1.2cm;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra Superior Fija -->
+  <header class="top-header">
+    <div class="top-header-left">
+      <a href="index.html" class="btn-return-app" title="Regresar a la aplicación principal LexiCore">
+        <span>←</span> <span>Volver a LexiCore</span>
+      </a>
+      <button class="btn-toc-toggle" onclick="toggleMobileToc()" title="Alternar índice">
+        📑 <span>Índice</span>
+      </button>
+      <a href="index.html" class="brand-title">
+        <span>⚡ Kale Anders &bull; Inglés Intermedio B1-B2</span>
+      </a>
+    </div>
+
+    <!-- Pestañas de Navegación Rápida -->
+    <div class="nav-tabs-bar">
+      <a href="A1-A2.html" class="nav-tab ">Nivel A1-A2</a>
+<a href="B1-B2.html" class="nav-tab nav-tab-active">Nivel B1-B2</a>
+<a href="C1-C2.html" class="nav-tab ">Nivel C1-C2</a>
+<a href="oxford_dictionary_book_a1.html" class="nav-tab ">Diccionario Oxford 3000</a>
+<a href="index.html" class="nav-tab ">🏠 App Principal</a>
+
+    </div>
+
+    <!-- Acciones -->
+    <div class="top-actions">
+      <button class="btn-action" onclick="toggleTheme()" title="Cambiar tema">
+        🌓 <span id="theme-btn-text">Tema</span>
+      </button>
+      <button class="btn-action btn-print" onclick="window.print()" title="Imprimir o guardar PDF">
+        🖨️ <span>Imprimir / PDF</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Layout Principal -->
+  <div class="app-layout">
+    
+    <!-- Barra Lateral de Contenidos -->
+    <aside class="sidebar-toc" id="sidebar-toc">
+      <div style="padding-bottom: 12px; margin-bottom: 12px; border-bottom: 1px solid var(--border);">
+        <a href="index.html" class="btn-return-app" style="width: 100%; justify-content: center; box-sizing: border-box;">
+          ← Volver a la App Principal
+        </a>
+      </div>
+      <div class="sidebar-title">
+        <span>Índice del Módulo</span>
+        <span style="font-size: 10px; background: var(--primary); color: white; padding: 2px 6px; border-radius: 4px;">31 Secciones</span>
+      </div>
+      <input type="text" class="toc-search" placeholder="Filtrar temas..." oninput="filterToc(this.value)">
+      <ul class="toc-list" id="toc-list">
+        
+            <li class="toc-item-h1">
+              <a href="#cap-1-gramatica-intermedia" onclick="closeMobileToc()">1. GRAMATICA INTERMEDIA</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-11-pasado-simple-vs-pasado-continuo" onclick="closeMobileToc()">&bull; 1.1. Pasado simple vs. pasado continuo</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-12-futuro-simple-vs-futuro-continuo" onclick="closeMobileToc()">&bull; 1.2. Futuro simple vs. futuro continuo</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-13-present-perfect-simple-vs-present-perfect-conti" onclick="closeMobileToc()">&bull; 1.3. Present perfect simple vs. present perfect continuous</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-14-past-perfect-simple-vs-past-perfect-continuous" onclick="closeMobileToc()">&bull; 1.4. Past perfect simple vs. past perfect continuous</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-15-condicional-simple-vs-condicional-continuo" onclick="closeMobileToc()">&bull; 1.5. Condicional simple vs. condicional continuo</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-16-modales-must-have-to-should" onclick="closeMobileToc()">&bull; 1.6. Modales: must, have to, should</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-17-modales-can-could-might-may" onclick="closeMobileToc()">&bull; 1.7. Modales: can, could, might, may</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-18-voz-pasiva" onclick="closeMobileToc()">&bull; 1.8. Voz pasiva</a>
+            </li>
+            <li class="toc-item-h1">
+              <a href="#cap-2-pronunciacion-intermedia" onclick="closeMobileToc()">2. PRONUNCIACION INTERMEDIA</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-21-diferencia-entre-i-corta-y-i-larga" onclick="closeMobileToc()">&bull; 2.1. Diferencia entre /i/ corta y /i:/ larga</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-22-diferencia-entre-sonidos-tipo-cat-y-cut" onclick="closeMobileToc()">&bull; 2.2. Diferencia entre sonidos tipo `cat` y `cut`</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-23-sonidos-th" onclick="closeMobileToc()">&bull; 2.3. Sonidos `th`</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-24-sonidos-r-y-l" onclick="closeMobileToc()">&bull; 2.4. Sonidos `r` y `l`</a>
+            </li>
+            <li class="toc-item-h1">
+              <a href="#cap-3-conversacion-intermedia" onclick="closeMobileToc()">3. CONVERSACION INTERMEDIA</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-31-expresar-opiniones-con-claridad" onclick="closeMobileToc()">&bull; 3.1. Expresar opiniones con claridad</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-32-hacer-preguntas-y-mantener-una-conversacion" onclick="closeMobileToc()">&bull; 3.2. Hacer preguntas y mantener una conversacion</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-33-sugerir-soluciones-alternativas" onclick="closeMobileToc()">&bull; 3.3. Sugerir soluciones alternativas</a>
+            </li>
+            <li class="toc-item-h1">
+              <a href="#cap-4-escritura-intermedia" onclick="closeMobileToc()">4. ESCRITURA INTERMEDIA</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-41-estructura-de-un-parrafo" onclick="closeMobileToc()">&bull; 4.1. Estructura de un parrafo</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-42-conectores-para-coherencia-y-cohesion" onclick="closeMobileToc()">&bull; 4.2. Conectores para coherencia y cohesion</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-43-evitar-repeticiones" onclick="closeMobileToc()">&bull; 4.3. Evitar repeticiones</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-44-descripciones-de-personas-y-lugares" onclick="closeMobileToc()">&bull; 4.4. Descripciones de personas y lugares</a>
+            </li>
+            <li class="toc-item-h1">
+              <a href="#cap-5-vocabulario-intermedio" onclick="closeMobileToc()">5. VOCABULARIO INTERMEDIO</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-51-phrasal-verbs-comunes" onclick="closeMobileToc()">&bull; 5.1. Phrasal verbs comunes</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-52-colocaciones-comunes-con-make-do-y-have" onclick="closeMobileToc()">&bull; 5.2. Colocaciones comunes con make, do y have</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-53-expresiones-idiomaticas-basicas" onclick="closeMobileToc()">&bull; 5.3. Expresiones idiomaticas basicas</a>
+            </li>
+            <li class="toc-item-h1">
+              <a href="#cap-6-correccion-de-errores-comunes" onclick="closeMobileToc()">6. CORRECCION DE ERRORES COMUNES</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-61-errores-de-vocabulario-y-uso" onclick="closeMobileToc()">&bull; 6.1. Errores de vocabulario y uso</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-62-errores-de-pronunciacion-frecuentes" onclick="closeMobileToc()">&bull; 6.2. Errores de pronunciacion frecuentes</a>
+            </li>
+            <li class="toc-item-h1">
+              <a href="#cap-7-como-estudiar-este-material-leyendo" onclick="closeMobileToc()">7. COMO ESTUDIAR ESTE MATERIAL LEYENDO</a>
+            </li>
+      </ul>
+    </aside>
+
+    <!-- Contenido Principal -->
+    <main class="doc-container">
+      <div class="doc-card">
+        
+        <!-- Portada -->
+        <div class="doc-hero">
+          <span class="hero-badge">Nivel Intermedio B1-B2</span>
+          <h1 class="hero-title">Inglés Intermedio B1-B2</h1>
+          <p class="hero-subtitle">Guía completa de estudio basada en el método comunicativo de Kale Anders</p>
+          <div style="margin-top: 18px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+            <a href="index.html" class="btn-return-app" style="padding: 9px 20px; font-size: 14px;">
+              ← Regresar a LexiCore App
+            </a>
+            <button class="btn-action btn-print" onclick="window.print()" style="padding: 9px 20px; font-size: 14px;">
+              🖨️ Imprimir / Guardar PDF
+            </button>
+          </div>
+        </div>
+
+        <!-- Bloques del Documento -->
+        <div class="doc-content">
+          <h4 class="doc-h3">Objetivo</h4>
+<p class="doc-p">Este material resume y reorganiza una clase completa de ingles intermedio para que puedas estudiarla leyendo. Se eliminaron saludos, promociones, repeticiones y comentarios poco utiles. Se conservaron las explicaciones centrales y los ejemplos importantes, corrigiendo errores evidentes de transcripcion.</p>
+
+                <div class="chapter-anchor " id="cap-1-gramatica-intermedia"></div>
+                <h2 class="doc-h1">
+                  <span class="chapter-tag">CAPÍTULO</span>
+                  <span>1. GRAMATICA INTERMEDIA</span>
+                </h2>
+
+            <div class="section-anchor" id="sec-11-pasado-simple-vs-pasado-continuo"></div>
+            <h3 class="doc-h2">1.1. Pasado simple vs. pasado continuo</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">Usamos el pasado simple para acciones terminadas en un momento concreto del pasado. Usamos el pasado continuo para acciones que estaban en progreso en un momento especifico, muchas veces cuando otra accion las interrumpe.</p>
+<h4 class="doc-h3">Estructura</h4>
+<p class="doc-p">Pasado simple:</p>
+<p class="doc-p">Sujeto + verbo en pasado + complemento.</p>
+<p class="doc-p">Pasado continuo:</p>
+<p class="doc-p">Sujeto + <strong><em>was</em></strong>/<strong><em>were</em></strong> + verbo con -ing + complemento.</p>
+<h4 class="doc-h3">Cuando usar pasado simple</h4>
+<ul class="doc-list"><li>Para acciones completas y terminadas.</li><li>Para hechos puntuales del pasado.</li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>I visited my grandmother yesterday.</li></ul>
+<p class="doc-p">Yo visite a mi abuela ayer.</p>
+<ul class="doc-list"><li>She finished the report last night.</li></ul>
+<p class="doc-p">Ella termino el informe anoche.</p>
+<ul class="doc-list"><li>He bought a new car last month.</li></ul>
+<p class="doc-p">El compro un carro nuevo el mes pasado.</p>
+<ul class="doc-list"><li>He called me two weeks ago.</li></ul>
+<p class="doc-p">El me llamo hace dos semanas.</p>
+<h4 class="doc-h3">Nota</h4>
+<p class="doc-p"><strong><code>bought</code></strong> es el pasado de <strong><code>buy</code></strong>. Es un verbo irregular.</p>
+<h4 class="doc-h3">Cuando usar pasado continuo</h4>
+<ul class="doc-list"><li>Para acciones que estaban ocurriendo.</li><li>Para describir el contexto de otra accion.</li><li>Para acciones en progreso interrumpidas por otra.</li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>I <strong><em>was</em></strong> reading a book when the phone rang.</li></ul>
+<p class="doc-p">Yo estaba leyendo un libro cuando sono el telefono.</p>
+<ul class="doc-list"><li>They <strong><em>were</em></strong> playing football when it started to rain.</li></ul>
+<p class="doc-p">Ellos estaban jugando futbol cuando empezo a llover.</p>
+<ul class="doc-list"><li>She <strong><em>was</em></strong> studying all afternoon yesterday.</li></ul>
+<p class="doc-p">Ella estuvo estudiando toda la tarde ayer.</p>
+<ul class="doc-list"><li>We <strong><em>were</em></strong> watching TV when the lights went out.</li></ul>
+<p class="doc-p">Estabamos viendo television cuando se fue la luz.</p>
+<h4 class="doc-h3">Notas</h4>
+<ul class="doc-list"><li><strong><code>rang</code></strong> es el pasado de <strong><code>ring</code></strong>.</li><li><strong><code>went out</code></strong> significa &quot;se apago&quot; o &quot;se fue la luz&quot;.</li><li>Con <strong><code>I / he / she / it</code></strong> usamos <strong><code>was</code></strong>.</li><li>Con <strong><code>we / you / they</code></strong> usamos <strong><code>were</code></strong>.</li></ul>
+<h4 class="doc-h3">Comparaciones utiles</h4>
+<ul class="doc-list"><li>I watched TV last night.</li></ul>
+<p class="doc-p">Vi television anoche.</p>
+<ul class="doc-list"><li>I <strong><em>was</em></strong> watching TV when my mom called.</li></ul>
+<p class="doc-p">Yo estaba viendo television cuando mi mama llamo.</p>
+<ul class="doc-list"><li>She cooked dinner at 7 p.m.</li></ul>
+<p class="doc-p">Ella cocino la cena a las 7.</p>
+<ul class="doc-list"><li>She <strong><em>was</em></strong> cooking dinner when the power went out.</li></ul>
+<p class="doc-p">Ella estaba cocinando cuando se fue la luz.</p>
+<ul class="doc-list"><li>They arrived at the airport.</li></ul>
+<p class="doc-p">Ellos llegaron al aeropuerto.</p>
+<ul class="doc-list"><li>They <strong><em>were</em></strong> arriving at the airport when the storm started.</li></ul>
+<p class="doc-p">Ellos estaban llegando al aeropuerto cuando comenzo la tormenta.</p>
+<p class="doc-p">Errores frecuentes</p>
+<ul class="doc-list"><li>No confundas una accion terminada con una accion en progreso.</li><li>No uses <strong><code>were</code></strong> con <strong><code>I</code></strong>.</li><li>No olvides que muchos verbos del pasado son irregulares.</li></ul>
+<h4 class="doc-h3">Resumen</h4>
+<p class="doc-p">El pasado simple cuenta el hecho. El pasado continuo describe la accion en desarrollo o el contexto de otro evento pasado.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. I .......... a book when you called me.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">was reading</span>
+                </div>
+<div class="exercise-question">2. She .......... the report last night.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">finished</span>
+                </div>
+<div class="exercise-question">3. They .......... football when it started to rain.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">were playing</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. We .......... TV when the lights went out.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">watched</span><span class="opt-badge" onclick="selectOption(this)">were watching</span><span class="opt-badge" onclick="selectOption(this)">was watching</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">were watching</span>
+                </div>
+<div class="exercise-question">2. He .......... me two weeks ago.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">called</span><span class="opt-badge" onclick="selectOption(this)">was calling</span><span class="opt-badge" onclick="selectOption(this)">were calling</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">called</span>
+                </div>
+
+            <div class="section-anchor" id="sec-12-futuro-simple-vs-futuro-continuo"></div>
+            <h3 class="doc-h2">1.2. Futuro simple vs. futuro continuo</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">El futuro simple habla de decisiones, promesas, predicciones o eventos futuros. El futuro continuo habla de acciones que estaran en progreso en un momento concreto del futuro.</p>
+<h4 class="doc-h3">Estructura</h4>
+<p class="doc-p">Futuro simple:</p>
+<p class="doc-p">Sujeto + <strong><em>will</em></strong> + verbo base + complemento.</p>
+<p class="doc-p">Futuro continuo:</p>
+<p class="doc-p">Sujeto + <strong><em>will</em></strong> be + verbo con -ing + complemento.</p>
+<h4 class="doc-h3">Usos del futuro simple</h4>
+<ul class="doc-list"><li>Decisiones espontaneas.</li><li>Promesas.</li><li>Predicciones.</li><li>Eventos futuros vistos como hechos.</li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>I <strong><em>will</em></strong> call you tomorrow.</li></ul>
+<p class="doc-p">Te llamare manana.</p>
+<ul class="doc-list"><li>They <strong><em>will</em></strong> arrive at 8 p.m.</li></ul>
+<p class="doc-p">Ellos llegaran a las 8 p.m.</p>
+<ul class="doc-list"><li>It <strong><em>will</em></strong> rain later today.</li></ul>
+<p class="doc-p">Llovera mas tarde hoy.</p>
+<h4 class="doc-h3">Usos del futuro continuo</h4>
+<ul class="doc-list"><li>Acciones en progreso en un momento especifico del futuro.</li><li>Situaciones que estaran ocurriendo.</li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>I <strong><em>will</em></strong> be working at 9 a.m.</li></ul>
+<p class="doc-p">Estare trabajando a las 9 a.m.</p>
+<ul class="doc-list"><li>They <strong><em>will</em></strong> be traveling to Spain next week.</li></ul>
+<p class="doc-p">Ellos estaran viajando a Espana la proxima semana.</p>
+<ul class="doc-list"><li>She <strong><em>will</em></strong> be studying when you arrive.</li></ul>
+<p class="doc-p">Ella estara estudiando cuando llegues.</p>
+<ul class="doc-list"><li>We <strong><em>will</em></strong> be having dinner at 7 p.m.</li></ul>
+<p class="doc-p">Estaremos cenando a las 7 p.m.</p>
+<h4 class="doc-h3">Comparaciones utiles</h4>
+<ul class="doc-list"><li>I <strong><em>will</em></strong> eat dinner at 7 p.m.</li></ul>
+<p class="doc-p">Cenare a las 7 p.m.</p>
+<ul class="doc-list"><li>I <strong><em>will</em></strong> be eating dinner at 7 p.m.</li></ul>
+<p class="doc-p">Estare cenando a las 7 p.m.</p>
+<ul class="doc-list"><li>She <strong><em>will</em></strong> call me later.</li></ul>
+<p class="doc-p">Ella me llamara mas tarde.</p>
+<ul class="doc-list"><li>She <strong><em>will</em></strong> be calling me later.</li></ul>
+<p class="doc-p">Ella estara llamandome mas tarde.</p>
+<ul class="doc-list"><li>They <strong><em>will</em></strong> finish the report tomorrow.</li></ul>
+<p class="doc-p">Ellos terminaran el informe manana.</p>
+<ul class="doc-list"><li>They <strong><em>will</em></strong> be finishing the report tomorrow.</li></ul>
+<p class="doc-p">Ellos estaran terminando el informe manana.</p>
+<p class="doc-p">Nota importante</p>
+<p class="doc-p">En ingles casual tambien se usa <strong><code>going to</code></strong>.</p>
+<p class="doc-p">Ejemplo</p>
+<ul class="doc-list"><li>He is <strong><em>going to</em></strong> finish the report.</li></ul>
+<p class="doc-p">El va a terminar el informe.</p>
+<h4 class="doc-h3">Resumen</h4>
+<p class="doc-p"><strong><code>Will</code></strong> presenta el evento futuro; <strong><code>will be + -ing</code></strong> muestra la accion en desarrollo dentro del futuro.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. I .......... you tomorrow.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">will call</span>
+                </div>
+<div class="exercise-question">2. At 9 a.m., I ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">will be working</span>
+                </div>
+<div class="exercise-question">3. They .......... the report tomorrow.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">will finish</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. She .......... when you arrive.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">will study</span><span class="opt-badge" onclick="selectOption(this)">will be studying</span><span class="opt-badge" onclick="selectOption(this)">is studying</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">will be studying</span>
+                </div>
+<div class="exercise-question">2. It .......... later today.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">will rain</span><span class="opt-badge" onclick="selectOption(this)">raining</span><span class="opt-badge" onclick="selectOption(this)">will be rain</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">will rain</span>
+                </div>
+
+            <div class="section-anchor" id="sec-13-present-perfect-simple-vs-present-perfect-conti"></div>
+            <h3 class="doc-h2">1.3. Present perfect simple vs. present perfect continuous</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">Estos tiempos conectan el pasado con el presente. El presente perfecto simple enfatiza el resultado. El presente perfecto continuo enfatiza la duracion o continuidad de la accion.</p>
+<h4 class="doc-h3">Estructura</h4>
+<p class="doc-p">Present perfect simple:</p>
+<p class="doc-p">Sujeto + have/has + participio pasado + complemento.</p>
+<p class="doc-p">Present perfect continuous:</p>
+<p class="doc-p">Sujeto + have/<strong><em>has been</em></strong> + verbo con -ing + complemento.</p>
+<h4 class="doc-h3">Usos del present perfect simple</h4>
+<ul class="doc-list"><li>Experiencias.</li><li>Resultados presentes.</li><li>Acciones completadas con relevancia actual.</li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>I have finished my homework.</li></ul>
+<p class="doc-p">He terminado mi tarea.</p>
+<ul class="doc-list"><li>She has traveled to Spain three times.</li></ul>
+<p class="doc-p">Ella ha viajado a Espana tres veces.</p>
+<ul class="doc-list"><li>They have lived here for five years.</li></ul>
+<p class="doc-p">Ellos han vivido aqui durante cinco anos.</p>
+<ul class="doc-list"><li>We have already eaten.</li></ul>
+<p class="doc-p">Ya hemos comido.</p>
+<h4 class="doc-h3">Usos del present perfect continuous</h4>
+<ul class="doc-list"><li>Acciones que comenzaron en el pasado y continuan.</li><li>Duracion de una actividad reciente.</li><li>Enfasis en el proceso.</li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>I <strong><em>have been</em></strong> studying for three hours.</li></ul>
+<p class="doc-p">He estado estudiando durante tres horas.</p>
+<ul class="doc-list"><li>She <strong><em>has been</em></strong> working on this project all day.</li></ul>
+<p class="doc-p">Ha estado trabajando en este proyecto todo el dia.</p>
+<ul class="doc-list"><li>They <strong><em>have been</em></strong> waiting for the bus since 8 a.m.</li></ul>
+<p class="doc-p">Han estado esperando el autobus desde las 8 a.m.</p>
+<ul class="doc-list"><li>We <strong><em>have been</em></strong> exercising.</li></ul>
+<p class="doc-p">Hemos estado haciendo ejercicio.</p>
+<h4 class="doc-h3">Comparaciones utiles</h4>
+<ul class="doc-list"><li>I have read that book.</li></ul>
+<p class="doc-p">He leido ese libro.</p>
+<ul class="doc-list"><li>I <strong><em>have been</em></strong> reading that book for hours.</li></ul>
+<p class="doc-p">He estado leyendo ese libro durante horas.</p>
+<ul class="doc-list"><li>They have cleaned the house.</li></ul>
+<p class="doc-p">Han limpiado la casa.</p>
+<ul class="doc-list"><li>They <strong><em>have been</em></strong> cleaning the house since this morning.</li></ul>
+<p class="doc-p">Han estado limpiando la casa desde esta manana.</p>
+<ul class="doc-list"><li>She has visited her grandmother.</li></ul>
+<p class="doc-p">Ha visitado a su abuela.</p>
+<ul class="doc-list"><li>She <strong><em>has been</em></strong> visiting her grandmother every week.</li></ul>
+<p class="doc-p">Ha estado visitando a su abuela cada semana.</p>
+<h4 class="doc-h3">Resumen</h4>
+<p class="doc-p">El presente perfecto simple destaca el resultado; el continuo destaca la duracion y la actividad en proceso.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. We .......... already ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">have / eaten</span>
+                </div>
+<div class="exercise-question">2. She .......... on this project all day.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">has been working</span>
+                </div>
+<div class="exercise-question">3. I .......... that book.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">have read</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. They .......... here for five years.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">have lived</span><span class="opt-badge" onclick="selectOption(this)">have been living</span><span class="opt-badge" onclick="selectOption(this)">has lived</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">have lived</span>
+                </div>
+<div class="exercise-question">2. I .......... for three hours.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">have studied</span><span class="opt-badge" onclick="selectOption(this)">have been studying</span><span class="opt-badge" onclick="selectOption(this)">has been studying</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">have been studying</span>
+                </div>
+
+            <div class="section-anchor" id="sec-14-past-perfect-simple-vs-past-perfect-continuous"></div>
+            <h3 class="doc-h2">1.4. Past perfect simple vs. past perfect continuous</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">Estos tiempos se usan para hablar de algo que paso antes de otro evento pasado.</p>
+<h4 class="doc-h3">Estructura</h4>
+<p class="doc-p">Past perfect simple:</p>
+<p class="doc-p">Sujeto + had + participio pasado + complemento.</p>
+<p class="doc-p">Past perfect continuous:</p>
+<p class="doc-p">Sujeto + <strong><em>had been</em></strong> + verbo con -ing + complemento.</p>
+<h4 class="doc-h3">Usos del past perfect simple</h4>
+<ul class="doc-list"><li>Una accion completada antes de otra en el pasado.</li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>I had finished the report before the meeting started.</li></ul>
+<p class="doc-p">Habia terminado el informe antes de que comenzara la reunion.</p>
+<ul class="doc-list"><li>She had left when I arrived.</li></ul>
+<p class="doc-p">Ella se habia ido cuando llegue.</p>
+<ul class="doc-list"><li>They had visited that museum before.</li></ul>
+<p class="doc-p">Ellos ya habian visitado ese museo.</p>
+<ul class="doc-list"><li>We had had dinner when she called.</li></ul>
+<p class="doc-p">Ya habiamos cenado cuando ella llamo.</p>
+<h4 class="doc-h3">Usos del past perfect continuous</h4>
+<ul class="doc-list"><li>Una accion en progreso antes de otro momento pasado.</li><li>Enfasis en duracion previa.</li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>I <strong><em>had been</em></strong> studying for two hours when the power went out.</li></ul>
+<p class="doc-p">Habia estado estudiando durante dos horas cuando se fue la luz.</p>
+<ul class="doc-list"><li>She <strong><em>had been</em></strong> working there for five years before she got promoted.</li></ul>
+<p class="doc-p">Habia estado trabajando alli durante cinco anos antes de que la ascendieran.</p>
+<ul class="doc-list"><li>They <strong><em>had been</em></strong> waiting for the bus for an hour when it finally arrived.</li></ul>
+<p class="doc-p">Habian estado esperando el autobus durante una hora cuando por fin llego.</p>
+<ul class="doc-list"><li>We <strong><em>had been</em></strong> discussing the problem for days before we found a solution.</li></ul>
+<p class="doc-p">Habiamos estado discutiendo el problema durante dias antes de encontrar una solucion.</p>
+<h4 class="doc-h3">Comparaciones utiles</h4>
+<ul class="doc-list"><li>I had read the book before the movie <strong><em>was</em></strong> released.</li></ul>
+<p class="doc-p">Habia leido el libro antes de que se estrenara la pelicula.</p>
+<ul class="doc-list"><li>She had cooked dinner when they arrived.</li></ul>
+<p class="doc-p">Ella ya habia cocinado la cena cuando ellos llegaron.</p>
+<ul class="doc-list"><li>She <strong><em>had been</em></strong> cooking dinner for two hours when they arrived.</li></ul>
+<p class="doc-p">Habia estado cocinando durante dos horas cuando llegaron.</p>
+<ul class="doc-list"><li>They had finished the project before the deadline.</li></ul>
+<p class="doc-p">Habian terminado el proyecto antes de la fecha limite.</p>
+<ul class="doc-list"><li>They <strong><em>had been</em></strong> working on the project for weeks before the deadline.</li></ul>
+<p class="doc-p">Habian estado trabajando en el proyecto durante semanas antes de la fecha limite.</p>
+<h4 class="doc-h3">Resumen</h4>
+<p class="doc-p">El past perfect simple marca anterioridad. El past perfect continuous añade la idea de duracion antes de otro evento pasado.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. I .......... the report before the meeting started.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">had finished</span>
+                </div>
+<div class="exercise-question">2. They .......... for the bus for an hour when it arrived.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">had been waiting</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. She .......... when I arrived.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">had left</span><span class="opt-badge" onclick="selectOption(this)">has left</span><span class="opt-badge" onclick="selectOption(this)">had been leaving</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">had left</span>
+                </div>
+<div class="exercise-question">2. We .......... the problem for days before we found a solution.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">had discussed</span><span class="opt-badge" onclick="selectOption(this)">had been discussing</span><span class="opt-badge" onclick="selectOption(this)">have been discussing</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">had been discussing</span>
+                </div>
+
+            <div class="section-anchor" id="sec-15-condicional-simple-vs-condicional-continuo"></div>
+            <h3 class="doc-h2">1.5. Condicional simple vs. condicional continuo</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">Estos tiempos hablan de situaciones hipoteticas: lo que sucederia o lo que estaria ocurriendo bajo ciertas condiciones.</p>
+<h4 class="doc-h3">Estructura</h4>
+<p class="doc-p">Condicional simple:</p>
+<p class="doc-p">Sujeto + <strong><em>would</em></strong> + verbo base + complemento.</p>
+<p class="doc-p">Condicional continuo:</p>
+<p class="doc-p">Sujeto + <strong><em>would</em></strong> be + verbo con -ing + complemento.</p>
+<p class="doc-p">Ejemplos del condicional simple</p>
+<ul class="doc-list"><li>If I had more time, I <strong><em>would</em></strong> travel more.</li></ul>
+<p class="doc-p">Si tuviera mas tiempo, viajaria mas.</p>
+<ul class="doc-list"><li>She <strong><em>would</em></strong> help if she knew how.</li></ul>
+<p class="doc-p">Ella ayudaria si supiera como.</p>
+<ul class="doc-list"><li>They <strong><em>would</em></strong> buy a bigger house if they earned more money.</li></ul>
+<p class="doc-p">Comprarian una casa mas grande si ganaran mas dinero.</p>
+<ul class="doc-list"><li>I <strong><em>would</em></strong> talk to him, but I don&#x27;t have his number.</li></ul>
+<p class="doc-p">Yo hablaria con el, pero no tengo su numero.</p>
+<p class="doc-p">Ejemplos del condicional continuo</p>
+<ul class="doc-list"><li>If I weren&#x27;t so busy, I <strong><em>would</em></strong> be studying for the exam right now.</li></ul>
+<p class="doc-p">Si no estuviera tan ocupado, estaria estudiando para el examen ahora mismo.</p>
+<ul class="doc-list"><li>If she <strong><em>were</em></strong> here, she <strong><em>would</em></strong> be helping us.</li></ul>
+<p class="doc-p">Si ella estuviera aqui, estaria ayudandonos.</p>
+<ul class="doc-list"><li>They <strong><em>would</em></strong> be buying the car if they had the money.</li></ul>
+<p class="doc-p">Estarian comprando el carro si tuvieran el dinero.</p>
+<ul class="doc-list"><li>I <strong><em>would</em></strong> be traveling more if I didn&#x27;t <strong><em>have to</em></strong> work so much.</li></ul>
+<p class="doc-p">Estaria viajando mas si no tuviera que trabajar tanto.</p>
+<h4 class="doc-h3">Nota</h4>
+<p class="doc-p">En el condicional es muy comun usar <strong><code>were</code></strong> en lugar de <strong><code>was</code></strong> en estructuras como <strong><code>If I were...</code></strong>.</p>
+<h4 class="doc-h3">Resumen</h4>
+<p class="doc-p">El condicional simple expresa el resultado hipotetico. El condicional continuo expresa una accion hipotetica en desarrollo.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. If I had more time, I .......... more.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">would travel</span>
+                </div>
+<div class="exercise-question">2. If I weren&#x27;t so busy, I .......... for the exam right now.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">would be studying</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. If she <strong><em>were</em></strong> here, she .......... us.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">would help</span><span class="opt-badge" onclick="selectOption(this)">would be helping</span><span class="opt-badge" onclick="selectOption(this)">both are possible</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">both are possible</span>
+                </div>
+
+            <div class="section-anchor" id="sec-16-modales-must-have-to-should"></div>
+            <h3 class="doc-h2">1.6. Modales: must, have to, should</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">Estos modales expresan obligacion, necesidad o consejo.</p>
+<p class="doc-p"><strong><em>Must</em></strong></p>
+<p class="doc-p">Se usa para obligaciones fuertes, reglas o deducciones logicas.</p>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>You <strong><em>must</em></strong> wear a helmet when riding a motorcycle.</li></ul>
+<p class="doc-p">Debes usar casco al conducir una motocicleta.</p>
+<ul class="doc-list"><li>She <strong><em>must</em></strong> be at home; her car is in the driveway.</li></ul>
+<p class="doc-p">Debe estar en casa; su carro esta en la entrada.</p>
+<ul class="doc-list"><li>We <strong><em>must</em></strong> finish this report by Friday.</li></ul>
+<p class="doc-p">Debemos terminar este informe para el viernes.</p>
+<p class="doc-p"><strong><em>Have to</em></strong></p>
+<p class="doc-p">Se usa para obligaciones practicas, rutinarias o externas.</p>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>I <strong><em>have to</em></strong> wake up early tomorrow for work.</li></ul>
+<p class="doc-p">Tengo que levantarme temprano manana para trabajar.</p>
+<ul class="doc-list"><li>They <strong><em>have to</em></strong> submit the assignment by Monday.</li></ul>
+<p class="doc-p">Tienen que entregar la tarea antes del lunes.</p>
+<ul class="doc-list"><li>She <strong><em>has to</em></strong> take care of her little brother this afternoon.</li></ul>
+<p class="doc-p">Ella tiene que cuidar a su hermanito esta tarde.</p>
+<p class="doc-p"><strong><em>Should</em></strong></p>
+<p class="doc-p">Se usa para consejos y recomendaciones.</p>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>You <strong><em>should</em></strong> eat more vegetables to stay healthy.</li></ul>
+<p class="doc-p">Deberias comer mas verduras para mantenerte saludable.</p>
+<ul class="doc-list"><li>He <strong><em>should</em></strong> apologize for being rude.</li></ul>
+<p class="doc-p">Deberia disculparse por ser grosero.</p>
+<ul class="doc-list"><li>They <strong><em>should</em></strong> study harder if they want to pass the exam.</li></ul>
+<p class="doc-p">Deberian estudiar mas si quieren aprobar el examen.</p>
+<ul class="doc-list"><li>We <strong><em>should</em></strong> leave early to avoid the traffic.</li></ul>
+<p class="doc-p">Deberiamos salir temprano para evitar el trafico.</p>
+<h4 class="doc-h3">Comparacion rapida</h4>
+<ul class="doc-list"><li><strong><code>must</code></strong>: obligacion fuerte.</li><li><strong><code>have to</code></strong>: necesidad practica o externa.</li><li><strong><code>should</code></strong>: consejo.</li></ul>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. You .......... wear a helmet.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">must</span>
+                </div>
+<div class="exercise-question">2. I .......... wake up early tomorrow.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">have to</span>
+                </div>
+<div class="exercise-question">3. You .......... eat more vegetables.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">should</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. He .......... apologize for being rude.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">must</span><span class="opt-badge" onclick="selectOption(this)">should</span><span class="opt-badge" onclick="selectOption(this)">has to</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">should</span>
+                </div>
+
+            <div class="section-anchor" id="sec-17-modales-can-could-might-may"></div>
+            <h3 class="doc-h2">1.7. Modales: can, could, might, may</h3>
+<p class="doc-p"><strong><em>Can</em></strong></p>
+<p class="doc-p">Habla de capacidad, posibilidad o permiso comun.</p>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>I <strong><em>can</em></strong> speak five languages.</li></ul>
+<p class="doc-p">Puedo hablar cinco idiomas.</p>
+<ul class="doc-list"><li>You <strong><em>can</em></strong> leave work early today.</li></ul>
+<p class="doc-p">Puedes salir temprano del trabajo hoy.</p>
+<ul class="doc-list"><li>She <strong><em>can</em></strong> swim <strong><em>very</em></strong> well.</li></ul>
+<p class="doc-p">Ella puede nadar muy bien.</p>
+<p class="doc-p"><strong><em>Could</em></strong></p>
+<p class="doc-p">Puede ser pasado de <strong><code>can</code></strong>, posibilidad o una peticion educada.</p>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>I <strong><em>could</em></strong> swim when I <strong><em>was</em></strong> five years old.</li></ul>
+<p class="doc-p">Podia nadar cuando tenia cinco anos.</p>
+<ul class="doc-list"><li>We <strong><em>could</em></strong> go to the beach this weekend.</li></ul>
+<p class="doc-p">Podriamos ir a la playa este fin de semana.</p>
+<ul class="doc-list"><li><strong><em>Could</em></strong> you help me with this report?</li></ul>
+<p class="doc-p">Podrias ayudarme con este informe?</p>
+<ul class="doc-list"><li>He <strong><em>could</em></strong> speak Italian, but he hasn&#x27;t practiced in years.</li></ul>
+<p class="doc-p">El podia hablar italiano, pero no lo ha practicado en anos.</p>
+<p class="doc-p"><strong><em>Might</em></strong></p>
+<p class="doc-p">Expresa posibilidad menos segura.</p>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>I <strong><em>might</em></strong> go to the party later, but I&#x27;m not sure.</li></ul>
+<p class="doc-p">Podria ir a la fiesta mas tarde, pero no estoy seguro.</p>
+<ul class="doc-list"><li>She <strong><em>might</em></strong> not come to the meeting today.</li></ul>
+<p class="doc-p">Puede que ella no venga a la reunion hoy.</p>
+<ul class="doc-list"><li>They <strong><em>might</em></strong> win the game, but it&#x27;s <strong><em>going to</em></strong> be tough.</li></ul>
+<p class="doc-p">Podrian ganar el partido, pero va a ser dificil.</p>
+<p class="doc-p"><strong><em>May</em></strong></p>
+<p class="doc-p">Expresa posibilidad mas formal o permiso formal.</p>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>You <strong><em>may</em></strong> leave early today if you finish your tasks.</li></ul>
+<p class="doc-p">Puede salir temprano hoy si termina sus tareas.</p>
+<ul class="doc-list"><li>It <strong><em>may</em></strong> rain later, so take an umbrella.</li></ul>
+<p class="doc-p">Puede que llueva mas tarde, asi que lleva paraguas.</p>
+<ul class="doc-list"><li><strong><em>May</em></strong> I ask a question?</li></ul>
+<p class="doc-p">Puedo hacer una pregunta?</p>
+<h4 class="doc-h3">Comparacion rapida</h4>
+<ul class="doc-list"><li><strong><code>can</code></strong>: habilidad o permiso comun.</li><li><strong><code>could</code></strong>: posibilidad, pasado o cortesia.</li><li><strong><code>might</code></strong>: posibilidad debil.</li><li><strong><code>may</code></strong>: posibilidad mas formal o permiso formal.</li></ul>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. I .......... speak five languages.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">can</span>
+                </div>
+<div class="exercise-question">2. ........... you help me with this report?</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">Could</span>
+                </div>
+<div class="exercise-question">3. It .......... rain later.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">may</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. She .......... come to the meeting, but she is not sure.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">can</span><span class="opt-badge" onclick="selectOption(this)">might</span><span class="opt-badge" onclick="selectOption(this)">must</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">might</span>
+                </div>
+
+            <div class="section-anchor" id="sec-18-voz-pasiva"></div>
+            <h3 class="doc-h2">1.8. Voz pasiva</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">La voz pasiva pone la atencion en la accion o en el objeto, no en quien la realiza.</p>
+<p class="doc-p">Estructura basica</p>
+<p class="doc-p">Sujeto + verbo <strong><code>to be</code></strong> + participio pasado (+ by + agente).</p>
+<p class="doc-p">Comparacion</p>
+<p class="doc-p">Voz activa:</p>
+<ul class="doc-list"><li>The chef prepared the meal.</li></ul>
+<p class="doc-p">El chef preparo la comida.</p>
+<p class="doc-p">Voz pasiva:</p>
+<ul class="doc-list"><li>The meal <strong><em>was</em></strong> prepared by the chef.</li></ul>
+<p class="doc-p">La comida fue preparada por el chef.</p>
+<p class="doc-p">Mas ejemplos</p>
+<ul class="doc-list"><li>The book <strong><em>was</em></strong> written by the author.</li></ul>
+<p class="doc-p">El libro fue escrito por el autor.</p>
+<ul class="doc-list"><li>The car <strong><em>was</em></strong> repaired by the mechanic.</li></ul>
+<p class="doc-p">El carro fue reparado por el mecanico.</p>
+<ul class="doc-list"><li>The cake <strong><em>was</em></strong> baked by Mary.</li></ul>
+<p class="doc-p">El pastel fue horneado por Mary.</p>
+<ul class="doc-list"><li>The letter <strong><em>was</em></strong> sent yesterday.</li></ul>
+<p class="doc-p">La carta fue enviada ayer.</p>
+<ul class="doc-list"><li>The house <strong><em>was</em></strong> built in 1990.</li></ul>
+<p class="doc-p">La casa fue construida en 1990.</p>
+<ul class="doc-list"><li>The problem <strong><em>was</em></strong> solved.</li></ul>
+<p class="doc-p">El problema fue resuelto.</p>
+<h4 class="doc-h3">Uso recomendado</h4>
+<p class="doc-p">La voz pasiva es muy util en contextos formales, academicos y profesionales.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. The meal .......... by the chef.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">was prepared</span>
+                </div>
+<div class="exercise-question">2. The book .......... by the author.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">was written</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. The problem ..........</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">was solved</span><span class="opt-badge" onclick="selectOption(this)">solved</span><span class="opt-badge" onclick="selectOption(this)">was solve</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">was solved</span>
+                </div>
+
+                <div class="chapter-anchor chapter-separator" id="cap-2-pronunciacion-intermedia"></div>
+                <h2 class="doc-h1">
+                  <span class="chapter-tag">CAPÍTULO</span>
+                  <span>2. PRONUNCIACION INTERMEDIA</span>
+                </h2>
+
+            <div class="section-anchor" id="sec-21-diferencia-entre-i-corta-y-i-larga"></div>
+            <h3 class="doc-h2">2.1. Diferencia entre /i/ corta y /i:/ larga</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">Una diferencia pequena en la vocal puede cambiar completamente la palabra.</p>
+<h4 class="doc-h3">Pares utiles</h4>
+<ul class="doc-list"><li>bit / beat</li><li>sit / seat</li><li>fit / feet</li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>I bought a bit of cake.</li></ul>
+<p class="doc-p">Compre un poco de pastel.</p>
+<ul class="doc-list"><li>Beat the drum.</li></ul>
+<p class="doc-p">Golpea el tambor.</p>
+<ul class="doc-list"><li>Please sit down.</li></ul>
+<p class="doc-p">Por favor, sientate.</p>
+<ul class="doc-list"><li>This seat is taken.</li></ul>
+<p class="doc-p">Este asiento esta ocupado.</p>
+<ul class="doc-list"><li>This shirt doesn&#x27;t fit me.</li></ul>
+<p class="doc-p">Esta camisa no me queda.</p>
+<ul class="doc-list"><li>My feet hurt.</li></ul>
+<p class="doc-p">Me duelen los pies.</p>
+<h4 class="doc-h3">Consejo</h4>
+<p class="doc-p">La vocal larga dura mas y suele sonar mas tensa. La corta es mas relajada y breve.</p>
+
+            <div class="section-anchor" id="sec-22-diferencia-entre-sonidos-tipo-cat-y-cut"></div>
+            <h3 class="doc-h2">2.2. Diferencia entre sonidos tipo `cat` y `cut`</h3>
+<h4 class="doc-h3">Pares utiles</h4>
+<ul class="doc-list"><li>cat / cut</li><li>bat / but</li><li>cap / cup</li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>The cat is sleeping on the chair.</li></ul>
+<p class="doc-p">El gato esta durmiendo en la silla.</p>
+<ul class="doc-list"><li>Be careful not to cut yourself.</li></ul>
+<p class="doc-p">Ten cuidado de no cortarte.</p>
+<ul class="doc-list"><li>He has a bat for baseball.</li></ul>
+<p class="doc-p">Tiene un bate para beisbol.</p>
+<ul class="doc-list"><li>She wanted to come, but she couldn&#x27;t.</li></ul>
+<p class="doc-p">Ella queria venir, pero no pudo.</p>
+<ul class="doc-list"><li>I need a cap for the sun.</li></ul>
+<p class="doc-p">Necesito una gorra para el sol.</p>
+<ul class="doc-list"><li>Pour the tea into the cup.</li></ul>
+<p class="doc-p">Vierte el te en la taza.</p>
+
+            <div class="section-anchor" id="sec-23-sonidos-th"></div>
+            <h3 class="doc-h2">2.3. Sonidos `th`</h3>
+<h4 class="doc-h3">Dos sonidos importantes</h4>
+<ul class="doc-list"><li>Sonido sordo: <strong><code>think</code></strong></li><li>Sonido sonoro: <strong><code>this</code></strong></li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>I think it&#x27;s a good idea.</li></ul>
+<p class="doc-p">Creo que es una buena idea.</p>
+<ul class="doc-list"><li>This is my favorite book.</li></ul>
+<p class="doc-p">Este es mi libro favorito.</p>
+<ul class="doc-list"><li>Thanks for your help.</li></ul>
+<p class="doc-p">Gracias por tu ayuda.</p>
+<ul class="doc-list"><li>They are coming to the party.</li></ul>
+<p class="doc-p">Ellos vienen a la fiesta.</p>
+<ul class="doc-list"><li>I am studying math.</li></ul>
+<p class="doc-p">Estoy estudiando matematicas.</p>
+<ul class="doc-list"><li>My mother is a teacher.</li></ul>
+<p class="doc-p">Mi madre es profesora.</p>
+<h4 class="doc-h3">Consejo de articulacion</h4>
+<p class="doc-p">Coloca la lengua entre los dientes y deja salir el aire. En <strong><code>this</code></strong>, ademas, hay vibracion.</p>
+
+            <div class="section-anchor" id="sec-24-sonidos-r-y-l"></div>
+            <h3 class="doc-h2">2.4. Sonidos `r` y `l`</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">En ingles, la <strong><code>r</code></strong> y la <strong><code>l</code></strong> se distinguen de forma muy clara.</p>
+<h4 class="doc-h3">Pares utiles</h4>
+<ul class="doc-list"><li>red / led</li><li>right / light</li><li>road / load</li><li>late / rate</li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>The red book is mine.</li></ul>
+<p class="doc-p">El libro rojo es mio.</p>
+<ul class="doc-list"><li>Turn on the light.</li></ul>
+<p class="doc-p">Enciende la luz.</p>
+<ul class="doc-list"><li>She <strong><em>was</em></strong> right about the answer.</li></ul>
+<p class="doc-p">Ella tenia razon sobre la respuesta.</p>
+<ul class="doc-list"><li>We arrived late last night.</li></ul>
+<p class="doc-p">Llegamos tarde anoche.</p>
+<ul class="doc-list"><li>The road <strong><em>was</em></strong> empty.</li></ul>
+<p class="doc-p">La carretera estaba vacia.</p>
+<ul class="doc-list"><li><strong><em>Can</em></strong> you help me load the truck?</li></ul>
+<p class="doc-p">Puedes ayudarme a cargar el camion?</p>
+
+                <div class="chapter-anchor chapter-separator" id="cap-3-conversacion-intermedia"></div>
+                <h2 class="doc-h1">
+                  <span class="chapter-tag">CAPÍTULO</span>
+                  <span>3. CONVERSACION INTERMEDIA</span>
+                </h2>
+
+            <div class="section-anchor" id="sec-31-expresar-opiniones-con-claridad"></div>
+            <h3 class="doc-h2">3.1. Expresar opiniones con claridad</h3>
+<h4 class="doc-h3">Frases utiles</h4>
+<ul class="doc-list"><li>I believe...</li><li>In my opinion, ...</li><li>From my perspective, ...</li><li>I think that...</li><li>I feel that...</li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>In my opinion, working from home has both advantages and disadvantages.</li></ul>
+<p class="doc-p">En mi opinion, trabajar desde casa tiene ventajas y desventajas.</p>
+<ul class="doc-list"><li>I believe learning languages opens many opportunities.</li></ul>
+<p class="doc-p">Creo que aprender idiomas abre muchas oportunidades.</p>
+<ul class="doc-list"><li>Personally, I think exercise is essential for a healthy lifestyle.</li></ul>
+<p class="doc-p">Personalmente, creo que el ejercicio es esencial para un estilo de vida saludable.</p>
+<ul class="doc-list"><li>From my perspective, this course is a great opportunity to improve our English skills.</li></ul>
+<p class="doc-p">Desde mi perspectiva, este curso es una gran oportunidad para mejorar nuestras habilidades de ingles.</p>
+<ul class="doc-list"><li>I feel that reading regularly improves my focus and creativity.</li></ul>
+<p class="doc-p">Siento que leer con regularidad mejora mi enfoque y creatividad.</p>
+<h4 class="doc-h3">Modelos para practicar</h4>
+<ul class="doc-list"><li>In my opinion, learning to cook is a valuable skill.</li><li>I think that exercising regularly helps reduce stress.</li><li>From my perspective, teamwork is essential in any job.</li></ul>
+
+            <div class="section-anchor" id="sec-32-hacer-preguntas-y-mantener-una-conversacion"></div>
+            <h3 class="doc-h2">3.2. Hacer preguntas y mantener una conversacion</h3>
+<p class="doc-p">Preguntas abiertas utiles</p>
+<ul class="doc-list"><li>What do you think about...?</li><li>How do you feel about...?</li><li><strong><em>Could</em></strong> you tell me more about...?</li><li>How did you manage to...?</li><li>Is there anything you <strong><em>would</em></strong> like to share about...?</li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>What do you think about learning a new language?</li></ul>
+<p class="doc-p">Que piensas sobre aprender un nuevo idioma?</p>
+<ul class="doc-list"><li>What do you think about working remotely?</li></ul>
+<p class="doc-p">Que piensas sobre trabajar de forma remota?</p>
+<ul class="doc-list"><li><strong><em>Could</em></strong> you tell me more about your experience in marketing?</li></ul>
+<p class="doc-p">Podrias contarme mas sobre tu experiencia en marketing?</p>
+<ul class="doc-list"><li>How did you manage to finish that project on time?</li></ul>
+<p class="doc-p">Como lograste terminar ese proyecto a tiempo?</p>
+<ul class="doc-list"><li>Is there anything you <strong><em>would</em></strong> like to share about your hobbies?</li></ul>
+<p class="doc-p">Hay algo que te gustaria compartir sobre tus pasatiempos?</p>
+<p class="doc-p">Como seguir la conversacion</p>
+<p class="doc-p">Si alguien dice:</p>
+<ul class="doc-list"><li>I think technology is changing education.</li></ul>
+<p class="doc-p">Buena respuesta: How do you think it is changing education?</p>
+<ul class="doc-list"><li>I recently started learning French.</li></ul>
+<p class="doc-p">Buena respuesta: That&#x27;s interesting. How long have you been studying it?</p>
+<ul class="doc-list"><li>I&#x27;m planning to move to another city.</li></ul>
+<p class="doc-p">Buena respuesta: What made you decide to move?</p>
+<h4 class="doc-h3">Nota</h4>
+<p class="doc-p"><strong><code>How come...?</code></strong> tambien sirve para preguntar <strong><code>Why?</code></strong> de una manera mas curiosa y suave.</p>
+
+            <div class="section-anchor" id="sec-33-sugerir-soluciones-alternativas"></div>
+            <h3 class="doc-h2">3.3. Sugerir soluciones alternativas</h3>
+<h4 class="doc-h3">Frases utiles</h4>
+<ul class="doc-list"><li>Have you considered...?</li><li>An alternative <strong><em>might</em></strong> be...</li><li>I propose that we...</li><li>Another option <strong><em>could</em></strong> be...</li><li>What if we tried...?</li><li>I suggest we...</li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>Have you considered a different approach to the problem?</li></ul>
+<p class="doc-p">Has considerado un enfoque distinto para el problema?</p>
+<ul class="doc-list"><li>An alternative <strong><em>might</em></strong> be collaborating with other departments.</li></ul>
+<p class="doc-p">Una alternativa podria ser colaborar con otros departamentos.</p>
+<ul class="doc-list"><li>I propose that we do more research before making a decision.</li></ul>
+<p class="doc-p">Propongo que investiguemos mas antes de tomar una decision.</p>
+<ul class="doc-list"><li>Another option <strong><em>could</em></strong> be asking for feedback from other stakeholders.</li></ul>
+<p class="doc-p">Otra opcion podria ser pedir retroalimentacion a otros interesados.</p>
+<ul class="doc-list"><li>What if we tried a pilot program to test our ideas?</li></ul>
+<p class="doc-p">Y si probamos un programa piloto para poner a prueba nuestras ideas?</p>
+<ul class="doc-list"><li>I suggest we consider all possibilities.</li></ul>
+<p class="doc-p">Sugiero que consideremos todas las posibilidades.</p>
+
+                <div class="chapter-anchor chapter-separator" id="cap-4-escritura-intermedia"></div>
+                <h2 class="doc-h1">
+                  <span class="chapter-tag">CAPÍTULO</span>
+                  <span>4. ESCRITURA INTERMEDIA</span>
+                </h2>
+
+            <div class="section-anchor" id="sec-41-estructura-de-un-parrafo"></div>
+            <h3 class="doc-h2">4.1. Estructura de un parrafo</h3>
+<p class="doc-p">Un buen parrafo suele tener tres partes:</p>
+<ol class="doc-ordered-list"><li>Topic sentence: presenta la idea principal.</li><li>Supporting sentences: desarrollan la idea.</li><li>Concluding sentence: cierra o resume.</li></ol>
+<p class="doc-p">Ejemplo 1</p>
+<p class="doc-p">Topic sentence:</p>
+<ul class="doc-list"><li>The importance of exercise cannot be overstated.</li></ul>
+<p class="doc-p">La importancia del ejercicio no puede exagerarse.</p>
+<p class="doc-p">Supporting sentence:</p>
+<ul class="doc-list"><li>Regular exercise helps improve mental health, increases energy levels, and prevents many health issues.</li></ul>
+<p class="doc-p">El ejercicio regular ayuda a mejorar la salud mental, aumenta la energia y previene muchos problemas de salud.</p>
+<p class="doc-p">Concluding sentence:</p>
+<ul class="doc-list"><li>In short, regular exercise is essential for maintaining a healthy lifestyle.</li></ul>
+<p class="doc-p">En resumen, el ejercicio regular es esencial para mantener un estilo de vida saludable.</p>
+<p class="doc-p">Ejemplo 2</p>
+<p class="doc-p">Topic sentence:</p>
+<ul class="doc-list"><li>Learning a new language is highly beneficial.</li></ul>
+<p class="doc-p">Supporting ideas:</p>
+<ul class="doc-list"><li>It improves cognitive skills.</li><li>It allows communication with more people.</li><li>It increases career opportunities.</li></ul>
+<p class="doc-p">Concluding sentence:</p>
+<ul class="doc-list"><li>For these reasons, language learning is a valuable skill to develop.</li></ul>
+<p class="doc-p">Ejemplo 3</p>
+<p class="doc-p">Topic sentence:</p>
+<ul class="doc-list"><li>Traveling is an enriching experience.</li></ul>
+<p class="doc-p">Supporting ideas:</p>
+<ul class="doc-list"><li>It exposes you to new cultures.</li><li>It helps you learn history.</li><li>It encourages personal growth.</li></ul>
+<p class="doc-p">Concluding sentence:</p>
+<ul class="doc-list"><li>Overall, traveling opens the mind and broadens perspectives.</li></ul>
+
+            <div class="section-anchor" id="sec-42-conectores-para-coherencia-y-cohesion"></div>
+            <h3 class="doc-h2">4.2. Conectores para coherencia y cohesion</h3>
+<p class="doc-p">Para anadir informacion</p>
+<ul class="doc-list"><li>and</li><li>moreover</li><li>furthermore</li><li>in addition</li></ul>
+<p class="doc-p">Para contrastar</p>
+<ul class="doc-list"><li>but</li><li>however</li><li>on the other hand</li><li>although</li></ul>
+<p class="doc-p">Para causa y efecto</p>
+<ul class="doc-list"><li>because</li><li>therefore</li><li>as a result</li><li>so</li></ul>
+<p class="doc-p">Para ordenar ideas</p>
+<ul class="doc-list"><li>first</li><li>then</li><li>finally</li><li>in conclusion</li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>She enjoys reading, and she also likes writing short stories.</li></ul>
+<p class="doc-p">Le gusta leer y tambien escribir cuentos cortos.</p>
+<ul class="doc-list"><li>He wanted to go to the party; however, he had too much work.</li></ul>
+<p class="doc-p">Queria ir a la fiesta; sin embargo, tenia demasiado trabajo.</p>
+<ul class="doc-list"><li>He didn&#x27;t study for the exam; therefore, he didn&#x27;t pass.</li></ul>
+<p class="doc-p">No estudio para el examen; por lo tanto, no aprobo.</p>
+<ul class="doc-list"><li>First, we <strong><em>will</em></strong> discuss the problem. Then, we <strong><em>will</em></strong> find a solution.</li></ul>
+<p class="doc-p">Primero discutiremos el problema. Luego encontraremos una solucion.</p>
+
+            <div class="section-anchor" id="sec-43-evitar-repeticiones"></div>
+            <h3 class="doc-h2">4.3. Evitar repeticiones</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">Repetir siempre las mismas palabras hace que el texto suene plano. Usa sinonimos y expresiones mas precisas.</p>
+<p class="doc-p">Sustituciones utiles</p>
+<ul class="doc-list"><li>good -&gt; excellent, great, fantastic, outstanding</li><li>bad -&gt; terrible, awful, poor, disappointing</li><li>happy -&gt; joyful, thrilled, overjoyed, content</li><li>interesting -&gt; captivating, fascinating, engaging, absorbing</li><li>important -&gt; essential, crucial, significant</li><li>big -&gt; huge, enormous, massive, vast</li><li>small -&gt; tiny, little, compact</li><li>nice -&gt; pleasant, lovely, charming, delightful</li><li>difficult -&gt; hard, challenging, demanding</li><li>tired -&gt; exhausted, worn out, drained</li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>The movie <strong><em>was</em></strong> fantastic.</li></ul>
+<p class="doc-p">La pelicula fue fantastica.</p>
+<ul class="doc-list"><li>The food <strong><em>was</em></strong> awful.</li></ul>
+<p class="doc-p">La comida estuvo terrible.</p>
+<ul class="doc-list"><li>She felt thrilled about the news.</li></ul>
+<p class="doc-p">Ella se sintio emocionada por la noticia.</p>
+<ul class="doc-list"><li>The book is captivating.</li></ul>
+<p class="doc-p">El libro es cautivador.</p>
+<ul class="doc-list"><li>This is a crucial decision.</li></ul>
+<p class="doc-p">Esta es una decision crucial.</p>
+<ul class="doc-list"><li>The house is enormous.</li></ul>
+<p class="doc-p">La casa es enorme.</p>
+<ul class="doc-list"><li>I feel exhausted after work.</li></ul>
+<p class="doc-p">Me siento exhausto despues del trabajo.</p>
+
+            <div class="section-anchor" id="sec-44-descripciones-de-personas-y-lugares"></div>
+            <h3 class="doc-h2">4.4. Descripciones de personas y lugares</h3>
+<h4 class="doc-h3">Elementos clave para describir personas</h4>
+<ul class="doc-list"><li>Apariencia fisica.</li><li>Altura y complexon.</li><li>Cabello y ojos.</li><li>Ropa.</li><li>Personalidad.</li><li>Estado emocional.</li></ul>
+<h4 class="doc-h3">Elementos clave para describir lugares</h4>
+<ul class="doc-list"><li>Tamano.</li><li>Colores.</li><li>Estilo.</li><li>Ambiente.</li><li>Objetos presentes.</li><li>Sonidos y olores.</li></ul>
+<h4 class="doc-h3">Descripcion simple vs. mejorada</h4>
+<p class="doc-p">Simple</p>
+<ul class="doc-list"><li>She is a tall woman with long curly hair and warm brown eyes.</li></ul>
+<p class="doc-p">Mejorada</p>
+<ul class="doc-list"><li>She is a tall, slender woman with cascading curly hair the color of chestnuts and sparkling brown eyes that seem full of kindness.</li></ul>
+<p class="doc-p">Simple</p>
+<ul class="doc-list"><li>He has short black hair and is <strong><em>very</em></strong> shy.</li></ul>
+<p class="doc-p">Mejorada</p>
+<ul class="doc-list"><li>He has short black hair, a slim figure, and a reserved attitude that makes him seem introspective.</li></ul>
+<p class="doc-p">Simple</p>
+<ul class="doc-list"><li>The beach <strong><em>was</em></strong> quiet and had palm trees.</li></ul>
+<p class="doc-p">Mejorada</p>
+<ul class="doc-list"><li>The beach stretched endlessly, with soft white sand and vibrant green palm trees swaying gently in the ocean breeze.</li></ul>
+<p class="doc-p">Simple</p>
+<ul class="doc-list"><li>The park <strong><em>was</em></strong> big and full of people.</li></ul>
+<p class="doc-p">Mejorada</p>
+<ul class="doc-list"><li>The park <strong><em>was</em></strong> spacious, filled with families enjoying picnics, runners moving along the paths, and children laughing near the playground.</li></ul>
+<p class="doc-p">Ejemplos adicionales</p>
+<ul class="doc-list"><li>My brother is tall and athletic, with short wavy brown hair and sharp blue eyes. He is incredibly determined and always willing to help others.</li><li>The market <strong><em>was</em></strong> bustling with life, colorful stalls overflowing with fresh produce, and the air filled with the aroma of baked goods and spices.</li><li>My bedroom is cozy and bright, with soft pastel walls, a large window, and a bookshelf full of my favorite novels.</li><li>She wore a flowing red dress that shimmered under the lights, paired with elegant silver heels and a delicate necklace.</li></ul>
+
+                <div class="chapter-anchor chapter-separator" id="cap-5-vocabulario-intermedio"></div>
+                <h2 class="doc-h1">
+                  <span class="chapter-tag">CAPÍTULO</span>
+                  <span>5. VOCABULARIO INTERMEDIO</span>
+                </h2>
+
+            <div class="section-anchor" id="sec-51-phrasal-verbs-comunes"></div>
+            <h3 class="doc-h2">5.1. Phrasal verbs comunes</h3>
+<p class="doc-p">Con <strong><code>look</code></strong></p>
+<ul class="doc-list"><li><strong><em>look after</em></strong> = cuidar</li><li><strong><em>look for</em></strong> = buscar</li><li><strong><em>look into</em></strong> = investigar</li><li><strong><em>look up to</em></strong> = admirar</li><li><strong><em>look out for</em></strong> = estar atento a</li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>She <strong><em>has to</em></strong> <strong><em>look after</em></strong> her younger brother every weekend.</li></ul>
+<p class="doc-p">Tiene que cuidar a su hermano menor cada fin de semana.</p>
+<ul class="doc-list"><li>I am looking for my keys.</li></ul>
+<p class="doc-p">Estoy buscando mis llaves.</p>
+<ul class="doc-list"><li>The police are looking into the robbery.</li></ul>
+<p class="doc-p">La policia esta investigando el robo.</p>
+<ul class="doc-list"><li>Many students <strong><em>look up to</em></strong> their teachers.</li></ul>
+<p class="doc-p">Muchos estudiantes admiran a sus profesores.</p>
+<ul class="doc-list"><li><strong><em>Look out for</em></strong> cars when crossing the street.</li></ul>
+<p class="doc-p">Ten cuidado con los carros al cruzar la calle.</p>
+<p class="doc-p">Con <strong><code>get</code></strong></p>
+<ul class="doc-list"><li><strong><em>get along with</em></strong> = llevarse bien con</li><li><strong><em>get over</em></strong> = superar</li><li><strong><em>get by</em></strong> = arreglarselas</li><li><strong><em>get away with</em></strong> = salirse con la suya / quedar impune</li><li><strong><em>get together</em></strong> = reunirse</li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>They get along <strong><em>very</em></strong> well despite their differences.</li></ul>
+<p class="doc-p">Se llevan muy bien a pesar de sus diferencias.</p>
+<ul class="doc-list"><li>It took him a long time to <strong><em>get over</em></strong> the flu.</li></ul>
+<p class="doc-p">Le tomo mucho tiempo recuperarse de la gripe.</p>
+<ul class="doc-list"><li>She doesn&#x27;t earn much, but she manages to <strong><em>get by</em></strong>.</li></ul>
+<p class="doc-p">No gana mucho, pero se las arregla para salir adelante.</p>
+<ul class="doc-list"><li>He cheated on the exam, but he got away with it.</li></ul>
+<p class="doc-p">Hizo trampa en el examen, pero se salio con la suya.</p>
+<ul class="doc-list"><li>Let&#x27;s <strong><em>get together</em></strong> for dinner this weekend.</li></ul>
+<p class="doc-p">Reunamonos para cenar este fin de semana.</p>
+<p class="doc-p">Con <strong><code>put</code></strong></p>
+<ul class="doc-list"><li><strong><em>put off</em></strong> = posponer</li><li><strong><em>put up with</em></strong> = tolerar</li><li><strong><em>put on</em></strong> = ponerse</li><li><strong><em>put out</em></strong> = apagar</li><li><strong><em>put away</em></strong> = guardar</li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>They decided to <strong><em>put off</em></strong> the meeting until next week.</li></ul>
+<p class="doc-p">Decidieron posponer la reunion hasta la proxima semana.</p>
+<ul class="doc-list"><li>I don&#x27;t know how she puts up with all the noise.</li></ul>
+<p class="doc-p">No se como soporta todo el ruido.</p>
+<ul class="doc-list"><li>She <strong><em>put on</em></strong> her jacket before leaving.</li></ul>
+<p class="doc-p">Se puso la chaqueta antes de salir.</p>
+<ul class="doc-list"><li>The firefighters <strong><em>put out</em></strong> the fire quickly.</li></ul>
+<p class="doc-p">Los bomberos apagaron el incendio rapidamente.</p>
+<ul class="doc-list"><li>Please <strong><em>put away</em></strong> your toys after playing.</li></ul>
+<p class="doc-p">Por favor, guarda tus juguetes despues de jugar.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. <strong><em>Can</em></strong> you .......... my dog while I&#x27;m away?</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">look after</span>
+                </div>
+<div class="exercise-question">2. They decided to .......... the meeting.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">put off</span>
+                </div>
+<div class="exercise-question">3. She managed to .......... on a small salary.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">get by</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. I don&#x27;t know how she .......... all the noise.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">puts up with</span><span class="opt-badge" onclick="selectOption(this)">gets over</span><span class="opt-badge" onclick="selectOption(this)">looks into</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">puts up with</span>
+                </div>
+
+            <div class="section-anchor" id="sec-52-colocaciones-comunes-con-make-do-y-have"></div>
+            <h3 class="doc-h2">5.2. Colocaciones comunes con make, do y have</h3>
+<p class="doc-p">Con <strong><code>make</code></strong></p>
+<ul class="doc-list"><li><strong><em>make a decision</em></strong> = tomar una decision</li><li><strong><em>make an effort</em></strong> = hacer un esfuerzo</li><li><strong><em>make a mistake</em></strong> = cometer un error</li><li><strong><em>make money</em></strong> = ganar dinero</li><li><strong><em>make plans</em></strong> = hacer planes</li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>I <strong><em>have to</em></strong> <strong><em>make a decision</em></strong> by tomorrow.</li></ul>
+<p class="doc-p">Tengo que tomar una decision para manana.</p>
+<ul class="doc-list"><li>He needs to <strong><em>make an effort</em></strong> if he wants to pass the exam.</li></ul>
+<p class="doc-p">Necesita esforzarse si quiere aprobar el examen.</p>
+<ul class="doc-list"><li>Everyone makes mistakes, so don&#x27;t worry too much.</li></ul>
+<p class="doc-p">Todos cometen errores, asi que no te preocupes demasiado.</p>
+<ul class="doc-list"><li>She makes a lot of money as a freelance designer.</li></ul>
+<p class="doc-p">Gana mucho dinero como disenadora independiente.</p>
+<ul class="doc-list"><li>Let&#x27;s <strong><em>make plans</em></strong> for the weekend.</li></ul>
+<p class="doc-p">Hagamos planes para el fin de semana.</p>
+<p class="doc-p">Con <strong><code>do</code></strong></p>
+<ul class="doc-list"><li><strong><em>do the dishes</em></strong> = lavar los platos</li><li><strong><em>do your homework</em></strong> = hacer la tarea</li><li><strong><em>do business</em></strong> = hacer negocios</li><li><strong><em>do exercise</em></strong> = hacer ejercicio</li><li><strong><em>do your best</em></strong> = hacer lo mejor posible</li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li><strong><em>Could</em></strong> you please <strong><em>do the dishes</em></strong> after dinner?</li></ul>
+<p class="doc-p">Podrias lavar los platos despues de cenar?</p>
+<ul class="doc-list"><li>He always does his homework right after school.</li></ul>
+<p class="doc-p">Siempre hace su tarea justo despues de la escuela.</p>
+<ul class="doc-list"><li>Our company does business with clients from all over the world.</li></ul>
+<p class="doc-p">Nuestra empresa hace negocios con clientes de todo el mundo.</p>
+<ul class="doc-list"><li>You <strong><em>should</em></strong> do more exercise to stay healthy.</li></ul>
+<p class="doc-p">Deberias hacer mas ejercicio para mantenerte saludable.</p>
+<ul class="doc-list"><li>Just <strong><em>do your best</em></strong>, and everything <strong><em>will</em></strong> be fine.</li></ul>
+<p class="doc-p">Solo haz lo mejor que puedas y todo estara bien.</p>
+<p class="doc-p">Con <strong><code>have</code></strong></p>
+<ul class="doc-list"><li><strong><em>have lunch</em></strong> = almorzar</li><li><strong><em>have fun</em></strong> = divertirse</li><li><strong><em>have an idea</em></strong> = tener una idea</li><li>have a conversation = tener una conversacion</li><li>have a problem = tener un problema</li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>Let&#x27;s <strong><em>have lunch</em></strong> together tomorrow.</li></ul>
+<p class="doc-p">Almorcemos juntos manana.</p>
+<ul class="doc-list"><li>We had so much fun at the amusement park.</li></ul>
+<p class="doc-p">Nos divertimos mucho en el parque de diversiones.</p>
+<ul class="doc-list"><li>I <strong><em>have an idea</em></strong> for the project.</li></ul>
+<p class="doc-p">Tengo una idea para el proyecto.</p>
+<ul class="doc-list"><li>We need to have a serious conversation about your grades.</li></ul>
+<p class="doc-p">Necesitamos tener una conversacion seria sobre tus notas.</p>
+<ul class="doc-list"><li>He is having a problem with his car.</li></ul>
+<p class="doc-p">Esta teniendo un problema con su carro.</p>
+
+            <div class="section-anchor" id="sec-53-expresiones-idiomaticas-basicas"></div>
+            <h3 class="doc-h2">5.3. Expresiones idiomaticas basicas</h3>
+<p class="doc-p">Con <strong><code>time</code></strong></p>
+<ul class="doc-list"><li><strong><em>time is money</em></strong> = el tiempo es dinero</li><li>spend time = pasar tiempo</li><li>kill time = matar el tiempo</li><li>make time = hacer tiempo</li><li><strong><em>run out of time</em></strong> = quedarse sin tiempo</li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>Let&#x27;s not waste any more time on this. Remember, <strong><em>time is money</em></strong>.</li></ul>
+<p class="doc-p">No perdamos mas tiempo en esto. Recuerda: el tiempo es dinero.</p>
+<ul class="doc-list"><li>She loves to spend time with her family on weekends.</li></ul>
+<p class="doc-p">Le encanta pasar tiempo con su familia los fines de semana.</p>
+<ul class="doc-list"><li>I read a book to kill time while waiting for my flight.</li></ul>
+<p class="doc-p">Lei un libro para matar el tiempo mientras esperaba mi vuelo.</p>
+<ul class="doc-list"><li>You need to make time for exercise in your schedule.</li></ul>
+<p class="doc-p">Necesitas hacer tiempo para el ejercicio en tu agenda.</p>
+<ul class="doc-list"><li>We ran out of time and couldn&#x27;t finish the presentation.</li></ul>
+<p class="doc-p">Nos quedamos sin tiempo y no pudimos terminar la presentacion.</p>
+<p class="doc-p">Con <strong><code>money</code></strong></p>
+<ul class="doc-list"><li>money doesn&#x27;t grow on trees = el dinero no crece en los arboles</li><li><strong><em>save money</em></strong> = ahorrar dinero</li><li><strong><em>make money</em></strong> = ganar dinero</li><li>throw money away = tirar el dinero</li><li><strong><em>worth every penny</em></strong> = vale cada centavo</li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>I <strong><em>can</em></strong>&#x27;t buy you a new phone right now. Money doesn&#x27;t grow on trees.</li></ul>
+<p class="doc-p">No puedo comprarte un telefono nuevo ahora. El dinero no crece en los arboles.</p>
+<ul class="doc-list"><li>You <strong><em>should</em></strong> <strong><em>save money</em></strong> for emergencies.</li></ul>
+<p class="doc-p">Deberias ahorrar dinero para emergencias.</p>
+<ul class="doc-list"><li>He makes a lot of money as an engineer.</li></ul>
+<p class="doc-p">Gana mucho dinero como ingeniero.</p>
+<ul class="doc-list"><li>Buying things you don&#x27;t need is like throwing money away.</li></ul>
+<p class="doc-p">Comprar cosas que no necesitas es como tirar el dinero.</p>
+<ul class="doc-list"><li>The vacation <strong><em>was</em></strong> expensive, but it <strong><em>was</em></strong> <strong><em>worth every penny</em></strong>.</li></ul>
+<p class="doc-p">Las vacaciones fueron caras, pero valieron cada centavo.</p>
+<p class="doc-p">Con <strong><code>work</code></strong></p>
+<ul class="doc-list"><li><strong><em>get to work</em></strong> = ponerse a trabajar</li><li><strong><em>work against the clock</em></strong> = trabajar contra reloj</li><li>work like a dog = trabajar muchisimo</li><li>all in a day&#x27;s work = parte del trabajo</li><li>out of work = sin trabajo</li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>It&#x27;s time to <strong><em>get to work</em></strong> and finish this project.</li></ul>
+<p class="doc-p">Es hora de ponerse a trabajar y terminar este proyecto.</p>
+<ul class="doc-list"><li>We are working against the clock to complete the report.</li></ul>
+<p class="doc-p">Estamos trabajando contra reloj para completar el informe.</p>
+<ul class="doc-list"><li>He <strong><em>has been</em></strong> working like a dog to meet the deadline.</li></ul>
+<p class="doc-p">Ha estado trabajando como un loco para cumplir con la fecha limite.</p>
+<ul class="doc-list"><li>Dealing with difficult clients is all in a day&#x27;s work for a manager.</li></ul>
+<p class="doc-p">Lidiar con clientes dificiles es parte del trabajo para un gerente.</p>
+<ul class="doc-list"><li>He <strong><em>has been</em></strong> out of work for months, but he is actively looking for a job.</li></ul>
+<p class="doc-p">Lleva meses sin trabajo, pero esta buscando empleo activamente.</p>
+
+                <div class="chapter-anchor chapter-separator" id="cap-6-correccion-de-errores-comunes"></div>
+                <h2 class="doc-h1">
+                  <span class="chapter-tag">CAPÍTULO</span>
+                  <span>6. CORRECCION DE ERRORES COMUNES</span>
+                </h2>
+
+            <div class="section-anchor" id="sec-61-errores-de-vocabulario-y-uso"></div>
+            <h3 class="doc-h2">6.1. Errores de vocabulario y uso</h3>
+<p class="doc-p"><strong><em>Advice</em></strong> vs. <strong><em>advise</em></strong></p>
+<ul class="doc-list"><li><strong><code>advice</code></strong> = consejo (sustantivo)</li><li><strong><code>advise</code></strong> = aconsejar (verbo)</li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>I need some <strong><em>advice</em></strong>.</li></ul>
+<p class="doc-p">Necesito un consejo.</p>
+<ul class="doc-list"><li>She advised me to study more.</li></ul>
+<p class="doc-p">Ella me aconsejo estudiar mas.</p>
+<p class="doc-p"><strong><em>Borrow</em></strong> vs. <strong><em>lend</em></strong></p>
+<ul class="doc-list"><li><strong><code>borrow</code></strong> = pedir prestado / tomar prestado</li><li><strong><code>lend</code></strong> = prestar</li></ul>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li><strong><em>Can</em></strong> you <strong><em>lend</em></strong> me your pen?</li></ul>
+<p class="doc-p">Me puedes prestar tu boligrafo?</p>
+<ul class="doc-list"><li>I borrowed his pen.</li></ul>
+<p class="doc-p">Tome prestado su boligrafo.</p>
+<p class="doc-p"><strong><em>Practice</em></strong></p>
+<p class="doc-p">En ingles americano, <strong><code>practice</code></strong> se usa tanto como sustantivo como verbo.</p>
+<p class="doc-p">Ejemplos</p>
+<ul class="doc-list"><li>I need more <strong><em>practice</em></strong> with my pronunciation.</li></ul>
+<p class="doc-p">Necesito mas practica con mi pronunciacion.</p>
+<ul class="doc-list"><li>I <strong><em>will</em></strong> <strong><em>practice</em></strong> my pronunciation every day.</li></ul>
+<p class="doc-p">Voy a practicar mi pronunciacion todos los dias.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. I need some ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">advice</span>
+                </div>
+<div class="exercise-question">2. <strong><em>Can</em></strong> you .......... me your pen?</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">lend</span>
+                </div>
+<div class="exercise-question">3. I <strong><em>will</em></strong> .......... every day.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">practice</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. Choose the correct word: I .......... his pen yesterday.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">lent</span><span class="opt-badge" onclick="selectOption(this)">borrowed</span><span class="opt-badge" onclick="selectOption(this)">advised</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">borrowed</span>
+                </div>
+
+            <div class="section-anchor" id="sec-62-errores-de-pronunciacion-frecuentes"></div>
+            <h3 class="doc-h2">6.2. Errores de pronunciacion frecuentes</h3>
+<p class="doc-p">Sonido de <strong><code>v</code></strong></p>
+<p class="doc-p">Muchos hispanohablantes pronuncian <strong><code>very</code></strong> como si tuviera sonido de <strong><code>b</code></strong>.</p>
+<p class="doc-p">Forma correcta</p>
+<ul class="doc-list"><li><strong><em>very</em></strong></li></ul>
+<p class="doc-p">No cierres los labios como en <strong><code>b</code></strong>.</p>
+<p class="doc-p">Apoya los dientes superiores sobre el labio inferior y vibra suavemente.</p>
+<p class="doc-p">Ejemplo</p>
+<ul class="doc-list"><li><strong><em>Very</em></strong> good.</li></ul>
+<p class="doc-p">Muy bien.</p>
+
+                <div class="chapter-anchor chapter-separator" id="cap-7-como-estudiar-este-material-leyendo"></div>
+                <h2 class="doc-h1">
+                  <span class="chapter-tag">CAPÍTULO</span>
+                  <span>7. COMO ESTUDIAR ESTE MATERIAL LEYENDO</span>
+                </h2>
+<h4 class="doc-h3">Metodo recomendado</h4>
+<ol class="doc-ordered-list"><li>Lee una seccion completa sin detenerte.</li><li>Vuelve a leerla subrayando estructuras y ejemplos.</li><li>Copia a mano o escribe 5 oraciones nuevas siguiendo el mismo patron.</li><li>Lee en voz alta los ejemplos de pronunciacion y conversacion.</li><li>Repite al dia siguiente sin mirar la traduccion.</li></ol>
+<h4 class="doc-h3">Rutina sugerida</h4>
+<ul class="doc-list"><li>Dia 1: Pasado simple y pasado continuo.</li><li>Dia 2: Futuro y presente perfecto.</li><li>Dia 3: Pasado perfecto y condicionales.</li><li>Dia 4: Modales y voz pasiva.</li><li>Dia 5: Pronunciacion.</li><li>Dia 6: Conversacion y escritura.</li><li>Dia 7: Vocabulario, errores comunes y repaso general.</li></ul>
+<h4 class="doc-h3">Consejo final</h4>
+<p class="doc-p">No memorices reglas aisladas. Estudia los ejemplos, leelos varias veces y crea nuevas frases basadas en ellos. Si conviertes estas estructuras en lectura repetida y practica escrita, vas a retener mucho mas que viendo el video una sola vez.</p>
+        </div>
+
+        <!-- Navegación final del documento -->
+        <div style="margin-top: 50px; padding: 24px; border-radius: 14px; background: var(--bg-alt); border: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+          <div>
+            <h4 style="font-size: 16px; font-weight: 800; color: var(--text);">¿Listo para continuar tu estudio?</h4>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Practica tu vocabulario en el Dashboard con Flashcards SRS, Quizzes o explora otros niveles.</p>
+          </div>
+          <a href="index.html" class="btn-return-app" style="padding: 10px 22px; font-size: 14px;">
+            ← Volver a la App Principal
+          </a>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Botón Volver Arriba -->
+  <button class="btn-back-to-top" id="btn-back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Subir al inicio">
+    ↑
+  </button>
+
+  <script>
+    // Inicializar Tema
+    function initTheme() {
+      const saved = localStorage.getItem('lexicore_theme') || 'light';
+      if (saved === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+      }
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      document.documentElement.classList.toggle('light', !isDark);
+      localStorage.setItem('lexicore_theme', isDark ? 'dark' : 'light');
+    }
+
+    // Soluciones en Ejercicios
+    function toggleAnswer(btn) {
+      const ansSpan = btn.nextElementSibling;
+      if (!ansSpan) return;
+      const isHidden = ansSpan.classList.contains('hidden-answer');
+      if (isHidden) {
+        ansSpan.classList.remove('hidden-answer');
+        btn.textContent = '🙈 Ocultar solución';
+      } else {
+        ansSpan.classList.add('hidden-answer');
+        btn.textContent = '👁️ Revelar solución';
+      }
+    }
+
+    // Selección interactiva de opciones
+    function selectOption(el) {
+      const parent = el.parentElement;
+      parent.querySelectorAll('.opt-badge').forEach(b => b.classList.remove('selected'));
+      el.classList.add('selected');
+    }
+
+    // ToC en Móviles
+    function toggleMobileToc() {
+      const sidebar = document.getElementById('sidebar-toc');
+      if (sidebar) sidebar.classList.toggle('open');
+    }
+
+    function closeMobileToc() {
+      const sidebar = document.getElementById('sidebar-toc');
+      if (sidebar && window.innerWidth <= 900) {
+        sidebar.classList.remove('open');
+      }
+    }
+
+    // Filtrar temas en el ToC
+    function filterToc(query) {
+      const q = query.toLowerCase().trim();
+      document.querySelectorAll('#toc-list li').forEach(li => {
+        const text = li.textContent.toLowerCase();
+        li.style.display = (!q || text.includes(q)) ? 'block' : 'none';
+      });
+    }
+
+    // Botón Volver Arriba
+    window.addEventListener('scroll', () => {
+      const btn = document.getElementById('btn-back-to-top');
+      if (window.scrollY > 400) {
+        btn.classList.add('visible');
+      } else {
+        btn.classList.remove('visible');
+      }
+    });
+
+    initTheme();
+  </script>
+</body>
+</html>

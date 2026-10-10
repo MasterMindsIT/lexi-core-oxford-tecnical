@@ -1,0 +1,2158 @@
+<!DOCTYPE html>
+<html lang="es" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inglés Básico A1-A2 - Guía Didáctica | Kale Anders</title>
+  <style>
+    :root {
+      --primary: #059669;
+      --primary-light: #ecfdf5;
+      --bg: #ffffff;
+      --bg-alt: #f8fafc;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --sidebar-bg: #f8fafc;
+      --card-bg: #ffffff;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-title: "Cambria", Georgia, serif;
+    }
+
+    .dark {
+      --primary: #059669;
+      --primary-light: #1e1b4b;
+      --bg: #0f172a;
+      --bg-alt: #1e293b;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border: #334155;
+      --sidebar-bg: #0b1120;
+      --card-bg: #1e293b;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-alt);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    /* Barra Superior Fija */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 24px;
+      gap: 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    }
+
+    .top-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-return-app {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--primary);
+      color: #ffffff;
+      border: 1px solid var(--primary);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13px;
+      text-decoration: none;
+      transition: all 0.2s;
+      white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .btn-return-app:hover {
+      opacity: 0.92;
+      transform: translateX(-2px);
+      color: #ffffff;
+    }
+
+    .btn-toc-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .brand-title {
+      font-weight: 800;
+      font-size: 16px;
+      color: var(--primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .nav-tabs-bar {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 4px 0;
+    }
+
+    .nav-tab {
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 8px;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+
+    .nav-tab:hover {
+      color: var(--text);
+      background: var(--bg-alt);
+    }
+
+    .nav-tab-active {
+      background: var(--primary) !important;
+      color: #ffffff !important;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-action {
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s;
+    }
+
+    .btn-action:hover {
+      background: var(--bg-alt);
+    }
+
+    .btn-print {
+      background: var(--primary);
+      color: white;
+      border: none;
+    }
+
+    .btn-print:hover {
+      opacity: 0.9;
+    }
+
+    /* Layout Principal: Sidebar + Contenido */
+    .app-layout {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      min-height: calc(100vh - 60px);
+    }
+
+    /* Barra Lateral de Contenidos (ToC) */
+    .sidebar-toc {
+      width: 330px;
+      flex-shrink: 0;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border);
+      padding: 24px 18px;
+      position: sticky;
+      top: 60px;
+      height: calc(100vh - 60px);
+      overflow-y: auto;
+    }
+
+    .sidebar-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 800;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .toc-search {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 12.5px;
+      margin-bottom: 14px;
+      outline: none;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .toc-item-h1 {
+      margin-top: 10px;
+    }
+
+    .toc-item-h1 a {
+      display: block;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--text);
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: background 0.15s;
+    }
+
+    .toc-item-h2 a {
+      display: block;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 4px 10px 4px 18px;
+      border-radius: 6px;
+      transition: all 0.15s;
+    }
+
+    .toc-item-h1 a:hover, .toc-item-h2 a:hover {
+      background: var(--border);
+      color: var(--text);
+    }
+
+    /* Contenedor del Documento Principal */
+    .doc-container {
+      flex: 1;
+      min-width: 0;
+      padding: 40px 60px 80px 60px;
+      background: var(--bg);
+    }
+
+    .doc-card {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* Portada de Documento */
+    .doc-hero {
+      text-align: center;
+      padding: 30px 20px 45px 20px;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: var(--font-title);
+      font-size: 38px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    /* Jerarquía Tipográfica */
+    .chapter-anchor, .section-anchor {
+      scroll-margin-top: 80px;
+    }
+
+    .chapter-separator {
+      margin-top: 60px;
+      padding-top: 30px;
+      border-top: 2px solid var(--border);
+    }
+
+    .doc-h1 {
+      font-family: var(--font-title);
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-top: 20px;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1.5px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .chapter-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 800;
+      color: var(--text-muted);
+      font-family: var(--font-main);
+    }
+
+    .doc-h2 {
+      font-family: var(--font-title);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 34px;
+      margin-bottom: 12px;
+    }
+
+    .doc-h3 {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-top: 22px;
+      margin-bottom: 8px;
+    }
+
+    .doc-p {
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    /* Listas con viñetas */
+    .doc-list {
+      margin: 12px 0 18px 24px;
+    }
+
+    .doc-list li {
+      margin-bottom: 6px;
+    }
+
+    /* Listas ordenadas / Pasos del método */
+    .doc-ordered-list {
+      margin: 14px 0 22px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .doc-ordered-list li {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-weight: 500;
+    }
+
+    /* Ejemplos Bilingües */
+    .bilingual-en {
+      color: var(--text);
+      font-size: 15.5px;
+      margin-top: 10px;
+      padding: 6px 12px;
+      background: var(--bg-alt);
+      border-left: 3px solid var(--primary);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .bilingual-es {
+      color: var(--text-muted);
+      font-size: 13.5px;
+      margin-bottom: 12px;
+      padding-left: 12px;
+      font-style: italic;
+    }
+
+    /* Cajas Callout / Book Note */
+    .callout-note {
+      background: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 18px 0;
+      display: flex;
+      gap: 12px;
+      font-style: italic;
+      color: var(--text);
+    }
+
+    .callout-icon {
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .callout-body {
+      flex: 1;
+    }
+
+    /* Ejercicios Guiados */
+    .exercise-subheading {
+      font-weight: 700;
+      margin-top: 16px;
+      margin-bottom: 6px;
+      color: var(--primary);
+    }
+
+    .exercise-question {
+      margin-top: 12px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .exercise-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 8px 0 8px 18px;
+    }
+
+    .opt-badge {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s;
+    }
+
+    .opt-badge:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .opt-badge.selected {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .exercise-answer-box {
+      margin: 6px 0 16px 18px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .ans-label {
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .btn-reveal {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      color: var(--primary);
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-reveal:hover {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .ans-text {
+      font-style: italic;
+      font-weight: 700;
+      color: #059669;
+      background: #ecfdf5;
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid #a7f3d0;
+    }
+
+    .hidden-answer {
+      display: none;
+    }
+
+    /* Inline Code */
+    code {
+      font-family: Consolas, Monaco, monospace;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 0.9em;
+      color: var(--primary);
+    }
+
+    /* Botón flotante para subir */
+    .btn-back-to-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s, transform 0.2s;
+      z-index: 90;
+    }
+
+    .btn-back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .btn-back-to-top:hover {
+      transform: translateY(-3px);
+    }
+
+    /* Drawer de ToC para Pantallas Pequeñas */
+    @media (max-width: 900px) {
+      .sidebar-toc {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 60px;
+        bottom: 0;
+        z-index: 99;
+        width: 300px;
+        box-shadow: 2px 0 15px rgba(0,0,0,0.2);
+      }
+
+      .sidebar-toc.open {
+        display: block;
+      }
+
+      .doc-container {
+        padding: 24px 20px 60px 20px;
+      }
+
+      .hero-title {
+        font-size: 28px;
+      }
+    }
+
+    /* Impresión / Guardar en PDF */
+    @media print {
+      body {
+        background: white;
+        color: black;
+        font-size: 10.5pt;
+      }
+
+      .top-header, .sidebar-toc, .btn-reveal, .btn-back-to-top {
+        display: none !important;
+      }
+
+      .doc-container {
+        padding: 0;
+      }
+
+      .chapter-anchor {
+        page-break-before: always;
+      }
+
+      .hidden-answer {
+        display: inline !important;
+      }
+
+      .bilingual-en {
+        background: none;
+        border-left: 2pt solid black;
+      }
+
+      @page {
+        margin: 1.5cm 1.2cm 1.5cm 1.2cm;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra Superior Fija -->
+  <header class="top-header">
+    <div class="top-header-left">
+      <a href="index.html" class="btn-return-app" title="Regresar a la aplicación principal LexiCore">
+        <span>←</span> <span>Volver a LexiCore</span>
+      </a>
+      <button class="btn-toc-toggle" onclick="toggleMobileToc()" title="Alternar índice">
+        📑 <span>Índice</span>
+      </button>
+      <a href="index.html" class="brand-title">
+        <span>⚡ Kale Anders &bull; Inglés Básico A1-A2</span>
+      </a>
+    </div>
+
+    <!-- Pestañas de Navegación Rápida -->
+    <div class="nav-tabs-bar">
+      <a href="A1-A2.html" class="nav-tab nav-tab-active">Nivel A1-A2</a>
+<a href="B1-B2.html" class="nav-tab ">Nivel B1-B2</a>
+<a href="C1-C2.html" class="nav-tab ">Nivel C1-C2</a>
+<a href="oxford_dictionary_book_a1.html" class="nav-tab ">Diccionario Oxford 3000</a>
+<a href="index.html" class="nav-tab ">🏠 App Principal</a>
+
+    </div>
+
+    <!-- Acciones -->
+    <div class="top-actions">
+      <button class="btn-action" onclick="toggleTheme()" title="Cambiar tema">
+        🌓 <span id="theme-btn-text">Tema</span>
+      </button>
+      <button class="btn-action btn-print" onclick="window.print()" title="Imprimir o guardar PDF">
+        🖨️ <span>Imprimir / PDF</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Layout Principal -->
+  <div class="app-layout">
+    
+    <!-- Barra Lateral de Contenidos -->
+    <aside class="sidebar-toc" id="sidebar-toc">
+      <div style="padding-bottom: 12px; margin-bottom: 12px; border-bottom: 1px solid var(--border);">
+        <a href="index.html" class="btn-return-app" style="width: 100%; justify-content: center; box-sizing: border-box;">
+          ← Volver a la App Principal
+        </a>
+      </div>
+      <div class="sidebar-title">
+        <span>Índice del Módulo</span>
+        <span style="font-size: 10px; background: var(--primary); color: white; padding: 2px 6px; border-radius: 4px;">23 Secciones</span>
+      </div>
+      <input type="text" class="toc-search" placeholder="Filtrar temas..." oninput="filterToc(this.value)">
+      <ul class="toc-list" id="toc-list">
+        
+            <li class="toc-item-h1">
+              <a href="#cap-1-vocabulario-basico" onclick="closeMobileToc()">1. VOCABULARIO BASICO</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-11-saludos-y-presentaciones" onclick="closeMobileToc()">&bull; 1.1. Saludos y presentaciones</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-12-numeros-fechas-y-anos" onclick="closeMobileToc()">&bull; 1.2. Numeros, fechas y anos</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-13-colores-y-descripciones-basicas" onclick="closeMobileToc()">&bull; 1.3. Colores y descripciones basicas</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-14-rutinas-diarias-y-verbos-basicos" onclick="closeMobileToc()">&bull; 1.4. Rutinas diarias y verbos basicos</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-15-comidas-y-bebidas" onclick="closeMobileToc()">&bull; 1.5. Comidas y bebidas</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-16-lugares-en-la-ciudad-y-preposiciones-de-lugar" onclick="closeMobileToc()">&bull; 1.6. Lugares en la ciudad y preposiciones de lugar</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-17-expresiones-basicas-para-viajar" onclick="closeMobileToc()">&bull; 1.7. Expresiones basicas para viajar</a>
+            </li>
+            <li class="toc-item-h1">
+              <a href="#cap-2-pronunciacion-basica" onclick="closeMobileToc()">2. PRONUNCIACION BASICA</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-21-vocales-cortas-y-largas" onclick="closeMobileToc()">&bull; 2.1. Vocales cortas y largas</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-22-el-sonido-r-en-ingles" onclick="closeMobileToc()">&bull; 2.2. El sonido R en ingles</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-23-el-sonido-th" onclick="closeMobileToc()">&bull; 2.3. El sonido TH</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-24-diferencia-entre-v-y-b" onclick="closeMobileToc()">&bull; 2.4. Diferencia entre V y B</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-25-vocales-redondeadas-u-y-u" onclick="closeMobileToc()">&bull; 2.5. Vocales redondeadas: /u:/ y /u/</a>
+            </li>
+            <li class="toc-item-h1">
+              <a href="#cap-3-gramatica-basica" onclick="closeMobileToc()">3. GRAMATICA BASICA</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-31-el-verbo-to-be-en-presente" onclick="closeMobileToc()">&bull; 3.1. El verbo to be en presente</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-32-articulos-a-an-the" onclick="closeMobileToc()">&bull; 3.2. Articulos: a, an, the</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-33-plurales-basicos-y-excepciones" onclick="closeMobileToc()">&bull; 3.3. Plurales basicos y excepciones</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-34-presente-simple-afirmaciones-y-negaciones" onclick="closeMobileToc()">&bull; 3.4. Presente simple: afirmaciones y negaciones</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-35-preposiciones-simples-in-on-under" onclick="closeMobileToc()">&bull; 3.5. Preposiciones simples: in, on, under</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-36-preguntas-en-presente-simple" onclick="closeMobileToc()">&bull; 3.6. Preguntas en presente simple</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-37-pronombres-sujeto-y-objeto" onclick="closeMobileToc()">&bull; 3.7. Pronombres sujeto y objeto</a>
+            </li>
+            <li class="toc-item-h1">
+              <a href="#cap-4-como-estudiar-este-material" onclick="closeMobileToc()">4. COMO ESTUDIAR ESTE MATERIAL</a>
+            </li>
+      </ul>
+    </aside>
+
+    <!-- Contenido Principal -->
+    <main class="doc-container">
+      <div class="doc-card">
+        
+        <!-- Portada -->
+        <div class="doc-hero">
+          <span class="hero-badge">Nivel Básico A1-A2</span>
+          <h1 class="hero-title">Inglés Básico A1-A2</h1>
+          <p class="hero-subtitle">Guía completa de estudio basada en el método comunicativo de Kale Anders</p>
+          <div style="margin-top: 18px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+            <a href="index.html" class="btn-return-app" style="padding: 9px 20px; font-size: 14px;">
+              ← Regresar a LexiCore App
+            </a>
+            <button class="btn-action btn-print" onclick="window.print()" style="padding: 9px 20px; font-size: 14px;">
+              🖨️ Imprimir / Guardar PDF
+            </button>
+          </div>
+        </div>
+
+        <!-- Bloques del Documento -->
+        <div class="doc-content">
+          <h4 class="doc-h3">Objetivo</h4>
+<p class="doc-p">Este material reorganiza una clase completa de ingles basico para que puedas estudiarla leyendo. Se eliminaron saludos, autopromocion, repeticiones y partes poco utiles. Se conservaron las explicaciones esenciales, los ejemplos importantes y varios modelos de practica.</p>
+
+                <div class="chapter-anchor " id="cap-1-vocabulario-basico"></div>
+                <h2 class="doc-h1">
+                  <span class="chapter-tag">CAPÍTULO</span>
+                  <span>1. VOCABULARIO BASICO</span>
+                </h2>
+
+            <div class="section-anchor" id="sec-11-saludos-y-presentaciones"></div>
+            <h3 class="doc-h2">1.1. Saludos y presentaciones</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">En ingles hay saludos formales, informales y despedidas. Elegir el adecuado depende de la situacion.</p>
+<h4 class="doc-h3">Saludos formales</h4>
+<ul class="doc-list"><li><strong><em>Good morning</em></strong>.</li></ul>
+<p class="doc-p">Buenos dias.</p>
+<ul class="doc-list"><li><strong><em>Good evening</em></strong>.</li></ul>
+<p class="doc-p">Buenas noches, como saludo.</p>
+<ul class="doc-list"><li>How <strong><em>are</em></strong> <strong><em>you</em></strong> doing today?</li></ul>
+<p class="doc-p">Como estas hoy?</p>
+<ul class="doc-list"><li><strong><em>How do you do</em></strong>?</li></ul>
+<p class="doc-p">Mucho gusto / como esta usted? Muy formal.</p>
+<ul class="doc-list"><li>Good day, sir.</li><li>Good day, madam.</li></ul>
+<h4 class="doc-h3">Nota importante</h4>
+<p class="doc-p"><strong><code>Good night</code></strong> no se usa normalmente para saludar. Se usa para despedirse o para desear buenas noches antes de dormir.</p>
+<h4 class="doc-h3">Saludos informales</h4>
+<ul class="doc-list"><li>Hi there.</li></ul>
+<p class="doc-p">Hola.</p>
+<ul class="doc-list"><li>How&#x27;s everything going?</li></ul>
+<p class="doc-p">Como va todo?</p>
+<ul class="doc-list"><li>Long time no see.</li></ul>
+<p class="doc-p">Tanto tiempo sin verte.</p>
+<ul class="doc-list"><li>What&#x27;s new?</li></ul>
+<p class="doc-p">Que hay de nuevo?</p>
+<ul class="doc-list"><li><strong><em>What&#x27;s up</em></strong>?</li></ul>
+<p class="doc-p">Que pasa? / que tal?</p>
+<h4 class="doc-h3">Despedidas comunes</h4>
+<ul class="doc-list"><li>Have <strong><em>a</em></strong> great day.</li></ul>
+<p class="doc-p">Que tengas un gran dia.</p>
+<ul class="doc-list"><li><strong><em>See you around</em></strong>.</li></ul>
+<p class="doc-p">Nos vemos por ahi.</p>
+<ul class="doc-list"><li>Talk to <strong><em>you</em></strong> soon.</li></ul>
+<p class="doc-p">Hablamos pronto.</p>
+<ul class="doc-list"><li><strong><em>Catch you later</em></strong>.</li></ul>
+<p class="doc-p">Nos vemos luego. Muy informal.</p>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li><strong><em>Good evening</em></strong>. How <strong><em>are</em></strong> <strong><em>you</em></strong>?</li></ul>
+<p class="doc-p">Buenas noches. Como esta?</p>
+<ul class="doc-list"><li><strong><em>It</em></strong>&#x27;s nice to meet <strong><em>you</em></strong>, Dr. Evans.</li></ul>
+<p class="doc-p">Es un gusto conocerlo, Dr. Evans.</p>
+<ul class="doc-list"><li>Hey, Mike. How&#x27;s life treating <strong><em>you</em></strong>?</li></ul>
+<p class="doc-p">Hola, Mike. Como te trata la vida?</p>
+<ul class="doc-list"><li>Hey there. What&#x27;s going <strong><em>on</em></strong>?</li></ul>
+<p class="doc-p">Hola. Que pasa?</p>
+<h4 class="doc-h3">Resumen</h4>
+<p class="doc-p">Usa expresiones formales con jefes, clientes o eventos profesionales. Usa expresiones informales con amigos y conocidos.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con puntos suspensivos y, si quieres, **encierra la respuesta correcta** cuando abras el archivo en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. Good .........., Mr. Carter.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">morning</span>
+                </div>
+<div class="exercise-question">2. Long time .......... see.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">no</span>
+                </div>
+<div class="exercise-question">3. Catch <strong><em>you</em></strong> ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">later</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. Saludo formal de noche:</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">Good evening</span><span class="opt-badge" onclick="selectOption(this)">Good night</span><span class="opt-badge" onclick="selectOption(this)">What&#x27;s up?</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">Good evening</span>
+                </div>
+<div class="exercise-question">2. Despedida informal con un amigo:</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">How do you do?</span><span class="opt-badge" onclick="selectOption(this)">See you around</span><span class="opt-badge" onclick="selectOption(this)">Good day, madam</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">See you around</span>
+                </div>
+
+            <div class="section-anchor" id="sec-12-numeros-fechas-y-anos"></div>
+            <h3 class="doc-h2">1.2. Numeros, fechas y anos</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">Aprender numeros y fechas te ayuda <strong><em>a</em></strong> hablar de edad, precios, cumpleaños, vuelos, reuniones y dias importantes.</p>
+<h4 class="doc-h3">Numeros utiles</h4>
+<ul class="doc-list"><li>45 = forty-five</li><li>78 = seventy-eight</li><li>100 = one hundred</li><li>1000 = one thousand</li></ul>
+<h4 class="doc-h3">Fechas</h4>
+<p class="doc-p">En formato americano, normalmente se dice:</p>
+<p class="doc-p">Mes + dia + ano</p>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li>November 13, 2024</li></ul>
+<p class="doc-p">13 de noviembre de 2024.</p>
+<ul class="doc-list"><li>My birthday <strong><em>is</em></strong> <strong><em>on</em></strong> <strong><em>the</em></strong> 21st of March.</li></ul>
+<p class="doc-p">Mi cumpleaños es el 21 de marzo.</p>
+<ul class="doc-list"><li><strong><em>We</em></strong> meet <strong><em>on</em></strong> <strong><em>the</em></strong> 15th of August.</li></ul>
+<p class="doc-p">Nos reunimos el 15 de agosto.</p>
+<ul class="doc-list"><li><strong><em>He</em></strong> was born <strong><em>on</em></strong> July 4, 1990.</li></ul>
+<p class="doc-p">El nacio el 4 de julio de 1990.</p>
+<ul class="doc-list"><li>My flight <strong><em>is</em></strong> <strong><em>on</em></strong> November 30th.</li></ul>
+<p class="doc-p">Mi vuelo es el 30 de noviembre.</p>
+<h4 class="doc-h3">Ordinales basicos</h4>
+<ul class="doc-list"><li>first</li><li>second</li><li>third</li><li>fourth</li><li>fifth</li><li>sixth</li><li>seventh</li><li>eighth</li><li>ninth</li><li>tenth</li></ul>
+<h4 class="doc-h3">Ejemplos con cantidades</h4>
+<ul class="doc-list"><li>There <strong><em>are</em></strong> 25 students <strong><em>in</em></strong> <strong><em>the</em></strong> room.</li></ul>
+<p class="doc-p">Hay 25 estudiantes en el salon.</p>
+<ul class="doc-list"><li>This ticket costs 100 dollars.</li></ul>
+<p class="doc-p">Este boleto cuesta 100 dolares.</p>
+<ul class="doc-list"><li><strong><em>She</em></strong> bought 9 apples.</li></ul>
+<p class="doc-p">Ella compro 9 manzanas.</p>
+<h4 class="doc-h3">Resumen</h4>
+<p class="doc-p">Aprende el nombre del mes, el numero y el ordinal correspondiente. En ingles es muy comun hablar de fechas con el mes primero.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con puntos suspensivos y, si quieres, **encierra la respuesta correcta** cuando abras el archivo en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. My birthday <strong><em>is</em></strong> <strong><em>on</em></strong> <strong><em>the</em></strong> .......... of March.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">21st</span>
+                </div>
+<div class="exercise-question">2. There <strong><em>are</em></strong> .......... students <strong><em>in</em></strong> <strong><em>the</em></strong> room.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">25</span>
+                </div>
+<div class="exercise-question">3. My flight <strong><em>is</em></strong> <strong><em>on</em></strong> November ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">30th</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. Traduce: Hoy es el segundo de abril de 2015.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">Today is April 2, 2015.</span><span class="opt-badge" onclick="selectOption(this)">Today is 2015 April 2.</span><span class="opt-badge" onclick="selectOption(this)">April is today 2.</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">Today is April 2, 2015.</span>
+                </div>
+
+            <div class="section-anchor" id="sec-13-colores-y-descripciones-basicas"></div>
+            <h3 class="doc-h2">1.3. Colores y descripciones basicas</h3>
+<h4 class="doc-h3">Colores esenciales</h4>
+<ul class="doc-list"><li>red = rojo</li><li>blue = azul</li><li>yellow = amarillo</li><li>green = verde</li><li>orange = naranja</li><li>purple = morado</li><li>black = negro</li><li>white = blanco</li><li>brown = marron</li><li>pink = rosa</li><li>gray / grey = gris</li></ul>
+<h4 class="doc-h3">Estructura</h4>
+<p class="doc-p">Objeto + verbo to be + color</p>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li><strong><em>The</em></strong> ball <strong><em>is</em></strong> red.</li></ul>
+<p class="doc-p">La pelota es roja.</p>
+<ul class="doc-list"><li><strong><em>The</em></strong> sky <strong><em>is</em></strong> blue.</li></ul>
+<p class="doc-p">El cielo es azul.</p>
+<ul class="doc-list"><li><strong><em>Her</em></strong> dress <strong><em>is</em></strong> pink.</li></ul>
+<p class="doc-p">Su vestido es rosa.</p>
+<ul class="doc-list"><li><strong><em>The</em></strong> grass <strong><em>is</em></strong> green.</li></ul>
+<p class="doc-p">El cesped es verde.</p>
+<ul class="doc-list"><li><strong><em>The</em></strong> cat <strong><em>is</em></strong> black and white.</li></ul>
+<p class="doc-p">El gato es blanco y negro.</p>
+<ul class="doc-list"><li>My shoes <strong><em>are</em></strong> brown.</li></ul>
+<p class="doc-p">Mis zapatos son marrones.</p>
+<ul class="doc-list"><li><strong><em>The</em></strong> wall <strong><em>is</em></strong> gray.</li></ul>
+<p class="doc-p">La pared es gris.</p>
+<ul class="doc-list"><li><strong><em>The</em></strong> car <strong><em>is</em></strong> bright yellow.</li></ul>
+<p class="doc-p">El carro es amarillo brillante.</p>
+<h4 class="doc-h3">Descripciones simples</h4>
+<ul class="doc-list"><li><strong><em>The</em></strong> house <strong><em>is</em></strong> white with <strong><em>a</em></strong> brown roof.</li></ul>
+<p class="doc-p">La casa es blanca con un techo marron.</p>
+<ul class="doc-list"><li>This bag <strong><em>is</em></strong> black and very big.</li></ul>
+<p class="doc-p">Esta bolsa es negra y muy grande.</p>
+<ul class="doc-list"><li>My bike <strong><em>is</em></strong> green and fast.</li></ul>
+<p class="doc-p">Mi bicicleta es verde y rapida.</p>
+<ul class="doc-list"><li><strong><em>Her</em></strong> hat <strong><em>is</em></strong> purple and pretty.</li></ul>
+<p class="doc-p">Su sombrero es morado y bonito.</p>
+<ul class="doc-list"><li><strong><em>The</em></strong> book <strong><em>is</em></strong> blue and <strong><em>it</em></strong>&#x27;s <strong><em>on</em></strong> <strong><em>the</em></strong> table.</li></ul>
+<p class="doc-p">El libro es azul y esta sobre la mesa.</p>
+<h4 class="doc-h3">Resumen</h4>
+<p class="doc-p">Primero identifica el objeto. Despues usa <strong><code>is</code></strong> o <strong><code>are</code></strong> y agrega el color o una descripcion corta.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con puntos suspensivos y, si quieres, **encierra la respuesta correcta** cuando abras el archivo en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. <strong><em>The</em></strong> ball <strong><em>is</em></strong> ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">blue</span>
+                </div>
+<div class="exercise-question">2. My shoes <strong><em>are</em></strong> ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">brown</span>
+                </div>
+<div class="exercise-question">3. <strong><em>The</em></strong> cat <strong><em>is</em></strong> black and ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">white</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. <strong><em>The</em></strong> sky <strong><em>is</em></strong> ..........</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">green</span><span class="opt-badge" onclick="selectOption(this)">blue</span><span class="opt-badge" onclick="selectOption(this)">brown</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">blue</span>
+                </div>
+
+            <div class="section-anchor" id="sec-14-rutinas-diarias-y-verbos-basicos"></div>
+            <h3 class="doc-h2">1.4. Rutinas diarias y verbos basicos</h3>
+<h4 class="doc-h3">Verbos de rutina</h4>
+<ul class="doc-list"><li><strong><em>wake up</em></strong> = despertarse</li><li><strong><em>get up</em></strong> = levantarse</li><li><strong><em>take a shower</em></strong> = ducharse</li><li><strong><em>get dressed</em></strong> = vestirse</li><li><strong><em>brush my teeth</em></strong> = cepillarme los dientes</li><li><strong><em>have breakfast</em></strong> = desayunar</li><li><strong><em>go to work</em></strong> = ir al trabajo</li><li>work = trabajar</li><li>study = estudiar</li><li><strong><em>have lunch</em></strong> = almorzar</li><li><strong><em>go home</em></strong> = volver <strong><em>a</em></strong> casa</li><li>cook = cocinar</li><li><strong><em>have dinner</em></strong> = cenar</li><li><strong><em>watch TV</em></strong> = ver television</li><li><strong><em>go to bed</em></strong> = irse <strong><em>a</em></strong> dormir</li></ul>
+<h4 class="doc-h3">Estructura</h4>
+<p class="doc-p">Sujeto + verbo + complemento</p>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li><strong><em>I</em></strong> <strong><em>wake up</em></strong> at 7 <strong><em>a</em></strong>.m. every day.</li></ul>
+<p class="doc-p"><strong><em>Me</em></strong> despierto <strong><em>a</em></strong> las 7 <strong><em>a</em></strong>.m. todos los dias.</p>
+<ul class="doc-list"><li><strong><em>She</em></strong> takes <strong><em>a</em></strong> shower after breakfast.</li></ul>
+<p class="doc-p">Ella se ducha despues del desayuno.</p>
+<ul class="doc-list"><li><strong><em>We</em></strong> <strong><em>go to work</em></strong> at 9 <strong><em>a</em></strong>.m. from Monday to Friday.</li></ul>
+<p class="doc-p">Vamos al trabajo <strong><em>a</em></strong> las 9 <strong><em>a</em></strong>.m. de lunes <strong><em>a</em></strong> viernes.</p>
+<ul class="doc-list"><li><strong><em>He</em></strong> brushes his teeth twice <strong><em>a</em></strong> day.</li></ul>
+<p class="doc-p">El se cepilla los dientes dos veces al dia.</p>
+<ul class="doc-list"><li><strong><em>They</em></strong> <strong><em>have dinner</em></strong> at 8 p.m. together.</li></ul>
+<p class="doc-p">Ellos cenan juntos <strong><em>a</em></strong> las 8 p.m.</p>
+<ul class="doc-list"><li><strong><em>I</em></strong> study English <strong><em>in</em></strong> <strong><em>the</em></strong> evening.</li></ul>
+<p class="doc-p">Estudio ingles por la noche.</p>
+<ul class="doc-list"><li>After work, <strong><em>she</em></strong> watches TV to relax.</li></ul>
+<p class="doc-p">Despues del trabajo, ella ve television para relajarse.</p>
+<ul class="doc-list"><li><strong><em>We</em></strong> <strong><em>go to bed</em></strong> at 10:30 p.m.</li></ul>
+<p class="doc-p">Nos vamos <strong><em>a</em></strong> dormir <strong><em>a</em></strong> las 10:30 p.m.</p>
+<p class="doc-p">Rutinas completas</p>
+<ul class="doc-list"><li><strong><em>I</em></strong> <strong><em>wake up</em></strong> at 6 <strong><em>a</em></strong>.m., <strong><em>brush my teeth</em></strong>, <strong><em>take a shower</em></strong>, <strong><em>have breakfast</em></strong>, and <strong><em>go to work</em></strong>.</li></ul>
+<p class="doc-p"><strong><em>Me</em></strong> despierto <strong><em>a</em></strong> las 6, <strong><em>me</em></strong> cepillo los dientes, <strong><em>me</em></strong> ducho, desayuno y voy al trabajo.</p>
+<ul class="doc-list"><li><strong><em>She</em></strong> gets up at 7, gets dressed quickly, has coffee, and leaves for school.</li></ul>
+<p class="doc-p">Ella se levanta <strong><em>a</em></strong> las 7, se viste rapido, toma cafe y sale para la escuela.</p>
+<ul class="doc-list"><li><strong><em>In</em></strong> <strong><em>the</em></strong> evening, <strong><em>we</em></strong> <strong><em>go home</em></strong>, <strong><em>have dinner</em></strong>, <strong><em>watch TV</em></strong>, and <strong><em>go to bed</em></strong> at 10 p.m.</li></ul>
+<p class="doc-p">Por la noche, volvemos <strong><em>a</em></strong> casa, cenamos, vemos television y nos acostamos <strong><em>a</em></strong> las 10.</p>
+<h4 class="doc-h3">Resumen</h4>
+<p class="doc-p">Las rutinas diarias se expresan normalmente en presente simple con acciones repetidas y horarios.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con puntos suspensivos y, si quieres, **encierra la respuesta correcta** cuando abras el archivo en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. <strong><em>I</em></strong> .......... up at 7 <strong><em>a</em></strong>.m. every day.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">wake</span>
+                </div>
+<div class="exercise-question">2. <strong><em>She</em></strong> takes <strong><em>a</em></strong> .......... after breakfast.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">shower</span>
+                </div>
+<div class="exercise-question">3. <strong><em>We</em></strong> go to .......... at 9 <strong><em>a</em></strong>.m.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">work</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. <strong><em>He</em></strong> .......... his teeth twice <strong><em>a</em></strong> day.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">brush</span><span class="opt-badge" onclick="selectOption(this)">brushes</span><span class="opt-badge" onclick="selectOption(this)">brushing</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">brushes</span>
+                </div>
+
+            <div class="section-anchor" id="sec-15-comidas-y-bebidas"></div>
+            <h3 class="doc-h2">1.5. Comidas y bebidas</h3>
+<h4 class="doc-h3">Comidas comunes</h4>
+<h4 class="doc-h3">Desayuno</h4>
+<ul class="doc-list"><li>eggs = huevos</li><li>toast = pan tostado</li><li>coffee = cafe</li><li>juice = jugo</li></ul>
+<h4 class="doc-h3">Almuerzo o cena</h4>
+<ul class="doc-list"><li>salad = ensalada</li><li>sandwich = sandwich</li><li>soup = sopa</li><li>rice = arroz</li><li>chicken = pollo</li><li>fish = pescado</li><li>steak = carne / bistec</li></ul>
+<h4 class="doc-h3">Snacks y postres</h4>
+<ul class="doc-list"><li>chocolate = chocolate</li><li>cookies = galletas</li><li>ice cream = helado</li></ul>
+<h4 class="doc-h3">Bebidas</h4>
+<ul class="doc-list"><li>water = agua</li><li>tea = te</li><li>soda = refresco</li><li>beer = cerveza</li></ul>
+<h4 class="doc-h3">Frases utiles en restaurantes</h4>
+<ul class="doc-list"><li><strong><em>I would like</em></strong> <strong><em>a</em></strong> coffee and <strong><em>a</em></strong> sandwich, please.</li></ul>
+<p class="doc-p"><strong><em>Me</em></strong> gustaria un cafe y un sandwich, por favor.</p>
+<ul class="doc-list"><li>Can <strong><em>I</em></strong> see <strong><em>the</em></strong> menu, please?</li></ul>
+<p class="doc-p">Puedo ver el menu, por favor?</p>
+<ul class="doc-list"><li>What <strong><em>do</em></strong> <strong><em>you</em></strong> recommend?</li></ul>
+<p class="doc-p">Que recomienda?</p>
+<ul class="doc-list"><li><strong><em>I</em></strong>&#x27;ll have <strong><em>the</em></strong> soup and <strong><em>a</em></strong> salad.</li></ul>
+<p class="doc-p">Voy <strong><em>a</em></strong> tomar la sopa y una ensalada.</p>
+<ul class="doc-list"><li><strong><em>Can I get the bill</em></strong>, please?</li></ul>
+<p class="doc-p"><strong><em>Me</em></strong> puede traer la cuenta, por favor?</p>
+<ul class="doc-list"><li><strong><em>Do</em></strong> <strong><em>you</em></strong> have any vegetarian options?</li></ul>
+<p class="doc-p">Tienen opciones vegetarianas?</p>
+<ul class="doc-list"><li><strong><em>Is</em></strong> <strong><em>it</em></strong> spicy?</li></ul>
+<p class="doc-p">Es picante?</p>
+<ul class="doc-list"><li>Can <strong><em>I</em></strong> have water with no ice?</li></ul>
+<p class="doc-p"><strong><em>Me</em></strong> puede dar agua sin hielo?</p>
+<h4 class="doc-h3">Dialogo modelo</h4>
+<ul class="doc-list"><li>Waiter: <strong><em>Are</em></strong> <strong><em>you</em></strong> ready to order?</li><li>Customer: Yes, <strong><em>I</em></strong>&#x27;ll have <strong><em>the</em></strong> chicken with rice and <strong><em>a</em></strong> glass of water, please.</li><li>Waiter: Would <strong><em>you</em></strong> like dessert?</li><li>Customer: Yes, <strong><em>I</em></strong>&#x27;d like some ice cream, please.</li><li>Waiter: Can <strong><em>I</em></strong> get <strong><em>you</em></strong> anything else?</li><li>Customer: No, thanks. Just <strong><em>the</em></strong> bill, please.</li></ul>
+<h4 class="doc-h3">Resumen</h4>
+<p class="doc-p">En ingles, <strong><code>I would like...</code></strong> es una de las formas mas naturales y educadas para pedir algo en un restaurante.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con puntos suspensivos y, si quieres, **encierra la respuesta correcta** cuando abras el archivo en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. <strong><em>I would like</em></strong> <strong><em>a</em></strong> coffee and <strong><em>a</em></strong> .........., please.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">sandwich</span>
+                </div>
+<div class="exercise-question">2. Can <strong><em>I</em></strong> get <strong><em>the</em></strong> .........., please?</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">bill</span>
+                </div>
+<div class="exercise-question">3. <strong><em>Do</em></strong> <strong><em>you</em></strong> have any .......... options?</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">vegetarian</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. Breakfast option:</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">steak and fries</span><span class="opt-badge" onclick="selectOption(this)">toast and coffee</span><span class="opt-badge" onclick="selectOption(this)">fish and soda</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">toast and coffee</span>
+                </div>
+
+            <div class="section-anchor" id="sec-16-lugares-en-la-ciudad-y-preposiciones-de-lugar"></div>
+            <h3 class="doc-h2">1.6. Lugares en la ciudad y preposiciones de lugar</h3>
+<h4 class="doc-h3">Lugares comunes</h4>
+<ul class="doc-list"><li>hospital</li><li>school</li><li>supermarket</li><li>park</li><li>bank</li><li>post office</li><li>library</li><li>pharmacy</li><li>bus station</li><li>restaurant</li><li>movie theater</li><li>police station</li></ul>
+<h4 class="doc-h3">Preposiciones y expresiones de lugar</h4>
+<ul class="doc-list"><li><strong><em>next to</em></strong> = al lado de</li><li><strong><em>in front of</em></strong> = en frente de</li><li><strong><em>behind</em></strong> = detras de</li><li><strong><em>between</em></strong> = entre</li><li><strong><em>on the corner</em></strong> = en la esquina</li><li><strong><em>across from</em></strong> = enfrente de</li></ul>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li><strong><em>The</em></strong> hospital <strong><em>is</em></strong> <strong><em>next to</em></strong> <strong><em>the</em></strong> bank.</li></ul>
+<p class="doc-p">El hospital esta al lado del banco.</p>
+<ul class="doc-list"><li><strong><em>The</em></strong> park <strong><em>is</em></strong> <strong><em>in front of</em></strong> <strong><em>the</em></strong> school.</li></ul>
+<p class="doc-p">El parque esta en frente de la escuela.</p>
+<ul class="doc-list"><li><strong><em>The</em></strong> bus station <strong><em>is</em></strong> <strong><em>behind</em></strong> <strong><em>the</em></strong> post office.</li></ul>
+<p class="doc-p">La estacion de autobuses esta detras de la oficina de correos.</p>
+<ul class="doc-list"><li><strong><em>The</em></strong> library <strong><em>is</em></strong> <strong><em>between</em></strong> <strong><em>the</em></strong> restaurant and <strong><em>the</em></strong> pharmacy.</li></ul>
+<p class="doc-p">La biblioteca esta entre el restaurante y la farmacia.</p>
+<ul class="doc-list"><li><strong><em>The</em></strong> pharmacy <strong><em>is</em></strong> <strong><em>on the corner</em></strong> of Main Street and First Avenue.</li></ul>
+<p class="doc-p">La farmacia esta en la esquina de Main Street y First Avenue.</p>
+<ul class="doc-list"><li><strong><em>The</em></strong> police station <strong><em>is</em></strong> <strong><em>across from</em></strong> <strong><em>the</em></strong> supermarket.</li></ul>
+<p class="doc-p">La estacion de policia esta enfrente del supermercado.</p>
+<h4 class="doc-h3">Resumen</h4>
+<p class="doc-p">Para hablar de una ciudad o un mapa, combina el nombre del lugar con una preposicion clara.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con puntos suspensivos y, si quieres, **encierra la respuesta correcta** cuando abras el archivo en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. <strong><em>The</em></strong> hospital <strong><em>is</em></strong> .......... to <strong><em>the</em></strong> bank.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">next</span>
+                </div>
+<div class="exercise-question">2. <strong><em>The</em></strong> library <strong><em>is</em></strong> .......... <strong><em>the</em></strong> restaurant and <strong><em>the</em></strong> pharmacy.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">between</span>
+                </div>
+<div class="exercise-question">3. <strong><em>The</em></strong> pharmacy <strong><em>is</em></strong> .......... <strong><em>the</em></strong> corner.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">on</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. <strong><em>The</em></strong> police station <strong><em>is</em></strong> .......... <strong><em>the</em></strong> supermarket.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">behind</span><span class="opt-badge" onclick="selectOption(this)">across from</span><span class="opt-badge" onclick="selectOption(this)">under</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">across from</span>
+                </div>
+
+            <div class="section-anchor" id="sec-17-expresiones-basicas-para-viajar"></div>
+            <h3 class="doc-h2">1.7. Expresiones basicas para viajar</h3>
+<h4 class="doc-h3">Transporte</h4>
+<ul class="doc-list"><li>Where <strong><em>is</em></strong> <strong><em>the</em></strong> nearest bus stop?</li></ul>
+<p class="doc-p">Donde esta la parada de autobus mas cercana?</p>
+<ul class="doc-list"><li>How much <strong><em>is</em></strong> <strong><em>a</em></strong> ticket to <strong><em>the</em></strong> airport?</li></ul>
+<p class="doc-p">Cuanto cuesta un boleto al aeropuerto?</p>
+<ul class="doc-list"><li><strong><em>Does</em></strong> this train go to <strong><em>the</em></strong> city center?</li></ul>
+<p class="doc-p">Este tren va al centro de la ciudad?</p>
+<ul class="doc-list"><li>What time <strong><em>does</em></strong> <strong><em>the</em></strong> next bus arrive?</li></ul>
+<p class="doc-p"><strong><em>A</em></strong> que hora llega el proximo autobus?</p>
+<ul class="doc-list"><li><strong><em>I would like</em></strong> <strong><em>a</em></strong> round-trip ticket.</li></ul>
+<p class="doc-p">Quisiera un boleto de ida y vuelta.</p>
+<ul class="doc-list"><li><strong><em>Is</em></strong> this seat taken?</li></ul>
+<p class="doc-p">Este asiento esta ocupado?</p>
+<h4 class="doc-h3">Hotel</h4>
+<ul class="doc-list"><li><strong><em>I</em></strong> have <strong><em>a</em></strong> reservation <strong><em>under</em></strong> <strong><em>the</em></strong> name Smith.</li></ul>
+<p class="doc-p">Tengo una reservacion <strong><em>a</em></strong> nombre de Smith.</p>
+<ul class="doc-list"><li>How much <strong><em>is</em></strong> <strong><em>a</em></strong> room for one night?</li></ul>
+<p class="doc-p">Cuanto cuesta una habitacion por una noche?</p>
+<ul class="doc-list"><li>Can <strong><em>I</em></strong> have <strong><em>a</em></strong> room with <strong><em>a</em></strong> double bed?</li></ul>
+<p class="doc-p">Puedo tener una habitacion con cama doble?</p>
+<ul class="doc-list"><li>What time <strong><em>is</em></strong> <strong><em>check-in</em></strong>?</li></ul>
+<p class="doc-p"><strong><em>A</em></strong> que hora es el registro de entrada?</p>
+<ul class="doc-list"><li>What time <strong><em>is</em></strong> <strong><em>check-out</em></strong>?</li></ul>
+<p class="doc-p"><strong><em>A</em></strong> que hora es el registro de salida?</p>
+<ul class="doc-list"><li><strong><em>Is breakfast included</em></strong>?</li></ul>
+<p class="doc-p">Esta incluido el desayuno?</p>
+<ul class="doc-list"><li>Can <strong><em>I</em></strong> get <strong><em>an</em></strong> extra pillow, please?</li></ul>
+<p class="doc-p"><strong><em>Me</em></strong> puede dar una almohada extra, por favor?</p>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li>Excuse <strong><em>me</em></strong>, where can <strong><em>I</em></strong> buy <strong><em>a</em></strong> subway ticket?</li></ul>
+<p class="doc-p">Disculpe, donde puedo comprar un boleto de metro?</p>
+<ul class="doc-list"><li>What platform <strong><em>does</em></strong> <strong><em>the</em></strong> train to Manchester leave from?</li></ul>
+<p class="doc-p">De que plataforma sale el tren <strong><em>a</em></strong> Manchester?</p>
+<ul class="doc-list"><li><strong><em>Is</em></strong> there <strong><em>a</em></strong> direct flight to New York?</li></ul>
+<p class="doc-p">Hay un vuelo directo <strong><em>a</em></strong> Nueva York?</p>
+<ul class="doc-list"><li><strong><em>I</em></strong> need <strong><em>a</em></strong> single room for two nights.</li></ul>
+<p class="doc-p">Necesito una habitacion individual por dos noches.</p>
+<ul class="doc-list"><li><strong><em>Do</em></strong> <strong><em>you</em></strong> have free Wi-Fi <strong><em>in</em></strong> <strong><em>the</em></strong> rooms?</li></ul>
+<p class="doc-p">Tienen Wi-Fi gratis en las habitaciones?</p>
+<ul class="doc-list"><li><strong><em>I would like</em></strong> to cancel my reservation, please.</li></ul>
+<p class="doc-p">Quisiera cancelar mi reservacion, por favor.</p>
+<h4 class="doc-h3">Resumen</h4>
+<p class="doc-p">Aprender estas frases te ayuda <strong><em>a</em></strong> moverte con mas seguridad en estaciones, aeropuertos y hoteles.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con puntos suspensivos y, si quieres, **encierra la respuesta correcta** cuando abras el archivo en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. How much <strong><em>is</em></strong> <strong><em>a</em></strong> ticket to <strong><em>the</em></strong> ..........?</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">airport</span>
+                </div>
+<div class="exercise-question">2. What time <strong><em>is</em></strong> ..........-<strong><em>in</em></strong>?</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">check</span>
+                </div>
+<div class="exercise-question">3. <strong><em>Is</em></strong> breakfast ..........?</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">included</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. Frase correcta en hotel:</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">I have a reservation under the name Smith.</span><span class="opt-badge" onclick="selectOption(this)">I would like a blue sandwich.</span><span class="opt-badge" onclick="selectOption(this)">The airport is under the bed.</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">I have a reservation under the name Smith.</span>
+                </div>
+
+                <div class="chapter-anchor chapter-separator" id="cap-2-pronunciacion-basica"></div>
+                <h2 class="doc-h1">
+                  <span class="chapter-tag">CAPÍTULO</span>
+                  <span>2. PRONUNCIACION BASICA</span>
+                </h2>
+
+            <div class="section-anchor" id="sec-21-vocales-cortas-y-largas"></div>
+            <h3 class="doc-h2">2.1. Vocales cortas y largas</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">Una vocal corta y una vocal larga pueden cambiar completamente el significado de una palabra.</p>
+<h4 class="doc-h3">Pares utiles</h4>
+<ul class="doc-list"><li>bit / beat</li><li>sit / seat</li><li>ship / sheep</li><li>pull / pool</li><li>cut / cart</li><li>duck / dark</li></ul>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li><strong><em>The</em></strong> ship <strong><em>is</em></strong> sailing.</li></ul>
+<p class="doc-p">El barco esta navegando.</p>
+<ul class="doc-list"><li><strong><em>The</em></strong> sheep <strong><em>are</em></strong> grazing.</li></ul>
+<p class="doc-p">Las ovejas estan pastando.</p>
+<ul class="doc-list"><li><strong><em>I</em></strong> need to pull <strong><em>the</em></strong> rope tightly.</li></ul>
+<p class="doc-p">Necesito tirar de la cuerda con fuerza.</p>
+<ul class="doc-list"><li><strong><em>The</em></strong> pool <strong><em>is</em></strong> full of water.</li></ul>
+<p class="doc-p">La piscina esta llena de agua.</p>
+<ul class="doc-list"><li><strong><em>We</em></strong> sat <strong><em>in</em></strong> <strong><em>the</em></strong> front seat of <strong><em>the</em></strong> theater.</li></ul>
+<p class="doc-p">Nos sentamos en el asiento delantero del teatro.</p>
+<h4 class="doc-h3">Resumen</h4>
+<p class="doc-p">Escucha y exagera la diferencia al practicar. Esa exageracion ayuda mucho al principio.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con puntos suspensivos y, si quieres, **encierra la respuesta correcta** cuando abras el archivo en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. <strong><em>The</em></strong> .......... <strong><em>is</em></strong> sailing.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">ship</span>
+                </div>
+<div class="exercise-question">2. <strong><em>The</em></strong> .......... <strong><em>is</em></strong> full of water.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">pool</span>
+                </div>
+<div class="exercise-question">3. <strong><em>We</em></strong> sat <strong><em>in</em></strong> <strong><em>the</em></strong> front .......... of <strong><em>the</em></strong> theater.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">seat</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. <strong><em>I</em></strong> need to .......... <strong><em>the</em></strong> rope tightly.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">pool</span><span class="opt-badge" onclick="selectOption(this)">pull</span><span class="opt-badge" onclick="selectOption(this)">peel</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">pull</span>
+                </div>
+
+            <div class="section-anchor" id="sec-22-el-sonido-r-en-ingles"></div>
+            <h3 class="doc-h2">2.2. El sonido R en ingles</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">La <strong><code>r</code></strong> inglesa no suena como la <strong><code>r</code></strong> espanola. Se produce mas atras, sin vibracion fuerte.</p>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li><strong><em>The</em></strong> red car <strong><em>is</em></strong> ready to race.</li></ul>
+<p class="doc-p">El carro rojo esta listo para correr.</p>
+<ul class="doc-list"><li><strong><em>Are</em></strong> <strong><em>you</em></strong> sure <strong><em>it</em></strong>&#x27;s <strong><em>the</em></strong> right road?</li></ul>
+<p class="doc-p">Estas seguro de que es el camino correcto?</p>
+<ul class="doc-list"><li><strong><em>Her</em></strong> brother drove far away.</li></ul>
+<p class="doc-p">Su hermano condujo muy lejos.</p>
+<ul class="doc-list"><li>Rachel <strong><em>is</em></strong> reading <strong><em>a</em></strong> book.</li></ul>
+<p class="doc-p">Rachel esta leyendo un libro.</p>
+<ul class="doc-list"><li><strong><em>The</em></strong> river <strong><em>is</em></strong> full of fish.</li></ul>
+<p class="doc-p">El rio esta lleno de peces.</p>
+<ul class="doc-list"><li><strong><em>The</em></strong> red rose <strong><em>is</em></strong> <strong><em>in</em></strong> <strong><em>the</em></strong> garden.</li></ul>
+<p class="doc-p">La rosa roja esta en el jardin.</p>
+<h4 class="doc-h3">Resumen</h4>
+<p class="doc-p">La <strong><code>r</code></strong> inglesa necesita practica consciente. Es normal que al principio se sienta rara.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con puntos suspensivos y, si quieres, **encierra la respuesta correcta** cuando abras el archivo en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. <strong><em>The</em></strong> red .......... <strong><em>is</em></strong> ready to race.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">car</span>
+                </div>
+<div class="exercise-question">2. <strong><em>Her</em></strong> brother drove .......... away.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">far</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. Rachel <strong><em>is</em></strong> .......... <strong><em>a</em></strong> book.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">reading</span><span class="opt-badge" onclick="selectOption(this)">riding</span><span class="opt-badge" onclick="selectOption(this)">resting</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">reading</span>
+                </div>
+
+            <div class="section-anchor" id="sec-23-el-sonido-th"></div>
+            <h3 class="doc-h2">2.3. El sonido TH</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">El ingles tiene dos sonidos <strong><code>th</code></strong>: uno sin vibracion y otro con vibracion.</p>
+<p class="doc-p">Sin vibracion</p>
+<ul class="doc-list"><li>think</li><li>thanks</li><li>thought</li></ul>
+<p class="doc-p">Con vibracion</p>
+<ul class="doc-list"><li>this</li><li>that</li><li>brother</li></ul>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li>Think before <strong><em>you</em></strong> act.</li></ul>
+<p class="doc-p">Piensa antes de actuar.</p>
+<ul class="doc-list"><li>Thank <strong><em>you</em></strong> for your help.</li></ul>
+<p class="doc-p">Gracias por tu ayuda.</p>
+<ul class="doc-list"><li>That chair <strong><em>is</em></strong> very comfortable.</li></ul>
+<p class="doc-p">Esa silla es muy comoda.</p>
+<ul class="doc-list"><li><strong><em>Her</em></strong> brother <strong><em>is</em></strong> thoughtful.</li></ul>
+<p class="doc-p">Su hermano es considerado.</p>
+<ul class="doc-list"><li><strong><em>The</em></strong> theater <strong><em>is</em></strong> <strong><em>next to</em></strong> <strong><em>the</em></strong> park.</li></ul>
+<p class="doc-p">El teatro esta junto al parque.</p>
+<ul class="doc-list"><li>Thank <strong><em>you</em></strong> for thinking of <strong><em>me</em></strong>.</li></ul>
+<p class="doc-p">Gracias por pensar en mi.</p>
+<ul class="doc-list"><li>My brother lives there.</li></ul>
+<p class="doc-p">Mi hermano vive alli.</p>
+<h4 class="doc-h3">Resumen</h4>
+<p class="doc-p">Coloca la lengua entre los dientes y deja salir el aire. No lo pronuncies como <strong><code>t</code></strong> ni como <strong><code>d</code></strong>.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con puntos suspensivos y, si quieres, **encierra la respuesta correcta** cuando abras el archivo en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. .......... before <strong><em>you</em></strong> act.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">Think</span>
+                </div>
+<div class="exercise-question">2. .......... <strong><em>you</em></strong> for your help.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">Thank</span>
+                </div>
+<div class="exercise-question">3. My brother lives ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">there</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. That chair <strong><em>is</em></strong> very ..........</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">comfortable</span><span class="opt-badge" onclick="selectOption(this)">brother</span><span class="opt-badge" onclick="selectOption(this)">think</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">comfortable</span>
+                </div>
+
+            <div class="section-anchor" id="sec-24-diferencia-entre-v-y-b"></div>
+            <h3 class="doc-h2">2.4. Diferencia entre V y B</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">En ingles, <strong><code>v</code></strong> y <strong><code>b</code></strong> suenan distinto. En espanol suelen sonar muy parecidas.</p>
+<h4 class="doc-h3">Pares utiles</h4>
+<ul class="doc-list"><li>van / ban</li><li>vest / best</li><li>vet / bet</li></ul>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li><strong><em>She</em></strong> will visit <strong><em>her</em></strong> brother <strong><em>in</em></strong> Berlin.</li></ul>
+<p class="doc-p">Ella visitara <strong><em>a</em></strong> su hermano en Berlin.</p>
+<ul class="doc-list"><li><strong><em>The</em></strong> blue van <strong><em>is</em></strong> parked outside.</li></ul>
+<p class="doc-p">La furgoneta azul esta estacionada afuera.</p>
+<ul class="doc-list"><li><strong><em>I</em></strong> bought vegetables at <strong><em>the</em></strong> market.</li></ul>
+<p class="doc-p">Compre verduras en el mercado.</p>
+<ul class="doc-list"><li>Victor borrowed <strong><em>a</em></strong> book from <strong><em>the</em></strong> library.</li></ul>
+<p class="doc-p">Victor pidio prestado un libro de la biblioteca.</p>
+<ul class="doc-list"><li><strong><em>They</em></strong> vote for <strong><em>the</em></strong> best candidate.</li></ul>
+<p class="doc-p">Ellos votan por el mejor candidato.</p>
+<h4 class="doc-h3">Resumen</h4>
+<p class="doc-p">La <strong><code>v</code></strong> toca suavemente el labio inferior con los dientes superiores. La <strong><code>b</code></strong> cierra ambos labios.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con puntos suspensivos y, si quieres, **encierra la respuesta correcta** cuando abras el archivo en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. <strong><em>She</em></strong> will .......... <strong><em>her</em></strong> brother <strong><em>in</em></strong> Berlin.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">visit</span>
+                </div>
+<div class="exercise-question">2. <strong><em>The</em></strong> blue .......... <strong><em>is</em></strong> parked outside.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">van</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. <strong><em>I</em></strong> bought .......... at <strong><em>the</em></strong> market.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">boats</span><span class="opt-badge" onclick="selectOption(this)">vegetables</span><span class="opt-badge" onclick="selectOption(this)">buttons</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">vegetables</span>
+                </div>
+
+            <div class="section-anchor" id="sec-25-vocales-redondeadas-u-y-u"></div>
+            <h3 class="doc-h2">2.5. Vocales redondeadas: /u:/ y /u/</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">Estas vocales son comunes y muchas veces se confunden.</p>
+<h4 class="doc-h3">Pares utiles</h4>
+<ul class="doc-list"><li>food / foot</li><li>pool / pull</li><li>school / book</li></ul>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li><strong><em>The</em></strong> food <strong><em>is</em></strong> <strong><em>on</em></strong> <strong><em>the</em></strong> table.</li></ul>
+<p class="doc-p">La comida esta sobre la mesa.</p>
+<ul class="doc-list"><li>Put <strong><em>the</em></strong> book <strong><em>on</em></strong> <strong><em>the</em></strong> desk.</li></ul>
+<p class="doc-p">Pon el libro sobre el escritorio.</p>
+<ul class="doc-list"><li><strong><em>The</em></strong> school <strong><em>is</em></strong> near my house.</li></ul>
+<p class="doc-p">La escuela esta cerca de mi casa.</p>
+<h4 class="doc-h3">Resumen</h4>
+<p class="doc-p">La vocal larga suena mas tensa y prolongada. La vocal corta es mas relajada.</p>
+
+                <div class="chapter-anchor chapter-separator" id="cap-3-gramatica-basica"></div>
+                <h2 class="doc-h1">
+                  <span class="chapter-tag">CAPÍTULO</span>
+                  <span>3. GRAMATICA BASICA</span>
+                </h2>
+
+            <div class="section-anchor" id="sec-31-el-verbo-to-be-en-presente"></div>
+            <h3 class="doc-h2">3.1. El verbo to be en presente</h3>
+<h4 class="doc-h3">Conjugaciones</h4>
+<ul class="doc-list"><li><strong><em>I</em></strong> <strong><em>am</em></strong></li><li><strong><em>he</em></strong> <strong><em>is</em></strong></li><li><strong><em>she</em></strong> <strong><em>is</em></strong></li><li><strong><em>it</em></strong> <strong><em>is</em></strong></li><li><strong><em>you</em></strong> <strong><em>are</em></strong></li><li><strong><em>we</em></strong> <strong><em>are</em></strong></li><li><strong><em>they</em></strong> <strong><em>are</em></strong></li></ul>
+<h4 class="doc-h3">Usos principales</h4>
+<p class="doc-p"><strong><code>To be</code></strong> sirve tanto para <strong><code>ser</code></strong> como para <strong><code>estar</code></strong>.</p>
+<h4 class="doc-h3">Ejemplos con `am`</h4>
+<ul class="doc-list"><li><strong><em>I</em></strong> <strong><em>am</em></strong> <strong><em>a</em></strong> student.</li></ul>
+<p class="doc-p">Soy estudiante.</p>
+<ul class="doc-list"><li><strong><em>I</em></strong> <strong><em>am</em></strong> at home.</li></ul>
+<p class="doc-p">Estoy en casa.</p>
+<ul class="doc-list"><li><strong><em>I</em></strong> <strong><em>am</em></strong> tired.</li></ul>
+<p class="doc-p">Estoy cansado.</p>
+<ul class="doc-list"><li><strong><em>I</em></strong> <strong><em>am</em></strong> from Mexico.</li></ul>
+<p class="doc-p">Soy de Mexico.</p>
+<h4 class="doc-h3">Ejemplos con `is`</h4>
+<ul class="doc-list"><li><strong><em>He</em></strong> <strong><em>is</em></strong> <strong><em>a</em></strong> doctor.</li></ul>
+<p class="doc-p">El es doctor.</p>
+<ul class="doc-list"><li><strong><em>She</em></strong> <strong><em>is</em></strong> at school.</li></ul>
+<p class="doc-p">Ella esta en la escuela.</p>
+<ul class="doc-list"><li><strong><em>It</em></strong> <strong><em>is</em></strong> cold outside.</li></ul>
+<p class="doc-p">Hace frio afuera.</p>
+<ul class="doc-list"><li><strong><em>She</em></strong> <strong><em>is</em></strong> my friend.</li></ul>
+<p class="doc-p">Ella es mi amiga.</p>
+<h4 class="doc-h3">Ejemplos con `are`</h4>
+<ul class="doc-list"><li><strong><em>You</em></strong> <strong><em>are</em></strong> my friend.</li></ul>
+<p class="doc-p">Tu eres mi amigo.</p>
+<ul class="doc-list"><li><strong><em>We</em></strong> <strong><em>are</em></strong> <strong><em>in</em></strong> <strong><em>the</em></strong> park.</li></ul>
+<p class="doc-p">Estamos en el parque.</p>
+<ul class="doc-list"><li><strong><em>They</em></strong> <strong><em>are</em></strong> teachers.</li></ul>
+<p class="doc-p">Ellos son profesores.</p>
+<ul class="doc-list"><li><strong><em>We</em></strong> <strong><em>are</em></strong> from Argentina.</li></ul>
+<p class="doc-p">Somos de Argentina.</p>
+<h4 class="doc-h3">Resumen</h4>
+<p class="doc-p">Memoriza que <strong><code>am</code></strong> va con <strong><code>I</code></strong>, <strong><code>is</code></strong> con <strong><code>he/she/it</code></strong> y <strong><code>are</code></strong> con <strong><code>you/we/they</code></strong>.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con puntos suspensivos y, si quieres, **encierra la respuesta correcta** cuando abras el archivo en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. <strong><em>I</em></strong> .......... <strong><em>a</em></strong> student.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">am</span>
+                </div>
+<div class="exercise-question">2. <strong><em>She</em></strong> .......... at school.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">is</span>
+                </div>
+<div class="exercise-question">3. <strong><em>We</em></strong> .......... from Peru.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">are</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. <strong><em>It</em></strong> .......... cold outside.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">am</span><span class="opt-badge" onclick="selectOption(this)">is</span><span class="opt-badge" onclick="selectOption(this)">are</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">is</span>
+                </div>
+
+            <div class="section-anchor" id="sec-32-articulos-a-an-the"></div>
+            <h3 class="doc-h2">3.2. Articulos: a, an, the</h3>
+<h4 class="doc-h3">Idea general</h4>
+<ul class="doc-list"><li><strong><code>a</code></strong> = un / una, antes de sonido consonante</li><li><strong><code>an</code></strong> = un / una, antes de sonido vocal</li><li><strong><code>the</code></strong> = el / la / los / las, para algo especifico</li></ul>
+<p class="doc-p">Ejemplos con <strong><code>a</code></strong></p>
+<ul class="doc-list"><li><strong><em>I</em></strong> saw <strong><em>a</em></strong> cat.</li></ul>
+<p class="doc-p">Vi un gato.</p>
+<ul class="doc-list"><li><strong><em>She</em></strong> has <strong><em>a</em></strong> dog.</li></ul>
+<p class="doc-p">Ella tiene un perro.</p>
+<ul class="doc-list"><li><strong><em>He</em></strong> wants <strong><em>a</em></strong> sandwich.</li></ul>
+<p class="doc-p">El quiere un sandwich.</p>
+<p class="doc-p">Ejemplos con <strong><code>an</code></strong></p>
+<ul class="doc-list"><li><strong><em>I</em></strong> ate <strong><em>an</em></strong> apple.</li></ul>
+<p class="doc-p">Comi una manzana.</p>
+<ul class="doc-list"><li><strong><em>She</em></strong> <strong><em>is</em></strong> reading <strong><em>an</em></strong> interesting book.</li></ul>
+<p class="doc-p">Ella esta leyendo un libro interesante.</p>
+<ul class="doc-list"><li><strong><em>He</em></strong> saw <strong><em>an</em></strong> owl <strong><em>in</em></strong> <strong><em>the</em></strong> tree.</li></ul>
+<p class="doc-p">El vio un buho en el arbol.</p>
+<p class="doc-p">Ejemplos con <strong><code>the</code></strong></p>
+<ul class="doc-list"><li><strong><em>The</em></strong> sun <strong><em>is</em></strong> shining.</li></ul>
+<p class="doc-p">El sol esta brillando.</p>
+<ul class="doc-list"><li><strong><em>I</em></strong> visited <strong><em>the</em></strong> museum yesterday.</li></ul>
+<p class="doc-p">Visite el museo ayer.</p>
+<ul class="doc-list"><li><strong><em>The</em></strong> cat <strong><em>is</em></strong> sleeping <strong><em>on</em></strong> <strong><em>the</em></strong> sofa.</li></ul>
+<p class="doc-p">El gato esta durmiendo en el sofa.</p>
+<p class="doc-p">Ejemplos mixtos</p>
+<ul class="doc-list"><li><strong><em>I</em></strong> want to eat <strong><em>an</em></strong> orange.</li></ul>
+<p class="doc-p">Quiero comer una naranja.</p>
+<ul class="doc-list"><li><strong><em>The</em></strong> car <strong><em>is</em></strong> new.</li></ul>
+<p class="doc-p">El carro es nuevo.</p>
+<ul class="doc-list"><li><strong><em>He</em></strong> bought <strong><em>a</em></strong> book.</li></ul>
+<p class="doc-p">El compro un libro.</p>
+<ul class="doc-list"><li><strong><em>The</em></strong> Earth revolves around <strong><em>the</em></strong> sun.</li></ul>
+<p class="doc-p">La Tierra gira alrededor del sol.</p>
+<h4 class="doc-h3">Resumen</h4>
+<p class="doc-p">Piensa primero si hablas de algo general o especifico. Despues revisa si la siguiente palabra empieza con sonido vocal o consonante.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con puntos suspensivos y, si quieres, **encierra la respuesta correcta** cuando abras el archivo en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. <strong><em>I</em></strong> ate .......... apple.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">an</span>
+                </div>
+<div class="exercise-question">2. <strong><em>He</em></strong> bought .......... book.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">a</span>
+                </div>
+<div class="exercise-question">3. .......... sun <strong><em>is</em></strong> shining.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">The</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. <strong><em>She</em></strong> <strong><em>is</em></strong> reading .......... interesting book.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">a</span><span class="opt-badge" onclick="selectOption(this)">an</span><span class="opt-badge" onclick="selectOption(this)">the</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">an</span>
+                </div>
+
+            <div class="section-anchor" id="sec-33-plurales-basicos-y-excepciones"></div>
+            <h3 class="doc-h2">3.3. Plurales basicos y excepciones</h3>
+<h4 class="doc-h3">Regla general</h4>
+<p class="doc-p">Se agrega <strong><code>s</code></strong>.</p>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li>dog -&gt; dogs</li><li>book -&gt; books</li><li>table -&gt; tables</li></ul>
+<h4 class="doc-h3">Con `es`</h4>
+<p class="doc-p">Si el sustantivo termina en <strong><code>x</code></strong>, <strong><code>z</code></strong>, <strong><code>ch</code></strong> o <strong><code>sh</code></strong>, se agrega <strong><code>es</code></strong>.</p>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li>box -&gt; boxes</li><li>church -&gt; churches</li></ul>
+<h4 class="doc-h3">Palabras terminadas en `y`</h4>
+<p class="doc-p">Si antes de <strong><code>y</code></strong> hay consonante, <strong><code>y</code></strong> cambia <strong><em>a</em></strong> <strong><code>ies</code></strong>.</p>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li>city -&gt; cities</li><li>baby -&gt; babies</li></ul>
+<h4 class="doc-h3">Irregulares</h4>
+<ul class="doc-list"><li>child -&gt; children</li><li>man -&gt; men</li><li>woman -&gt; women</li><li>mouse -&gt; mice</li></ul>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li>There <strong><em>are</em></strong> two dogs <strong><em>in</em></strong> <strong><em>the</em></strong> yard.</li></ul>
+<p class="doc-p">Hay dos perros en el patio.</p>
+<ul class="doc-list"><li><strong><em>I</em></strong> have three books to read.</li></ul>
+<p class="doc-p">Tengo tres libros para leer.</p>
+<ul class="doc-list"><li><strong><em>She</em></strong> has two mice <strong><em>in</em></strong> <strong><em>her</em></strong> house.</li></ul>
+<p class="doc-p">Ella tiene dos ratones en su casa.</p>
+<ul class="doc-list"><li><strong><em>We</em></strong> saw men <strong><em>in</em></strong> <strong><em>the</em></strong> park.</li></ul>
+<p class="doc-p">Vimos hombres en el parque.</p>
+<ul class="doc-list"><li><strong><em>The</em></strong> churches <strong><em>in</em></strong> this town <strong><em>are</em></strong> beautiful.</li></ul>
+<p class="doc-p">Las iglesias de este pueblo son hermosas.</p>
+<h4 class="doc-h3">Resumen</h4>
+<p class="doc-p">Aprende la regla general primero y luego memoriza poco <strong><em>a</em></strong> poco los plurales irregulares mas comunes.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con puntos suspensivos y, si quieres, **encierra la respuesta correcta** cuando abras el archivo en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. dog -&gt; ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">dogs</span>
+                </div>
+<div class="exercise-question">2. city -&gt; ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">cities</span>
+                </div>
+<div class="exercise-question">3. child -&gt; ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">children</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. mouse -&gt; ?</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">mouses</span><span class="opt-badge" onclick="selectOption(this)">mice</span><span class="opt-badge" onclick="selectOption(this)">mousees</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">mice</span>
+                </div>
+
+            <div class="section-anchor" id="sec-34-presente-simple-afirmaciones-y-negaciones"></div>
+            <h3 class="doc-h2">3.4. Presente simple: afirmaciones y negaciones</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">Se usa para rutinas, gustos y hechos generales.</p>
+<h4 class="doc-h3">Afirmaciones</h4>
+<ul class="doc-list"><li><strong><em>I</em></strong> like coffee.</li></ul>
+<p class="doc-p"><strong><em>Me</em></strong> gusta el cafe.</p>
+<ul class="doc-list"><li><strong><em>She</em></strong> works every day.</li></ul>
+<p class="doc-p">Ella trabaja todos los dias.</p>
+<ul class="doc-list"><li><strong><em>They</em></strong> play soccer <strong><em>on</em></strong> weekends.</li></ul>
+<p class="doc-p">Ellos juegan futbol los fines de semana.</p>
+<h4 class="doc-h3">Regla importante</h4>
+<p class="doc-p">Con <strong><code>he</code></strong>, <strong><code>she</code></strong> e <strong><code>it</code></strong>, el verbo suele llevar <strong><code>s</code></strong>.</p>
+<h4 class="doc-h3">Negaciones</h4>
+<ul class="doc-list"><li><strong><em>I</em></strong> <strong><em>don&#x27;t</em></strong> like tea.</li></ul>
+<p class="doc-p">No <strong><em>me</em></strong> gusta el te.</p>
+<ul class="doc-list"><li><strong><em>She</em></strong> <strong><em>doesn&#x27;t</em></strong> play tennis.</li></ul>
+<p class="doc-p">Ella no juega tenis.</p>
+<ul class="doc-list"><li><strong><em>They</em></strong> <strong><em>don&#x27;t</em></strong> <strong><em>watch TV</em></strong>.</li></ul>
+<p class="doc-p">Ellos no ven television.</p>
+<p class="doc-p">Mas ejemplos</p>
+<ul class="doc-list"><li><strong><em>I</em></strong> like ice cream.</li></ul>
+<p class="doc-p"><strong><em>Me</em></strong> gusta el helado.</p>
+<ul class="doc-list"><li><strong><em>She</em></strong> <strong><em>doesn&#x27;t</em></strong> eat meat.</li></ul>
+<p class="doc-p">Ella no come carne.</p>
+<ul class="doc-list"><li><strong><em>They</em></strong> go to school by bus.</li></ul>
+<p class="doc-p">Ellos van <strong><em>a</em></strong> la escuela en autobus.</p>
+<ul class="doc-list"><li><strong><em>We</em></strong> <strong><em>don&#x27;t</em></strong> have time.</li></ul>
+<p class="doc-p">No tenemos tiempo.</p>
+<ul class="doc-list"><li><strong><em>He</em></strong> likes to read books.</li></ul>
+<p class="doc-p"><strong><em>A</em></strong> el le gusta leer libros.</p>
+<h4 class="doc-h3">Resumen</h4>
+<p class="doc-p">En negativo, usa <strong><code>don&#x27;t</code></strong> con <strong><code>I/you/we/they</code></strong> y <strong><code>doesn&#x27;t</code></strong> con <strong><code>he/she/it</code></strong>.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con puntos suspensivos y, si quieres, **encierra la respuesta correcta** cuando abras el archivo en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. <strong><em>I</em></strong> .......... like tea.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">don&#x27;t</span>
+                </div>
+<div class="exercise-question">2. <strong><em>She</em></strong> .......... play tennis.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">doesn&#x27;t</span>
+                </div>
+<div class="exercise-question">3. <strong><em>They</em></strong> .......... <strong><em>watch TV</em></strong>.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">don&#x27;t</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. <strong><em>He</em></strong> .......... books every day.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">read</span><span class="opt-badge" onclick="selectOption(this)">reads</span><span class="opt-badge" onclick="selectOption(this)">don&#x27;t read</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">reads</span>
+                </div>
+
+            <div class="section-anchor" id="sec-35-preposiciones-simples-in-on-under"></div>
+            <h3 class="doc-h2">3.5. Preposiciones simples: in, on, under</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">Las preposiciones muestran la relacion entre objetos y lugares.</p>
+<h4 class="doc-h3">`in`</h4>
+<p class="doc-p">Para lugares cerrados o areas grandes.</p>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li><strong><em>The</em></strong> book <strong><em>is</em></strong> <strong><em>in</em></strong> <strong><em>the</em></strong> box.</li></ul>
+<p class="doc-p">El libro esta en la caja.</p>
+<ul class="doc-list"><li><strong><em>I</em></strong> live <strong><em>in</em></strong> <strong><em>a</em></strong> big city.</li></ul>
+<p class="doc-p">Vivo en una ciudad grande.</p>
+<h4 class="doc-h3">`on`</h4>
+<p class="doc-p">Para superficies.</p>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li><strong><em>The</em></strong> cup <strong><em>is</em></strong> <strong><em>on</em></strong> <strong><em>the</em></strong> table.</li></ul>
+<p class="doc-p">La taza esta sobre la mesa.</p>
+<ul class="doc-list"><li><strong><em>She</em></strong> put <strong><em>the</em></strong> keys <strong><em>on</em></strong> <strong><em>the</em></strong> shelf.</li></ul>
+<p class="doc-p">Ella puso las llaves en la estanteria.</p>
+<h4 class="doc-h3">`under`</h4>
+<p class="doc-p">Para algo debajo de otro objeto.</p>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li><strong><em>The</em></strong> dog <strong><em>is</em></strong> <strong><em>under</em></strong> <strong><em>the</em></strong> chair.</li></ul>
+<p class="doc-p">El perro esta debajo de la silla.</p>
+<ul class="doc-list"><li><strong><em>The</em></strong> shoes <strong><em>are</em></strong> <strong><em>under</em></strong> <strong><em>the</em></strong> bed.</li></ul>
+<p class="doc-p">Los zapatos estan debajo de la cama.</p>
+<p class="doc-p">Mas ejemplos</p>
+<ul class="doc-list"><li><strong><em>The</em></strong> keys <strong><em>are</em></strong> <strong><em>on</em></strong> <strong><em>the</em></strong> table.</li></ul>
+<p class="doc-p">Las llaves estan en la mesa.</p>
+<ul class="doc-list"><li><strong><em>I</em></strong> <strong><em>am</em></strong> <strong><em>in</em></strong> <strong><em>the</em></strong> car.</li></ul>
+<p class="doc-p">Estoy en el coche.</p>
+<ul class="doc-list"><li><strong><em>The</em></strong> cat <strong><em>is</em></strong> <strong><em>under</em></strong> <strong><em>the</em></strong> bed.</li></ul>
+<p class="doc-p">El gato esta debajo de la cama.</p>
+<ul class="doc-list"><li><strong><em>She</em></strong> <strong><em>is</em></strong> <strong><em>in</em></strong> <strong><em>the</em></strong> kitchen.</li></ul>
+<p class="doc-p">Ella esta en la cocina.</p>
+<ul class="doc-list"><li><strong><em>The</em></strong> book <strong><em>is</em></strong> <strong><em>on</em></strong> <strong><em>the</em></strong> desk.</li></ul>
+<p class="doc-p">El libro esta sobre el escritorio.</p>
+<h4 class="doc-h3">Resumen</h4>
+<p class="doc-p">Piensa en la imagen: <strong><code>in</code></strong> = dentro, <strong><code>on</code></strong> = sobre, <strong><code>under</code></strong> = debajo.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con puntos suspensivos y, si quieres, **encierra la respuesta correcta** cuando abras el archivo en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. <strong><em>The</em></strong> book <strong><em>is</em></strong> .......... <strong><em>the</em></strong> box.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">in</span>
+                </div>
+<div class="exercise-question">2. <strong><em>The</em></strong> cup <strong><em>is</em></strong> .......... <strong><em>the</em></strong> table.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">on</span>
+                </div>
+<div class="exercise-question">3. <strong><em>The</em></strong> dog <strong><em>is</em></strong> .......... <strong><em>the</em></strong> chair.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">under</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. There <strong><em>is</em></strong> <strong><em>a</em></strong> picture .......... <strong><em>the</em></strong> wall.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">in</span><span class="opt-badge" onclick="selectOption(this)">on</span><span class="opt-badge" onclick="selectOption(this)">under</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">on</span>
+                </div>
+
+            <div class="section-anchor" id="sec-36-preguntas-en-presente-simple"></div>
+            <h3 class="doc-h2">3.6. Preguntas en presente simple</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">Para hacer preguntas en presente simple usamos <strong><code>do</code></strong> o <strong><code>does</code></strong>.</p>
+<h4 class="doc-h3">Con `do`</h4>
+<ul class="doc-list"><li><strong><em>Do</em></strong> <strong><em>you</em></strong> like coffee?</li></ul>
+<p class="doc-p">Te gusta el cafe?</p>
+<ul class="doc-list"><li><strong><em>Do</em></strong> <strong><em>they</em></strong> play soccer?</li></ul>
+<p class="doc-p">Ellos juegan futbol?</p>
+<ul class="doc-list"><li><strong><em>Do</em></strong> <strong><em>we</em></strong> need to study?</li></ul>
+<p class="doc-p">Necesitamos estudiar?</p>
+<h4 class="doc-h3">Con `does`</h4>
+<ul class="doc-list"><li><strong><em>Does</em></strong> <strong><em>he</em></strong> play <strong><em>the</em></strong> guitar?</li></ul>
+<p class="doc-p">El toca la guitarra?</p>
+<ul class="doc-list"><li><strong><em>Does</em></strong> <strong><em>she</em></strong> like pizza?</li></ul>
+<p class="doc-p"><strong><em>A</em></strong> ella le gusta la pizza?</p>
+<ul class="doc-list"><li><strong><em>Does</em></strong> <strong><em>she</em></strong> work here?</li></ul>
+<p class="doc-p">Ella trabaja aqui?</p>
+<h4 class="doc-h3">Respuestas cortas</h4>
+<ul class="doc-list"><li>Yes, <strong><em>I</em></strong> <strong><em>do</em></strong>.</li><li>No, <strong><em>I</em></strong> <strong><em>don&#x27;t</em></strong>.</li><li>Yes, <strong><em>he</em></strong> <strong><em>does</em></strong>.</li><li>No, <strong><em>he</em></strong> <strong><em>doesn&#x27;t</em></strong>.</li><li>Yes, <strong><em>they</em></strong> <strong><em>do</em></strong>.</li><li>No, <strong><em>they</em></strong> <strong><em>don&#x27;t</em></strong>.</li></ul>
+<h4 class="doc-h3">Ejemplos de respuesta</h4>
+<ul class="doc-list"><li><strong><em>Do</em></strong> <strong><em>you</em></strong> like pizza? -&gt; Yes, <strong><em>I</em></strong> <strong><em>do</em></strong>.</li><li><strong><em>Does</em></strong> <strong><em>he</em></strong> play <strong><em>the</em></strong> guitar? -&gt; No, <strong><em>he</em></strong> <strong><em>doesn&#x27;t</em></strong>.</li><li><strong><em>Do</em></strong> <strong><em>they</em></strong> <strong><em>watch TV</em></strong>? -&gt; Yes, <strong><em>they</em></strong> <strong><em>do</em></strong>.</li><li><strong><em>Does</em></strong> <strong><em>she</em></strong> go to school? -&gt; Yes, <strong><em>she</em></strong> <strong><em>does</em></strong>.</li><li><strong><em>Do</em></strong> <strong><em>we</em></strong> have homework? -&gt; No, <strong><em>we</em></strong> <strong><em>don&#x27;t</em></strong>.</li></ul>
+<h4 class="doc-h3">Resumen</h4>
+<p class="doc-p"><strong><code>Do</code></strong> y <strong><code>does</code></strong> ayudan <strong><em>a</em></strong> formar la pregunta. En la respuesta corta, se repiten.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con puntos suspensivos y, si quieres, **encierra la respuesta correcta** cuando abras el archivo en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. .......... <strong><em>you</em></strong> like coffee?</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">Do</span>
+                </div>
+<div class="exercise-question">2. .......... <strong><em>he</em></strong> play <strong><em>the</em></strong> guitar?</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">Does</span>
+                </div>
+<div class="exercise-question">3. Yes, <strong><em>I</em></strong> ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">do</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. Respuesta corta correcta: <strong><em>Do</em></strong> <strong><em>we</em></strong> have homework?</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">No, we don&#x27;t.</span><span class="opt-badge" onclick="selectOption(this)">No, we doesn&#x27;t.</span><span class="opt-badge" onclick="selectOption(this)">No, we aren&#x27;t.</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">No, we don&#x27;t.</span>
+                </div>
+
+            <div class="section-anchor" id="sec-37-pronombres-sujeto-y-objeto"></div>
+            <h3 class="doc-h2">3.7. Pronombres sujeto y objeto</h3>
+<h4 class="doc-h3">Pronombres sujeto</h4>
+<ul class="doc-list"><li><strong><em>I</em></strong> = yo</li><li><strong><em>you</em></strong> = tu / usted</li><li><strong><em>he</em></strong> = el</li><li><strong><em>she</em></strong> = ella</li><li><strong><em>it</em></strong> = eso</li><li><strong><em>we</em></strong> = nosotros</li><li><strong><em>they</em></strong> = ellos</li></ul>
+<h4 class="doc-h3">Pronombres objeto</h4>
+<ul class="doc-list"><li><strong><em>me</em></strong> = <strong><em>me</em></strong></li><li><strong><em>you</em></strong> = te / lo / la</li><li><strong><em>him</em></strong> = lo / le</li><li><strong><em>her</em></strong> = la / le</li><li><strong><em>it</em></strong> = lo / la</li><li><strong><em>us</em></strong> = nos</li><li><strong><em>them</em></strong> = los / las</li></ul>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li><strong><em>I</em></strong> love <strong><em>him</em></strong>.</li></ul>
+<p class="doc-p">Yo lo amo.</p>
+<ul class="doc-list"><li><strong><em>She</em></strong> gave <strong><em>me</em></strong> <strong><em>the</em></strong> book.</li></ul>
+<p class="doc-p">Ella <strong><em>me</em></strong> dio el libro.</p>
+<ul class="doc-list"><li><strong><em>They</em></strong> invited <strong><em>us</em></strong> to <strong><em>the</em></strong> party.</li></ul>
+<p class="doc-p">Ellos nos invitaron <strong><em>a</em></strong> la fiesta.</p>
+<ul class="doc-list"><li><strong><em>He</em></strong> loves <strong><em>her</em></strong>.</li></ul>
+<p class="doc-p">El la ama.</p>
+<ul class="doc-list"><li><strong><em>We</em></strong> saw <strong><em>them</em></strong> yesterday.</li></ul>
+<p class="doc-p">Los vimos ayer.</p>
+<ul class="doc-list"><li><strong><em>I</em></strong> work with <strong><em>them</em></strong>.</li></ul>
+<p class="doc-p">Trabajo con ellos.</p>
+<ul class="doc-list"><li>This <strong><em>is</em></strong> my book. <strong><em>I</em></strong> <strong><em>am</em></strong> reading <strong><em>it</em></strong>.</li></ul>
+<p class="doc-p">Este es mi libro. Lo estoy leyendo.</p>
+<ul class="doc-list"><li>Come with <strong><em>us</em></strong>.</li></ul>
+<p class="doc-p">Ven con nosotros.</p>
+<ul class="doc-list"><li><strong><em>I</em></strong> saw <strong><em>her</em></strong> <strong><em>in</em></strong> <strong><em>the</em></strong> store.</li></ul>
+<p class="doc-p">La vi en la tienda.</p>
+<h4 class="doc-h3">Resumen</h4>
+<p class="doc-p">Los pronombres sujeto hacen la accion. Los pronombres objeto reciben la accion.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con puntos suspensivos y, si quieres, **encierra la respuesta correcta** cuando abras el archivo en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. <strong><em>I</em></strong> love ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">him</span>
+                </div>
+<div class="exercise-question">2. <strong><em>She</em></strong> gave .......... <strong><em>the</em></strong> book.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">me</span>
+                </div>
+<div class="exercise-question">3. Come with ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">us</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. <strong><em>We</em></strong> saw .......... yesterday.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">they</span><span class="opt-badge" onclick="selectOption(this)">them</span><span class="opt-badge" onclick="selectOption(this)">their</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">them</span>
+                </div>
+
+                <div class="chapter-anchor chapter-separator" id="cap-4-como-estudiar-este-material"></div>
+                <h2 class="doc-h1">
+                  <span class="chapter-tag">CAPÍTULO</span>
+                  <span>4. COMO ESTUDIAR ESTE MATERIAL</span>
+                </h2>
+<h4 class="doc-h3">Metodo recomendado</h4>
+<ol class="doc-ordered-list"><li>Lee una seccion completa sin pausar.</li><li>Vuelve a leer y subraya palabras clave y estructuras.</li><li>Di en voz alta los ejemplos mas importantes.</li><li>Escribe 5 oraciones nuevas siguiendo el mismo modelo.</li><li>Repite al dia siguiente sin mirar la traduccion.</li></ol>
+<h4 class="doc-h3">Rutina sugerida</h4>
+<ul class="doc-list"><li>Dia 1: Saludos, numeros y colores.</li><li>Dia 2: Rutinas y comidas.</li><li>Dia 3: Ciudad y viajes.</li><li>Dia 4: Pronunciacion.</li><li>Dia 5: To be, articulos y plurales.</li><li>Dia 6: Presente simple, preposiciones y preguntas.</li><li>Dia 7: Pronombres y repaso general.</li></ul>
+<h4 class="doc-h3">Consejo final</h4>
+<p class="doc-p">No intentes memorizar todo de una sola vez. Lee, repite, escucha mentalmente los ejemplos y crea frases nuevas <strong><em>a</em></strong> partir de ellos. La repeticion con contexto es lo que hace que el ingles se vuelva natural.</p>
+        </div>
+
+        <!-- Navegación final del documento -->
+        <div style="margin-top: 50px; padding: 24px; border-radius: 14px; background: var(--bg-alt); border: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+          <div>
+            <h4 style="font-size: 16px; font-weight: 800; color: var(--text);">¿Listo para continuar tu estudio?</h4>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Practica tu vocabulario en el Dashboard con Flashcards SRS, Quizzes o explora otros niveles.</p>
+          </div>
+          <a href="index.html" class="btn-return-app" style="padding: 10px 22px; font-size: 14px;">
+            ← Volver a la App Principal
+          </a>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Botón Volver Arriba -->
+  <button class="btn-back-to-top" id="btn-back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Subir al inicio">
+    ↑
+  </button>
+
+  <script>
+    // Inicializar Tema
+    function initTheme() {
+      const saved = localStorage.getItem('lexicore_theme') || 'light';
+      if (saved === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+      }
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      document.documentElement.classList.toggle('light', !isDark);
+      localStorage.setItem('lexicore_theme', isDark ? 'dark' : 'light');
+    }
+
+    // Soluciones en Ejercicios
+    function toggleAnswer(btn) {
+      const ansSpan = btn.nextElementSibling;
+      if (!ansSpan) return;
+      const isHidden = ansSpan.classList.contains('hidden-answer');
+      if (isHidden) {
+        ansSpan.classList.remove('hidden-answer');
+        btn.textContent = '🙈 Ocultar solución';
+      } else {
+        ansSpan.classList.add('hidden-answer');
+        btn.textContent = '👁️ Revelar solución';
+      }
+    }
+
+    // Selección interactiva de opciones
+    function selectOption(el) {
+      const parent = el.parentElement;
+      parent.querySelectorAll('.opt-badge').forEach(b => b.classList.remove('selected'));
+      el.classList.add('selected');
+    }
+
+    // ToC en Móviles
+    function toggleMobileToc() {
+      const sidebar = document.getElementById('sidebar-toc');
+      if (sidebar) sidebar.classList.toggle('open');
+    }
+
+    function closeMobileToc() {
+      const sidebar = document.getElementById('sidebar-toc');
+      if (sidebar && window.innerWidth <= 900) {
+        sidebar.classList.remove('open');
+      }
+    }
+
+    // Filtrar temas en el ToC
+    function filterToc(query) {
+      const q = query.toLowerCase().trim();
+      document.querySelectorAll('#toc-list li').forEach(li => {
+        const text = li.textContent.toLowerCase();
+        li.style.display = (!q || text.includes(q)) ? 'block' : 'none';
+      });
+    }
+
+    // Botón Volver Arriba
+    window.addEventListener('scroll', () => {
+      const btn = document.getElementById('btn-back-to-top');
+      if (window.scrollY > 400) {
+        btn.classList.add('visible');
+      } else {
+        btn.classList.remove('visible');
+      }
+    });
+
+    initTheme();
+  </script>
+</body>
+</html>

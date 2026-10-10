@@ -1,0 +1,2268 @@
+<!DOCTYPE html>
+<html lang="es" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inglés Avanzado C1-C2 - Guía Didáctica | Kale Anders</title>
+  <style>
+    :root {
+      --primary: #7c3aed;
+      --primary-light: #f5f3ff;
+      --bg: #ffffff;
+      --bg-alt: #f8fafc;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --sidebar-bg: #f8fafc;
+      --card-bg: #ffffff;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-title: "Cambria", Georgia, serif;
+    }
+
+    .dark {
+      --primary: #7c3aed;
+      --primary-light: #1e1b4b;
+      --bg: #0f172a;
+      --bg-alt: #1e293b;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border: #334155;
+      --sidebar-bg: #0b1120;
+      --card-bg: #1e293b;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-alt);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    /* Barra Superior Fija */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 24px;
+      gap: 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    }
+
+    .top-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-return-app {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--primary);
+      color: #ffffff;
+      border: 1px solid var(--primary);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13px;
+      text-decoration: none;
+      transition: all 0.2s;
+      white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .btn-return-app:hover {
+      opacity: 0.92;
+      transform: translateX(-2px);
+      color: #ffffff;
+    }
+
+    .btn-toc-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .brand-title {
+      font-weight: 800;
+      font-size: 16px;
+      color: var(--primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .nav-tabs-bar {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 4px 0;
+    }
+
+    .nav-tab {
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 8px;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+
+    .nav-tab:hover {
+      color: var(--text);
+      background: var(--bg-alt);
+    }
+
+    .nav-tab-active {
+      background: var(--primary) !important;
+      color: #ffffff !important;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-action {
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s;
+    }
+
+    .btn-action:hover {
+      background: var(--bg-alt);
+    }
+
+    .btn-print {
+      background: var(--primary);
+      color: white;
+      border: none;
+    }
+
+    .btn-print:hover {
+      opacity: 0.9;
+    }
+
+    /* Layout Principal: Sidebar + Contenido */
+    .app-layout {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      min-height: calc(100vh - 60px);
+    }
+
+    /* Barra Lateral de Contenidos (ToC) */
+    .sidebar-toc {
+      width: 330px;
+      flex-shrink: 0;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border);
+      padding: 24px 18px;
+      position: sticky;
+      top: 60px;
+      height: calc(100vh - 60px);
+      overflow-y: auto;
+    }
+
+    .sidebar-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 800;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .toc-search {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 12.5px;
+      margin-bottom: 14px;
+      outline: none;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .toc-item-h1 {
+      margin-top: 10px;
+    }
+
+    .toc-item-h1 a {
+      display: block;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--text);
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: background 0.15s;
+    }
+
+    .toc-item-h2 a {
+      display: block;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 4px 10px 4px 18px;
+      border-radius: 6px;
+      transition: all 0.15s;
+    }
+
+    .toc-item-h1 a:hover, .toc-item-h2 a:hover {
+      background: var(--border);
+      color: var(--text);
+    }
+
+    /* Contenedor del Documento Principal */
+    .doc-container {
+      flex: 1;
+      min-width: 0;
+      padding: 40px 60px 80px 60px;
+      background: var(--bg);
+    }
+
+    .doc-card {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* Portada de Documento */
+    .doc-hero {
+      text-align: center;
+      padding: 30px 20px 45px 20px;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: var(--font-title);
+      font-size: 38px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    /* Jerarquía Tipográfica */
+    .chapter-anchor, .section-anchor {
+      scroll-margin-top: 80px;
+    }
+
+    .chapter-separator {
+      margin-top: 60px;
+      padding-top: 30px;
+      border-top: 2px solid var(--border);
+    }
+
+    .doc-h1 {
+      font-family: var(--font-title);
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-top: 20px;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1.5px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .chapter-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 800;
+      color: var(--text-muted);
+      font-family: var(--font-main);
+    }
+
+    .doc-h2 {
+      font-family: var(--font-title);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 34px;
+      margin-bottom: 12px;
+    }
+
+    .doc-h3 {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-top: 22px;
+      margin-bottom: 8px;
+    }
+
+    .doc-p {
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    /* Listas con viñetas */
+    .doc-list {
+      margin: 12px 0 18px 24px;
+    }
+
+    .doc-list li {
+      margin-bottom: 6px;
+    }
+
+    /* Listas ordenadas / Pasos del método */
+    .doc-ordered-list {
+      margin: 14px 0 22px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .doc-ordered-list li {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-weight: 500;
+    }
+
+    /* Ejemplos Bilingües */
+    .bilingual-en {
+      color: var(--text);
+      font-size: 15.5px;
+      margin-top: 10px;
+      padding: 6px 12px;
+      background: var(--bg-alt);
+      border-left: 3px solid var(--primary);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .bilingual-es {
+      color: var(--text-muted);
+      font-size: 13.5px;
+      margin-bottom: 12px;
+      padding-left: 12px;
+      font-style: italic;
+    }
+
+    /* Cajas Callout / Book Note */
+    .callout-note {
+      background: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 18px 0;
+      display: flex;
+      gap: 12px;
+      font-style: italic;
+      color: var(--text);
+    }
+
+    .callout-icon {
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .callout-body {
+      flex: 1;
+    }
+
+    /* Ejercicios Guiados */
+    .exercise-subheading {
+      font-weight: 700;
+      margin-top: 16px;
+      margin-bottom: 6px;
+      color: var(--primary);
+    }
+
+    .exercise-question {
+      margin-top: 12px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .exercise-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 8px 0 8px 18px;
+    }
+
+    .opt-badge {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s;
+    }
+
+    .opt-badge:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .opt-badge.selected {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .exercise-answer-box {
+      margin: 6px 0 16px 18px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .ans-label {
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .btn-reveal {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      color: var(--primary);
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-reveal:hover {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .ans-text {
+      font-style: italic;
+      font-weight: 700;
+      color: #059669;
+      background: #ecfdf5;
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid #a7f3d0;
+    }
+
+    .hidden-answer {
+      display: none;
+    }
+
+    /* Inline Code */
+    code {
+      font-family: Consolas, Monaco, monospace;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 0.9em;
+      color: var(--primary);
+    }
+
+    /* Botón flotante para subir */
+    .btn-back-to-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s, transform 0.2s;
+      z-index: 90;
+    }
+
+    .btn-back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .btn-back-to-top:hover {
+      transform: translateY(-3px);
+    }
+
+    /* Drawer de ToC para Pantallas Pequeñas */
+    @media (max-width: 900px) {
+      .sidebar-toc {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 60px;
+        bottom: 0;
+        z-index: 99;
+        width: 300px;
+        box-shadow: 2px 0 15px rgba(0,0,0,0.2);
+      }
+
+      .sidebar-toc.open {
+        display: block;
+      }
+
+      .doc-container {
+        padding: 24px 20px 60px 20px;
+      }
+
+      .hero-title {
+        font-size: 28px;
+      }
+    }
+
+    /* Impresión / Guardar en PDF */
+    @media print {
+      body {
+        background: white;
+        color: black;
+        font-size: 10.5pt;
+      }
+
+      .top-header, .sidebar-toc, .btn-reveal, .btn-back-to-top {
+        display: none !important;
+      }
+
+      .doc-container {
+        padding: 0;
+      }
+
+      .chapter-anchor {
+        page-break-before: always;
+      }
+
+      .hidden-answer {
+        display: inline !important;
+      }
+
+      .bilingual-en {
+        background: none;
+        border-left: 2pt solid black;
+      }
+
+      @page {
+        margin: 1.5cm 1.2cm 1.5cm 1.2cm;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra Superior Fija -->
+  <header class="top-header">
+    <div class="top-header-left">
+      <a href="index.html" class="btn-return-app" title="Regresar a la aplicación principal LexiCore">
+        <span>←</span> <span>Volver a LexiCore</span>
+      </a>
+      <button class="btn-toc-toggle" onclick="toggleMobileToc()" title="Alternar índice">
+        📑 <span>Índice</span>
+      </button>
+      <a href="index.html" class="brand-title">
+        <span>⚡ Kale Anders &bull; Inglés Avanzado C1-C2</span>
+      </a>
+    </div>
+
+    <!-- Pestañas de Navegación Rápida -->
+    <div class="nav-tabs-bar">
+      <a href="A1-A2.html" class="nav-tab ">Nivel A1-A2</a>
+<a href="B1-B2.html" class="nav-tab ">Nivel B1-B2</a>
+<a href="C1-C2.html" class="nav-tab nav-tab-active">Nivel C1-C2</a>
+<a href="oxford_dictionary_book_a1.html" class="nav-tab ">Diccionario Oxford 3000</a>
+<a href="index.html" class="nav-tab ">🏠 App Principal</a>
+
+    </div>
+
+    <!-- Acciones -->
+    <div class="top-actions">
+      <button class="btn-action" onclick="toggleTheme()" title="Cambiar tema">
+        🌓 <span id="theme-btn-text">Tema</span>
+      </button>
+      <button class="btn-action btn-print" onclick="window.print()" title="Imprimir o guardar PDF">
+        🖨️ <span>Imprimir / PDF</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Layout Principal -->
+  <div class="app-layout">
+    
+    <!-- Barra Lateral de Contenidos -->
+    <aside class="sidebar-toc" id="sidebar-toc">
+      <div style="padding-bottom: 12px; margin-bottom: 12px; border-bottom: 1px solid var(--border);">
+        <a href="index.html" class="btn-return-app" style="width: 100%; justify-content: center; box-sizing: border-box;">
+          ← Volver a la App Principal
+        </a>
+      </div>
+      <div class="sidebar-title">
+        <span>Índice del Módulo</span>
+        <span style="font-size: 10px; background: var(--primary); color: white; padding: 2px 6px; border-radius: 4px;">31 Secciones</span>
+      </div>
+      <input type="text" class="toc-search" placeholder="Filtrar temas..." oninput="filterToc(this.value)">
+      <ul class="toc-list" id="toc-list">
+        
+            <li class="toc-item-h1">
+              <a href="#cap-1-gramatica-avanzada" onclick="closeMobileToc()">1. GRAMATICA AVANZADA</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-11-condicionales-mixtos-mixed-conditionals" onclick="closeMobileToc()">&bull; 1.1. Condicionales mixtos (Mixed Conditionals)</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-12-inversion-para-enfasis-y-estilo-formal" onclick="closeMobileToc()">&bull; 1.2. Inversion para enfasis y estilo formal</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-13-cleft-sentences-oraciones-hendidas" onclick="closeMobileToc()">&bull; 1.3. Cleft sentences (Oraciones hendidas)</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-14-el-subjuntivo-en-ingles-y-estructuras-de-mandat" onclick="closeMobileToc()">&bull; 1.4. El subjuntivo en ingles y estructuras de mandato formal</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-15-participle-clauses-clausulas-de-participio" onclick="closeMobileToc()">&bull; 1.5. Participle clauses (Clausulas de participio)</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-16-voz-pasiva-avanzada-pasiva-impersonal-y-causati" onclick="closeMobileToc()">&bull; 1.6. Voz pasiva avanzada, pasiva impersonal y causativos</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-17-modales-de-deduccion-y-especulacion-en-el-pasad" onclick="closeMobileToc()">&bull; 1.7. Modales de deduccion y especulacion en el pasado</a>
+            </li>
+            <li class="toc-item-h1">
+              <a href="#cap-2-pronunciacion-avanzada-y-connected-speech" onclick="closeMobileToc()">2. PRONUNCIACION AVANZADA Y CONNECTED SPEECH</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-21-linking-y-union-de-sonidos" onclick="closeMobileToc()">&bull; 2.1. Linking y union de sonidos</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-22-elision-y-asimilacion" onclick="closeMobileToc()">&bull; 2.2. Elision y asimilacion</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-23-reducciones-nativas-y-formas-debiles-en-habla-r" onclick="closeMobileToc()">&bull; 2.3. Reducciones nativas y formas debiles en habla rapida</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-24-entonacion-avanzada-y-sentence-stress" onclick="closeMobileToc()">&bull; 2.4. Entonacion avanzada y Sentence Stress</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-25-la-parada-glotal-the-glottal-stop-ʔ" onclick="closeMobileToc()">&bull; 2.5. La parada glotal (The Glottal Stop /ʔ/)</a>
+            </li>
+            <li class="toc-item-h1">
+              <a href="#cap-3-conversacion-avanzada-y-fluidez-nativa" onclick="closeMobileToc()">3. CONVERSACION AVANZADA Y FLUIDEZ NATIVA</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-31-matizar-argumentos-y-asertividad-diplomatica-he" onclick="closeMobileToc()">&bull; 3.1. Matizar argumentos y asertividad diplomatica (Hedging &amp; Softening)</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-32-debatir-rebatir-y-persuadir-con-elegancia" onclick="closeMobileToc()">&bull; 3.2. Debatir, rebatir y persuadir con elegancia</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-33-marcadores-discursivos-y-muletillas-nativas-nat" onclick="closeMobileToc()">&bull; 3.3. Marcadores discursivos y muletillas nativas naturales</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-34-gestion-de-turnos-interrumpir-educadamente-y-ce" onclick="closeMobileToc()">&bull; 3.4. Gestion de turnos: Interrumpir educadamente y ceder la palabra</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-41-modismos-idioms-y-metaforas-de-uso-frecuente-en" onclick="closeMobileToc()">&bull; 4.1. Modismos (Idioms) y metaforas de uso frecuente en el mundo real</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-42-phrasal-verbs-avanzados-de-tres-particulas" onclick="closeMobileToc()">&bull; 4.2. Phrasal verbs avanzados de tres particulas</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-43-colocaciones-avanzadas-de-alto-impacto" onclick="closeMobileToc()">&bull; 4.3. Colocaciones avanzadas de alto impacto</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-44-falsos-cognados-sutiles-y-precision-lexica" onclick="closeMobileToc()">&bull; 4.4. Falsos cognados sutiles y precision lexica</a>
+            </li>
+            <li class="toc-item-h1">
+              <a href="#cap-5-escritura-y-estilo-avanzado" onclick="closeMobileToc()">5. ESCRITURA Y ESTILO AVANZADO</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-51-control-del-registro-de-lo-conversacional-a-lo-" onclick="closeMobileToc()">&bull; 5.1. Control del registro: De lo conversacional a lo formal ejecutivo</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-52-cohesion-textual-compleja-y-variacion-sintactic" onclick="closeMobileToc()">&bull; 5.2. Cohesion textual compleja y variacion sintactica</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-53-eufemismos-y-lenguaje-asertivo" onclick="closeMobileToc()">&bull; 5.3. Eufemismos y lenguaje asertivo</a>
+            </li>
+            <li class="toc-item-h1">
+              <a href="#cap-6-correccion-de-errores-del-hablante-avanzado" onclick="closeMobileToc()">6. CORRECCION DE ERRORES DEL HABLANTE AVANZADO</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-61-calcos-sintacticos-sutiles-del-espanol" onclick="closeMobileToc()">&bull; 6.1. Calcos sintacticos sutiles del espanol</a>
+            </li>
+            <li class="toc-item-h2">
+              <a href="#sec-62-regimen-preposicional-complejo" onclick="closeMobileToc()">&bull; 6.2. Regimen preposicional complejo</a>
+            </li>
+            <li class="toc-item-h1">
+              <a href="#cap-7-como-estudiar-este-material-leyendo-metodo-kale-" onclick="closeMobileToc()">7. COMO ESTUDIAR ESTE MATERIAL LEYENDO (METODO KALE ANDERS)</a>
+            </li>
+      </ul>
+    </aside>
+
+    <!-- Contenido Principal -->
+    <main class="doc-container">
+      <div class="doc-card">
+        
+        <!-- Portada -->
+        <div class="doc-hero">
+          <span class="hero-badge">Nivel Avanzado C1-C2</span>
+          <h1 class="hero-title">Inglés Avanzado C1-C2</h1>
+          <p class="hero-subtitle">Guía de maestría y fluidez nativa basada en el método comunicativo de Kale Anders</p>
+          <div style="margin-top: 18px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+            <a href="index.html" class="btn-return-app" style="padding: 9px 20px; font-size: 14px;">
+              ← Regresar a LexiCore App
+            </a>
+            <button class="btn-action btn-print" onclick="window.print()" style="padding: 9px 20px; font-size: 14px;">
+              🖨️ Imprimir / Guardar PDF
+            </button>
+          </div>
+        </div>
+
+        <!-- Bloques del Documento -->
+        <div class="doc-content">
+          <h4 class="doc-h3">Objetivo</h4>
+<p class="doc-p">Este material resume y reorganiza una clase completa de ingles avanzado C1-C2 para que puedas estudiarla leyendo. Se eliminaron saludos, promociones, repeticiones y comentarios poco utiles. Se conservaron las explicaciones esenciales, las estructuras complejas, el analisis de <strong><em>connected speech</em></strong> y los modelos de conversacion real de alto nivel.</p>
+
+                <div class="chapter-anchor " id="cap-1-gramatica-avanzada"></div>
+                <h2 class="doc-h1">
+                  <span class="chapter-tag">CAPÍTULO</span>
+                  <span>1. GRAMATICA AVANZADA</span>
+                </h2>
+
+            <div class="section-anchor" id="sec-11-condicionales-mixtos-mixed-conditionals"></div>
+            <h3 class="doc-h2">1.1. Condicionales mixtos (Mixed Conditionals)</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">En situaciones reales, el tiempo de la condicion no siempre coincide con el tiempo del resultado. Los condicionales mixtos combinan el pasado y el presente para expresar como una accion pasada afecta el presente, o como un estado presente permanente condiciono una accion en el pasado.</p>
+<h4 class="doc-h3">Estructura Tipo 1: Condicion en pasado con resultado en presente</h4>
+<p class="doc-p">If + past perfect (had + participio), sujeto + would + verbo base + now.</p>
+<p class="doc-p">Se usa cuando una decision o hecho del pasado tiene un impacto directo en el presente.</p>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li>If I had accepted that job offer last year, I would be living in London now.</li></ul>
+<p class="doc-p">Si hubiera aceptado esa oferta de trabajo el ano pasado, estaria viviendo en Londres ahora.</p>
+<ul class="doc-list"><li>If you had not forgotten your keys, we would not be standing outside in the cold.</li></ul>
+<p class="doc-p">Si no hubieras olvidado tus llaves, no estariamos parados afuera en el frio ahora mismo.</p>
+<h4 class="doc-h3">Estructura Tipo 2: Condicion en presente con resultado en el pasado</h4>
+<p class="doc-p">If + past simple (were/verbo en pasado), sujeto + would have + participio.</p>
+<p class="doc-p">Se usa cuando una caracteristica o cualidad general de la persona afecto lo que ocurrio en el pasado.</p>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li>If I were more patient, I would not have lost my temper yesterday.</li></ul>
+<p class="doc-p">Si yo fuera mas paciente, no habria perdido los estribos ayer.</p>
+<ul class="doc-list"><li>If she spoke fluent German, she would have gotten the job in Berlin.</li></ul>
+<p class="doc-p">Si ella hablara aleman fluido, habria conseguido el puesto en Berlin.</p>
+<h4 class="doc-h3">Notas</h4>
+<p class="doc-p"><strong><code>were</code></strong> se prefiere sobre <strong><code>was</code></strong> en registros formales y cuidados con todos los pronombres (If I were, If he were).</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. If I .......... (accept) that promotion last year, I .......... (be) a director today.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">had accepted / would be</span>
+                </div>
+<div class="exercise-question">2. If she .......... (be) more careful with details, she .......... (not make) that blunder yesterday.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">were / would not have made</span>
+                </div>
+<div class="exercise-question">3. If we .......... (save) more capital in Q1, we .......... (not struggle) right now.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">had saved / would not be struggling</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. If I hadn&#x27;t missed the train, I .......... here with you now.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">would be</span><span class="opt-badge" onclick="selectOption(this)">would have been</span><span class="opt-badge" onclick="selectOption(this)">will be</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">would be</span>
+                </div>
+<div class="exercise-question">2. If he were more punctual in general, he .......... on time for yesterday&#x27;s pitch.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">would arrive</span><span class="opt-badge" onclick="selectOption(this)">would have arrived</span><span class="opt-badge" onclick="selectOption(this)">had arrived</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">would have arrived</span>
+                </div>
+
+            <div class="section-anchor" id="sec-12-inversion-para-enfasis-y-estilo-formal"></div>
+            <h3 class="doc-h2">1.2. Inversion para enfasis y estilo formal</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">En contextos formales, academicos o retoricos, colocar un adverbio o frase negativa al inicio de la oracion invierte el orden habitual del sujeto y el verbo auxiliar. Esto otorga gran fuerza expresiva y autoridad.</p>
+<h4 class="doc-h3">Estructura</h4>
+<p class="doc-p">Adverbio negativo / restrictivo + auxiliar + sujeto + verbo principal + complemento.</p>
+<h4 class="doc-h3">Adverbios que detonan inversion</h4>
+<ul class="doc-list"><li>Rarely / Seldom</li><li>Never / Never before</li><li>Little</li><li>Barely / Scarcely / Hardly ... when</li><li>Not only ... but also</li><li>Under no circumstances</li><li>On no account</li><li>No sooner ... than</li></ul>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li>Rarely have I seen such exceptional dedication in a software team.</li></ul>
+<p class="doc-p">Raras veces he visto una dedicacion tan excepcional en un equipo de software.</p>
+<ul class="doc-list"><li>Never in my life had I witnessed such a magnificent performance.</li></ul>
+<p class="doc-p">Nunca en mi vida habia presenciado una actuacion tan magnifica.</p>
+<ul class="doc-list"><li>Not only did they finish the project ahead of schedule, but they also exceeded all expectations.</li></ul>
+<p class="doc-p">No solo terminaron el proyecto antes de lo previsto, sino que tambien superaron todas las expectativas.</p>
+<ul class="doc-list"><li>Under no circumstances should you disclose your security credentials.</li></ul>
+<p class="doc-p">Bajo ninguna circunstancia debes revelar tus credenciales de seguridad.</p>
+<ul class="doc-list"><li>Scarcely had we entered the building when the alarm sounded.</li></ul>
+<p class="doc-p">Apenas habiamos entrado al edificio cuando sono la alarma.</p>
+<h4 class="doc-h3">Notas</h4>
+<p class="doc-p">Recuerda que en oraciones afirmativas en presente simple o pasado simple que no tienen auxiliar, debes agregar <strong><code>do</code></strong>, <strong><code>does</code></strong> o <strong><code>did</code></strong> (por ejemplo: <strong><code>Little did he know</code></strong> en lugar de <strong><code>Little he knew</code></strong>).</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. Rarely .......... (see / I) such extraordinary dedication in an engineering sprint.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">have I seen</span>
+                </div>
+<div class="exercise-question">2. Under no circumstances .......... you disclose administrative credentials.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">should</span>
+                </div>
+<div class="exercise-question">3. Not only .......... (they / finish) the audit, but they also reduced infrastructure costs.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">did they finish</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. Never before .......... such a complex system architecture.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">I had encountered</span><span class="opt-badge" onclick="selectOption(this)">had I encountered</span><span class="opt-badge" onclick="selectOption(this)">did I encountered</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">had I encountered</span>
+                </div>
+<div class="exercise-question">2. Seldom .......... such a smooth zero-downtime deployment.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">we experience</span><span class="opt-badge" onclick="selectOption(this)">do we experience</span><span class="opt-badge" onclick="selectOption(this)">we do experience</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">do we experience</span>
+                </div>
+
+            <div class="section-anchor" id="sec-13-cleft-sentences-oraciones-hendidas"></div>
+            <h3 class="doc-h2">1.3. Cleft sentences (Oraciones hendidas)</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">Las <strong><em>cleft sentences</em></strong> dividen una sola oracion en dos clausulas para resaltar un elemento especifico (el sujeto, el objeto, el motivo o la accion). Son fundamentales en debates, presentaciones y negociaciones para clarificar puntos criticos.</p>
+<h4 class="doc-h3">Estructura con It-clefts</h4>
+<p class="doc-p">It + be (is/was) + elemento enfatizado + that/who + resto de la oracion.</p>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li>It was his attitude that caused the misunderstanding, not his lack of competence.</li></ul>
+<p class="doc-p">Fue su actitud lo que causo el malentendido, no su falta de competencia.</p>
+<ul class="doc-list"><li>It is the backend latency that we need to address first.</li></ul>
+<p class="doc-p">Es la latencia del backend lo que necesitamos resolver primero.</p>
+<h4 class="doc-h3">Estructura con Wh-clefts (What / All / The reason why)</h4>
+<p class="doc-p">What + sujeto + verbo + is/was + elemento focalizado.</p>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li>What I really need right now is a few days of uninterrupted focus.</li></ul>
+<p class="doc-p">Lo que realmente necesito ahora mismo son unos dias de concentracion sin interrupciones.</p>
+<ul class="doc-list"><li>All we want to achieve is a seamless user experience.</li></ul>
+<p class="doc-p">Todo lo que queremos lograr es una experiencia de usuario fluida.</p>
+<ul class="doc-list"><li>The reason why the deployment failed was an invalid environment variable.</li></ul>
+<p class="doc-p">La razon por la que el despliegue fallo fue una variable de entorno no valida.</p>
+<h4 class="doc-h3">Notas</h4>
+<p class="doc-p">Usa <strong><code>What surprises me is...</code></strong> o <strong><code>What concerns me is...</code></strong> para liderar conversaciones profesionales con diplomacia y contundencia.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. What we really .......... (need) right now is a reliable cache invalidation strategy.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">need</span>
+                </div>
+<div class="exercise-question">2. It was the lack of automated tests .......... caused the regression.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">that</span>
+                </div>
+<div class="exercise-question">3. All I want to .......... (do) is ensure uninterrupted high availability.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">do</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. .......... was her strategic vision that saved the startup from bankruptcy.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">It</span><span class="opt-badge" onclick="selectOption(this)">What</span><span class="opt-badge" onclick="selectOption(this)">There</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">It</span>
+                </div>
+<div class="exercise-question">2. What concerns me most .......... the growing technical debt.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">is</span><span class="opt-badge" onclick="selectOption(this)">are</span><span class="opt-badge" onclick="selectOption(this)">being</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">is</span>
+                </div>
+
+            <div class="section-anchor" id="sec-14-el-subjuntivo-en-ingles-y-estructuras-de-mandat"></div>
+            <h3 class="doc-h2">1.4. El subjuntivo en ingles y estructuras de mandato formal</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">El subjuntivo en ingles se utiliza en registros formales y corporativos despues de ciertos verbos y adjetivos que expresan urgencia, demanda, insistencia o recomendacion. La regla es que el verbo subordinado permanece en su forma base (infinitivo sin to), sin importar el sujeto.</p>
+<h4 class="doc-h3">Estructura</h4>
+<p class="doc-p">Sujeto 1 + verbo de demanda + that + Sujeto 2 + verbo base + complemento.</p>
+<h4 class="doc-h3">Verbos que exigen subjuntivo</h4>
+<ul class="doc-list"><li>demand that</li><li>insist that</li><li>recommend that</li><li>propose that</li><li>request that</li><li>urge that</li></ul>
+<h4 class="doc-h3">Adjetivos que exigen subjuntivo</h4>
+<ul class="doc-list"><li>It is crucial that</li><li>It is essential that</li><li>It is imperative that</li><li>It is vital that</li></ul>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li>The board insisted that he resign immediately.</li></ul>
+<p class="doc-p">La junta directiva insistio en que el dimitiera de inmediato.</p>
+<ul class="doc-list"><li>It is imperative that every team member be notified of the policy change.</li></ul>
+<p class="doc-p">Es imperativo que cada miembro del equipo sea notificado del cambio de politica.</p>
+<ul class="doc-list"><li>The doctor recommended that she take a complete break from work.</li></ul>
+<p class="doc-p">El medico recomendo que ella se tomara un descanso completo del trabajo.</p>
+<ul class="doc-list"><li>I propose that the deadline be extended by two weeks.</li></ul>
+<p class="doc-p">Propongo que la fecha limite se extienda dos semanas.</p>
+<h4 class="doc-h3">Notas</h4>
+<p class="doc-p">Nota como en lugar de <strong><code>resigns</code></strong> se escribe <strong><code>resign</code></strong>, y en lugar de <strong><code>is notified</code></strong> se escribe <strong><code>be notified</code></strong>.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. The CTO insisted that the lead architect .......... (be) present at the meeting.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">be</span>
+                </div>
+<div class="exercise-question">2. It is imperative that every developer .......... (follow) the security guidelines.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">follow</span>
+                </div>
+<div class="exercise-question">3. The board recommended that he .......... (step) down immediately.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">step</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. We demand that all <strong><em>sensitive</em></strong> data .......... encrypted at rest.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">is</span><span class="opt-badge" onclick="selectOption(this)">be</span><span class="opt-badge" onclick="selectOption(this)">was</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">be</span>
+                </div>
+<div class="exercise-question">2. It is crucial that she .......... informed as soon as possible.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">be</span><span class="opt-badge" onclick="selectOption(this)">is</span><span class="opt-badge" onclick="selectOption(this)">will be</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">be</span>
+                </div>
+
+            <div class="section-anchor" id="sec-15-participle-clauses-clausulas-de-participio"></div>
+            <h3 class="doc-h2">1.5. Participle clauses (Clausulas de participio)</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">Las clausulas de participio reducen oraciones subordinadas y permiten expresar tiempo, causa, condicion o simultaneidad de manera elegante y sintetica. Sustituyen conectores comunes como <strong><code>because</code></strong>, <strong><code>after</code></strong>, <strong><code>since</code></strong> y <strong><code>while</code></strong>.</p>
+<h4 class="doc-h3">Tipos de clausulas de participio</h4>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. .......... (feel) completely exhausted, she logged off early.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">Feeling</span>
+                </div>
+<div class="exercise-question">2. .......... (complete) the performance audit, the team celebrated.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">Having completed</span>
+                </div>
+<div class="exercise-question">3. .......... (view) from a business standpoint, the trade-off is justifiable.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">Viewed</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. .......... the documentation thoroughly, he submitted the pull request.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">Having read</span><span class="opt-badge" onclick="selectOption(this)">Reading had</span><span class="opt-badge" onclick="selectOption(this)">Read having</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">Having read</span>
+                </div>
+<div class="exercise-question">2. Not .......... what else to try, they consulted the principal architect.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">knowing</span><span class="opt-badge" onclick="selectOption(this)">known</span><span class="opt-badge" onclick="selectOption(this)">to know</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">knowing</span>
+                </div>
+<ol class="doc-ordered-list"><li>Present participle (-ing): para acciones activas o simultaneas.</li><li>Past participle (-ed / 3ra columna): para significados pasivos.</li><li>Perfect participle (having + participio): para enfatizar que una accion se completo antes que otra.</li></ol>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li>Feeling exhausted after the cross-country flight, he went straight to sleep.</li></ul>
+<p class="doc-p">Sintiendose agotado tras el vuelo transcontinental, se fue directo a dormir.</p>
+<ul class="doc-list"><li>Having completed the code review, the engineer merged the pull request.</li></ul>
+<p class="doc-p">Habiendo completado la revision de codigo, el ingeniero fusiono el pull request.</p>
+<ul class="doc-list"><li>Viewed from a broader perspective, this setback is an opportunity for growth.</li></ul>
+<p class="doc-p">Visto desde una perspectiva mas amplia, este contratiempo es una oportunidad de crecimiento.</p>
+<ul class="doc-list"><li>Not knowing what to do next, she consulted her senior mentor.</li></ul>
+<p class="doc-p">Al no saber que hacer a continuacion, consulto a su mentor principal.</p>
+<h4 class="doc-h3">Notas</h4>
+<p class="doc-p">El sujeto del participio debe ser el mismo sujeto de la clausula principal. De lo contrario, se produce un error gramatical conocido como <strong><code>dangling participle</code></strong>.</p>
+
+            <div class="section-anchor" id="sec-16-voz-pasiva-avanzada-pasiva-impersonal-y-causati"></div>
+            <h3 class="doc-h2">1.6. Voz pasiva avanzada, pasiva impersonal y causativos</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">En contextos academicos, cientificos y ejecutivos, la pasiva se utiliza para transmitir neutralidad, confidencialidad o enfoque en los datos antes que en los individuos.</p>
+<h4 class="doc-h3">Pasiva impersonal con verbos de reporte</h4>
+<p class="doc-p">Estructura: It + is/was + participio (thought, believed, rumored, reported, claimed) + that...</p>
+<p class="doc-p">O bien: Sujeto + is/was + participio + to + infinitivo.</p>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li>It is widely believed that cloud technologies have transformed enterprise infrastructure.</li></ul>
+<p class="doc-p">Se cree ampliamente que las tecnologias en la nube han transformado la infraestructura empresarial.</p>
+<ul class="doc-list"><li>The CEO is rumored to have stepped down from his position.</li></ul>
+<p class="doc-p">Se rumorea que el director ejecutivo ha renunciado a su cargo.</p>
+<ul class="doc-list"><li>The new security protocol is expected to reduce vulnerabilities by fifty percent.</li></ul>
+<p class="doc-p">Se espera que el nuevo protocolo de seguridad reduzca las vulnerabilidades en un cincuenta por ciento.</p>
+<h4 class="doc-h3">Estructuras causativas avanzadas: Have / Get something done</h4>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li>We had the entire database optimized by external specialists.</li></ul>
+<p class="doc-p">Hicimos optimizar toda la base de datos por especialistas externos.</p>
+<ul class="doc-list"><li>You should get your contracts reviewed by legal counsel before signing.</li></ul>
+<p class="doc-p">Deberias hacer revisar tus contratos por asesoria legal antes de firmar.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. The database is rumored to .......... (experience) high write latency.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">have experienced</span>
+                </div>
+<div class="exercise-question">2. We had our entire infrastructure .......... (audit) by cybersecurity experts.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">audited</span>
+                </div>
+<div class="exercise-question">3. It is widely .......... (believe) that distributed systems require eventual consistency.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">believed</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. The CEO is reported .......... with key investors yesterday.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">to meet</span><span class="opt-badge" onclick="selectOption(this)">to have met</span><span class="opt-badge" onclick="selectOption(this)">having met</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">to have met</span>
+                </div>
+<div class="exercise-question">2. You need to get this contract .......... before Friday.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">sign</span><span class="opt-badge" onclick="selectOption(this)">signed</span><span class="opt-badge" onclick="selectOption(this)">signing</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">signed</span>
+                </div>
+
+            <div class="section-anchor" id="sec-17-modales-de-deduccion-y-especulacion-en-el-pasad"></div>
+            <h3 class="doc-h2">1.7. Modales de deduccion y especulacion en el pasado</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">Para formular hipotesis, deducciones y evaluaciones sobre hechos ya ocurridos en el pasado con distintos grados de certeza.</p>
+<h4 class="doc-h3">Estructuras</h4>
+<ul class="doc-list"><li>Certeza afirmativa: must have + participio (debio haber sido).</li><li>Certeza negativa / Imposibilidad: can&#x27;t have / couldn&#x27;t have + participio (no pudo haber sido).</li><li>Reproche o deber incumplido: should have / ought to have + participio (debio haber hecho).</li><li>Posibilidad o incertidumbre: might have / may have / could have + participio (pudo haber sido).</li></ul>
+<h4 class="doc-h3">Ejemplos</h4>
+<ul class="doc-list"><li>She must have left her laptop at the office; it is not in her backpack.</li></ul>
+<p class="doc-p">Ella debio haber dejado su portatil en la oficina; no esta en su mochila.</p>
+<ul class="doc-list"><li>He can&#x27;t have committed that blunder intentionally; he is extraordinarily diligent.</li></ul>
+<p class="doc-p">El no pudo haber cometido ese error garrafal intencionadamente; es extraordinariamente diligente.</p>
+<ul class="doc-list"><li>We should have run the automated test suite before deploying to production.</li></ul>
+<p class="doc-p">Debimos haber ejecutado la suite de pruebas automatizadas antes de desplegar a produccion.</p>
+<ul class="doc-list"><li>They might have taken a detour due to the highway construction.</li></ul>
+<p class="doc-p">Podrian haber tomado un desvio debido a las obras en la autopista.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. The telemetry logs show zero traffic; the server .......... (must / crash) around midnight.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">must have crashed</span>
+                </div>
+<div class="exercise-question">2. He .......... (can / not / know) about the incident; he was offline all day.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">can&#x27;t have known</span>
+                </div>
+<div class="exercise-question">3. We .......... (should / run) the benchmark tests before going live.</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">should have run</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. She .......... forgotten about the sprint review; she never misses one.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">must have</span><span class="opt-badge" onclick="selectOption(this)">can&#x27;t have</span><span class="opt-badge" onclick="selectOption(this)">should have</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">can&#x27;t have</span>
+                </div>
+<div class="exercise-question">2. They .......... taken the wrong route; they should have arrived an hour ago.</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">might have</span><span class="opt-badge" onclick="selectOption(this)">can have</span><span class="opt-badge" onclick="selectOption(this)">shall have</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">might have</span>
+                </div>
+
+                <div class="chapter-anchor chapter-separator" id="cap-2-pronunciacion-avanzada-y-connected-speech"></div>
+                <h2 class="doc-h1">
+                  <span class="chapter-tag">CAPÍTULO</span>
+                  <span>2. PRONUNCIACION AVANZADA Y CONNECTED SPEECH</span>
+                </h2>
+
+            <div class="section-anchor" id="sec-21-linking-y-union-de-sonidos"></div>
+            <h3 class="doc-h2">2.1. Linking y union de sonidos</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">En el habla natural a velocidad nativa, las palabras no se articulan de forma aislada. El aparato fonador une el final de una palabra con el inicio de la siguiente para crear un flujo continuo de voz.</p>
+<h4 class="doc-h3">Regla 1: Consonante final a vocal inicial (C-V)</h4>
+<p class="doc-p">La consonante salta a la siguiente palabra como si formara una silaba nueva.</p>
+<ul class="doc-list"><li>Hold on -&gt; /hoʊl-dɒn/</li><li>Check it out -&gt; /tʃe-kɪ-daʊt/</li><li>First of all -&gt; /fɜː-stə-vɔːl/</li></ul>
+<h4 class="doc-h3">Regla 2: Vocal final a vocal inicial con semivocales intrusivas (V-V)</h4>
+<ul class="doc-list"><li>Cuando la primera palabra termina en sonido /uː/, /oʊ/, /aʊ/, se inserta una semivocal /w/ de enlace:</li></ul>
+<p class="doc-p">* Go out -&gt; /ɡoʊ-w-aʊt/</p>
+<p class="doc-p">* Do it -&gt; /duː-w-ɪt/</p>
+<ul class="doc-list"><li>Cuando termina en sonido /iː/, /eɪ/, /aɪ/, /ɔɪ/, se inserta una semivocal /j/ (sonido similar a &#x27;y&#x27;):</li></ul>
+<p class="doc-p">* I agree -&gt; /aɪ-j-əˈɡriː/</p>
+<p class="doc-p">* See it -&gt; /siː-j-ɪt/</p>
+<h4 class="doc-h3">Regla 3: Linking R y R intrusiva</h4>
+<p class="doc-p">En ingles no rotico (britanico, australiano), una R final muda se pronuncia si la palabra siguiente inicia con vocal:</p>
+<ul class="doc-list"><li>Four apples -&gt; /fɔː-r-ˈæplz/</li><li>Law and order -&gt; /lɔː-r-ənd ˈɔːdə/</li></ul>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. Enlace C-V en &#x27;hold on&#x27;: se pronuncia como /hoʊl-.......... /</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">dɒn</span>
+                </div>
+<div class="exercise-question">2. Sonido intrusivo /w/ entre &#x27;go&#x27; y &#x27;out&#x27;: /ɡoʊ-.......... -aʊt/</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">w</span>
+                </div>
+<div class="exercise-question">3. Sonido intrusivo /j/ entre &#x27;I&#x27; y &#x27;agree&#x27;: /aɪ-.......... -əˈɡriː/</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">j</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. En la frase &#x27;Law and order&#x27;, el enlace en inglés británico inserta:</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">Linking</span><span class="opt-badge" onclick="selectOption(this)">r</span><span class="opt-badge" onclick="selectOption(this)">Intrusive</span><span class="opt-badge" onclick="selectOption(this)">w</span><span class="opt-badge" onclick="selectOption(this)">Glottal stop</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">Linking /r/</span>
+                </div>
+
+            <div class="section-anchor" id="sec-22-elision-y-asimilacion"></div>
+            <h3 class="doc-h2">2.2. Elision y asimilacion</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">La <strong><em>elision</em></strong> es la omision completa de un sonido para facilitar la velocidad articulatoria. La asimilacion es la mutacion de un sonido por influencia de su vecino.</p>
+<h4 class="doc-h3">Elision de /t/ y /d/ entre consonantes</h4>
+<ul class="doc-list"><li>Next door -&gt; /neks-dɔː/</li><li>Last night -&gt; /lɑːs-naɪt/</li><li>You and me -&gt; /juː-n-miː/</li><li>Stand there -&gt; /stæn-ðeə/</li></ul>
+<h4 class="doc-h3">Asimilacion palatal</h4>
+<p class="doc-p">Cuando una palabra termina en /t/ o /d/ y la siguiente empieza con /j/ (como en you, your):</p>
+<ul class="doc-list"><li>/t/ + /j/ -&gt; /tʃ/ (sonido &#x27;ch&#x27;):</li></ul>
+<p class="doc-p">* Nice to meet you -&gt; /naɪs tə ˈmiː-tʃuː/</p>
+<p class="doc-p">* Don&#x27;t you worry -&gt; /doʊn-tʃuː ˈwʌri/</p>
+<ul class="doc-list"><li>/d/ + /j/ -&gt; /dʒ/ (sonido &#x27;j&#x27; fuerte en ingles):</li></ul>
+<p class="doc-p">* Did you hear that? -&gt; /ˈdɪ-dʒuː hɪə ðæt/</p>
+<p class="doc-p">* Would you mind? -&gt; /ˈwʊ-dʒuː maɪnd/</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. En &#x27;next door&#x27;, la consonante que se elide es: ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">/t/</span>
+                </div>
+<div class="exercise-question">2. En &#x27;did you&#x27;, la fusión /d/ + /j/ genera el sonido: ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">/dʒ/ (j fuerte)</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. En &#x27;meet you&#x27;, la asimilación /t/ + /j/ suena como:</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">tʃ</span><span class="opt-badge" onclick="selectOption(this)">(ch)</span><span class="opt-badge" onclick="selectOption(this)">ʃ</span><span class="opt-badge" onclick="selectOption(this)">(sh)</span><span class="opt-badge" onclick="selectOption(this)">dʒ</span><span class="opt-badge" onclick="selectOption(this)">(j)</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">/tʃ/ (ch)</span>
+                </div>
+
+            <div class="section-anchor" id="sec-23-reducciones-nativas-y-formas-debiles-en-habla-r"></div>
+            <h3 class="doc-h2">2.3. Reducciones nativas y formas debiles en habla rapida</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">El ingles es un idioma de ritmo acentual (stress-timed language). Las palabras gramaticales (preposiciones, auxiliares, pronombres) reducen sus vocales a la vocal neutra schwa /ə/ o se comprimen en contracciones coloquiales.</p>
+<h4 class="doc-h3">Formas reducidas habituales</h4>
+<ul class="doc-list"><li>going to -&gt; gonna</li><li>want to -&gt; wanna</li><li>have got to -&gt; gotta</li><li>kind of -&gt; kinda</li><li>out of -&gt; outta</li><li>should have -&gt; shoulda / should&#x27;ve</li><li>could have -&gt; coulda / could&#x27;ve</li><li>would have -&gt; woulda / would&#x27;ve</li><li>let me -&gt; lemme</li><li>give me -&gt; gimme</li></ul>
+<h4 class="doc-h3">Ejemplos en contexto</h4>
+<ul class="doc-list"><li>I&#x27;m gonna take care of this issue right away.</li></ul>
+<p class="doc-p">Voy a ocuparme de este problema de inmediato.</p>
+<ul class="doc-list"><li>You shoulda let me know earlier.</li></ul>
+<p class="doc-p">Debiste haberme avisado antes.</p>
+<ul class="doc-list"><li>We&#x27;re completely outta options.</li></ul>
+<p class="doc-p">Nos quedamos totalmente sin opciones.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. Forma reducida de &#x27;kind of&#x27;: ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">kinda</span>
+                </div>
+<div class="exercise-question">2. Forma reducida de &#x27;out of&#x27;: ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">outta</span>
+                </div>
+<div class="exercise-question">3. Forma reducida de &#x27;should have&#x27;: ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">shoulda</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. La frase &#x27;I gotta go&#x27; es la reducción informal de:</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">I have got to go</span><span class="opt-badge" onclick="selectOption(this)">I go to go</span><span class="opt-badge" onclick="selectOption(this)">I getting go</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">I have got to go</span>
+                </div>
+
+            <div class="section-anchor" id="sec-24-entonacion-avanzada-y-sentence-stress"></div>
+            <h3 class="doc-h2">2.4. Entonacion avanzada y Sentence Stress</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">El acento de la oracion transmite la intencion oculta, el contraste y la actitud emocional del hablante. Cambiar el acento de palabra altera el significado por completo.</p>
+<h4 class="doc-h3">Ejemplo clasico de contraste</h4>
+<ul class="doc-list"><li>I didn&#x27;t say he borrowed the car. (Alguien mas lo dijo, no yo).</li><li>I didn&#x27;t say HE borrowed the car. (Dije que otra persona tomo prestado el auto).</li><li>I didn&#x27;t say he BORROWED the car. (Insinue que lo robo o se lo llevo sin permiso).</li><li>I didn&#x27;t say he borrowed THE car. (Tomo otro auto, no ese en particular).</li></ul>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. El significado &#x27;Alguien más lo dijo, no yo&#x27; se logra enfatizando la palabra: ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">I</span>
+                </div>
+<div class="exercise-question">2. El significado &#x27;Insinué que lo robó en vez de pedirlo prestado&#x27; enfatiza: ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">borrowed</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. En inglés, el ritmo es marcado predominantemente por:</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">Palabras con contenido léxico (stress-timed)</span><span class="opt-badge" onclick="selectOption(this)">Cada sílaba individual (syllable-timed)</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">Palabras con contenido léxico (stress-timed)</span>
+                </div>
+
+            <div class="section-anchor" id="sec-25-la-parada-glotal-the-glottal-stop-ʔ"></div>
+            <h3 class="doc-h2">2.5. La parada glotal (The Glottal Stop /ʔ/)</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">La parada glotal ocurre cuando las cuerdas vocales se cierran abruptamente, interrumpiendo el flujo de aire antes de pronunciar el siguiente sonido. Es un rasgo distintivo del habla nativa informal en dialectos britanicos y americanos.</p>
+<h4 class="doc-h3">Ejemplos comunes</h4>
+<ul class="doc-list"><li>Button -&gt; /ˈbʌʔn/</li><li>Cotton -&gt; /ˈkɒʔn/</li><li>Important -&gt; /ɪmˈpɔːʔnt/</li><li>Network -&gt; /ˈneʔwɜːk/</li><li>Not yet -&gt; /nɒʔ jet/</li></ul>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. En habla rápida urbana, &#x27;button&#x27; se pronuncia reemplazando la /t/ por: ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">parada glotal /ʔ/</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. La parada glotal ocurre por el cierre momentáneo de:</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">Las cuerdas vocales</span><span class="opt-badge" onclick="selectOption(this)">Los labios</span><span class="opt-badge" onclick="selectOption(this)">El paladar blando</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">Las cuerdas vocales</span>
+                </div>
+
+                <div class="chapter-anchor chapter-separator" id="cap-3-conversacion-avanzada-y-fluidez-nativa"></div>
+                <h2 class="doc-h1">
+                  <span class="chapter-tag">CAPÍTULO</span>
+                  <span>3. CONVERSACION AVANZADA Y FLUIDEZ NATIVA</span>
+                </h2>
+
+            <div class="section-anchor" id="sec-31-matizar-argumentos-y-asertividad-diplomatica-he"></div>
+            <h3 class="doc-h2">3.1. Matizar argumentos y asertividad diplomatica (Hedging &amp; Softening)</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">En reuniones de negocios, conferencias tecnicas o negociaciones, la asertividad nunca debe confundirse con la brusquedad. El lenguaje matizado protege las relaciones profesionales y demuestra respeto por la perspectiva ajena.</p>
+<h4 class="doc-h3">Estructuras de suavizado</h4>
+<ul class="doc-list"><li>It seems to me that...</li><li>To a certain extent, that argument holds weight, but...</li><li>I am inclined to believe that we should proceed with caution.</li><li>It might be worth considering whether...</li><li>Arguably, this is the most cost-effective alternative.</li></ul>
+<h4 class="doc-h3">Ejemplos comparativos</h4>
+<ul class="doc-list"><li>Directo / Cortante: This plan will fail.</li><li>Matizado C1: It appears that this strategy may encounter substantial friction unless modified.</li><li>Directo / Cortante: You don&#x27;t understand the problem.</li><li>Matizado C1: Perhaps I have not explained the complexity of the constraint clearly enough.</li></ul>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. Para suavizar una objeción: &#x27;I&#x27;m .......... to believe we should reconsider.&#x27;</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">inclined</span>
+                </div>
+<div class="exercise-question">2. Para matizar un juicio: &#x27;To a certain .........., that argument is valid.&#x27;</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">extent</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. En lugar de &#x27;Your design is terrible&#x27;, una alternativa diplomática C1 es:</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">It seems the design might benefit from a few refinements.</span><span class="opt-badge" onclick="selectOption(this)">Your design will definitely cause problems.</span><span class="opt-badge" onclick="selectOption(this)">I hate this layout.</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">It seems the design might benefit from a few refinements.</span>
+                </div>
+
+            <div class="section-anchor" id="sec-32-debatir-rebatir-y-persuadir-con-elegancia"></div>
+            <h3 class="doc-h2">3.2. Debatir, rebatir y persuadir con elegancia</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">Para debatir con solvencia a nivel avanzado se requiere reconocer la validez parcial del argumento opuesto antes de introducir un contraejemplo solido.</p>
+<h4 class="doc-h3">Patrones retoricos</h4>
+<ul class="doc-list"><li>While I take your point on board, we must not lose sight of the primary objective.</li></ul>
+<p class="doc-p">Aunque tomo en cuenta tu punto, no debemos perder de vista el objetivo primordial.</p>
+<ul class="doc-list"><li>Let me play <strong><em>devil&#x27;s advocate</em></strong> for a moment: what happens if our key provider goes down?</li></ul>
+<p class="doc-p">Permiteme hacer de abogado del diablo por un momento: ¿que ocurre si nuestro proveedor clave se cae?</p>
+<ul class="doc-list"><li>With all due respect, the evidence does not substantiate that conclusion.</li></ul>
+<p class="doc-p">Con todo el respeto, la evidencia no respalda esa conclusion.</p>
+<ul class="doc-list"><li>I can certainly appreciate that perspective; however, there is another dimension to consider.</li></ul>
+<p class="doc-p">Ciertamente aprecio esa perspectiva; sin embargo, hay otra dimension que considerar.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. Para introducir un escenario adverso de prueba: &#x27;Let me play .......... advocate.&#x27;</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">devil&#x27;s</span>
+                </div>
+<div class="exercise-question">2. Para expresar desacuerdo respetuoso: &#x27;With all due .........., I disagree.&#x27;</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">respect</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. La expresión &#x27;While I take your point on board&#x27; significa:</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">Reconozco tu argumento antes de matizar mi postura.</span><span class="opt-badge" onclick="selectOption(this)">Rechazo totalmente lo que dijiste.</span><span class="opt-badge" onclick="selectOption(this)">No entendí tu punto.</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">Reconozco tu argumento antes de matizar mi postura.</span>
+                </div>
+
+            <div class="section-anchor" id="sec-33-marcadores-discursivos-y-muletillas-nativas-nat"></div>
+            <h3 class="doc-h2">3.3. Marcadores discursivos y muletillas nativas naturales</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">Los marcadores discursivos estructuran el pensamiento en tiempo real, permiten ordenar argumentos complejos y otorgan el tiempo necesario para articular ideas sin silencios incomodos.</p>
+<h4 class="doc-h3">Marcadores de sintesis y conclusion</h4>
+<ul class="doc-list"><li>At the end of the day, client satisfaction is our sole benchmark.</li></ul>
+<p class="doc-p">Al fin y al cabo, la satisfaccion del cliente es nuestro unico punto de referencia.</p>
+<ul class="doc-list"><li>By and large, the preliminary pilot was a resounding success.</li></ul>
+<p class="doc-p">En terminos generales, el piloto preliminar fue un exito rotundo.</p>
+<h4 class="doc-h3">Marcadores de honestidad y matiz</h4>
+<ul class="doc-list"><li>To be completely frank, that outcome caught our leadership team off guard.</li></ul>
+<p class="doc-p">Para ser totalmente franco, ese resultado tomo desprevenido a nuestro equipo de liderazgo.</p>
+<ul class="doc-list"><li>As a matter of fact, we have already mitigated the root cause.</li></ul>
+<p class="doc-p">De hecho, ya hemos mitigado la causa raiz.</p>
+<ul class="doc-list"><li>Off the top of my head, I would estimate a turnaround time of three business days.</li></ul>
+<p class="doc-p">Asi a ojo de buen cubero / sin revisar los datos exactos, estimaria un tiempo de respuesta de tres dias habiles.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. Para sintetizar el punto central: &#x27;At the .......... of the day, latency matters.&#x27;</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">end</span>
+                </div>
+<div class="exercise-question">2. Para dar una estimación aproximada sin datos exactos: &#x27;Off the .......... of my head...&#x27;</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">top</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. La expresión &#x27;As a matter of fact&#x27; se traduce como:</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">De hecho</span><span class="opt-badge" onclick="selectOption(this)">en realidad</span><span class="opt-badge" onclick="selectOption(this)">Por si acaso</span><span class="opt-badge" onclick="selectOption(this)">A pesar de todo</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">De hecho / en realidad</span>
+                </div>
+
+            <div class="section-anchor" id="sec-34-gestion-de-turnos-interrumpir-educadamente-y-ce"></div>
+            <h3 class="doc-h2">3.4. Gestion de turnos: Interrumpir educadamente y ceder la palabra</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">Intervenir en reuniones virtuales o presenciales sin sonar descortes es una habilidad linguistica de alto nivel.</p>
+<h4 class="doc-h3">Para intervenir educadamente</h4>
+<ul class="doc-list"><li>If I could just chime in here for a moment...</li><li>May I briefly interject with a point of clarification?</li><li>Sorry to cut you off, but there is one critical aspect we cannot overlook.</li></ul>
+<h4 class="doc-h3">Para ceder o devolver la palabra</h4>
+<ul class="doc-list"><li>Sorry for the interruption, please go ahead. You were saying?</li><li>I have concluded my remarks. The floor is yours.</li></ul>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. Para intervenir brevemente: &#x27;If I may .......... in for a second...&#x27;</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">chime</span>
+                </div>
+<div class="exercise-question">2. Para devolver la palabra: &#x27;The .......... is yours.&#x27;</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">floor</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. Para disculparte por interrumpir y pedir que continúen:</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">Sorry to cut you off; please go ahead. You were saying?</span><span class="opt-badge" onclick="selectOption(this)">Be quiet now.</span><span class="opt-badge" onclick="selectOption(this)">I am talking now.</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">Sorry to cut you off; please go ahead. You were saying?</span>
+                </div>
+<ol class="doc-ordered-list"><li>VOCABULARIO AVANZADO, COLOCACIONES Y MODISMOS</li></ol>
+
+            <div class="section-anchor" id="sec-41-modismos-idioms-y-metaforas-de-uso-frecuente-en"></div>
+            <h3 class="doc-h2">4.1. Modismos (Idioms) y metaforas de uso frecuente en el mundo real</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">Los modismos son indispensables para interpretar matices culturales y expresarse como un hablante nativo culto.</p>
+<ul class="doc-list"><li><strong><em>Bite the bullet</em></strong></li></ul>
+<p class="doc-p">Significado: Asumir con valentia una decision o tarea dificil que no se puede postergar mas.</p>
+<p class="doc-p">Ejemplo: We need to <strong><em>bite the bullet</em></strong> and refactor this entire architectural module.</p>
+<p class="doc-p">Traduccion: Necesitamos apretar los dientes y refactorizar este modulo arquitectonico completo.</p>
+<ul class="doc-list"><li><strong><em>Hit the ground running</em></strong></li></ul>
+<p class="doc-p">Significado: Comenzar una nueva actividad con maxima energia, preparacion y eficacia desde el primer dia.</p>
+<p class="doc-p">Ejemplo: The new lead engineer <strong><em>hit the ground running</em></strong> and solved two critical bottlenecks in week one.</p>
+<p class="doc-p">Traduccion: El nuevo ingeniero lider empezo con paso firme y resolvio dos cuellos de botella criticos en su primera semana.</p>
+<ul class="doc-list"><li><strong><em>Burn the midnight oil</em></strong></li></ul>
+<p class="doc-p">Significado: Trabajar o estudiar intensamente hasta altas horas de la madrugada.</p>
+<p class="doc-p">Ejemplo: Our DevOps engineers burned the midnight oil to ensure uninterrupted uptime.</p>
+<p class="doc-p">Traduccion: Nuestros ingenieros de DevOps trabajaron hasta la madrugada para garantizar la disponibilidad ininterrumpida.</p>
+<ul class="doc-list"><li><strong><em>Cut corners</em></strong></li></ul>
+<p class="doc-p">Significado: Reducir costos o esfuerzos de manera negligente perjudicando la calidad o la seguridad.</p>
+<p class="doc-p">Ejemplo: You must never <strong><em>cut corners</em></strong> when designing payment processing systems.</p>
+<p class="doc-p">Traduccion: Nunca debes escatimar ni hacer las cosas mal al disenar sistemas de procesamiento de pagos.</p>
+<ul class="doc-list"><li><strong><em>Touch base</em></strong></li></ul>
+<p class="doc-p">Significado: Ponerse en contacto brevemente con alguien para sincronizarse o actualizar el estado de algo.</p>
+<p class="doc-p">Ejemplo: Let us <strong><em>touch base</em></strong> first thing tomorrow morning to align on deliverables.</p>
+<p class="doc-p">Traduccion: Pongamonos en contacto manana a primera hora para alinearnos en las entregas.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. Aceptar una decisión difícil inevitable: &#x27;Bite the ..........&#x27;</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">bullet</span>
+                </div>
+<div class="exercise-question">2. Empezar un nuevo rol con máxima eficacia desde el día 1: &#x27;Hit the ground ..........&#x27;</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">running</span>
+                </div>
+<div class="exercise-question">3. Trabajar intensamente hasta la madrugada: &#x27;Burn the midnight ..........&#x27;</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">oil</span>
+                </div>
+<div class="exercise-question">4. Hacer cosas de mala calidad para ahorrar: &#x27;Cut ..........&#x27;</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">corners</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. La expresión &#x27;Let&#x27;s <strong><em>touch base</em></strong> tomorrow&#x27; significa:</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">Pongámonos en contacto brevemente para alinearnos.</span><span class="opt-badge" onclick="selectOption(this)">Juguemos béisbol mañana.</span><span class="opt-badge" onclick="selectOption(this)">Toquemos la base de datos.</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">Pongámonos en contacto brevemente para alinearnos.</span>
+                </div>
+
+            <div class="section-anchor" id="sec-42-phrasal-verbs-avanzados-de-tres-particulas"></div>
+            <h3 class="doc-h2">4.2. Phrasal verbs avanzados de tres particulas</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">A diferencia de los phrasal verbs simples, los de tres particulas son invariablemente inseparables y forman bloques idiomaticos fijos.</p>
+<ul class="doc-list"><li><strong><em>Come up with</em></strong> (idear, proponer una solucion creativa)</li></ul>
+<p class="doc-p">Ejemplo: She came up with a resilient failover mechanism during the crisis.</p>
+<p class="doc-p">Traduccion: Ideo un mecanismo de respaldo resiliente durante la crisis.</p>
+<ul class="doc-list"><li>Look down on (menospreciar o considerar inferior a alguien)</li></ul>
+<p class="doc-p">Ejemplo: Exceptional managers never look down on team members who ask for guidance.</p>
+<p class="doc-p">Traduccion: Los gerentes excepcionales nunca menosprecian a los miembros del equipo que piden orientacion.</p>
+<ul class="doc-list"><li><strong><em>Put up with</em></strong> (tolerar o sobrellevar una situacion incomoda)</li></ul>
+<p class="doc-p">Ejemplo: We cannot <strong><em>put up with</em></strong> unmitigated latency in our high-frequency transactions.</p>
+<p class="doc-p">Traduccion: No podemos tolerar una latencia sin mitigar en nuestras transacciones de alta frecuencia.</p>
+<ul class="doc-list"><li><strong><em>Face up to</em></strong> (afrontar con madurez una realidad incomoda)</li></ul>
+<p class="doc-p">Ejemplo: It is time to <strong><em>face up to</em></strong> the accumulated technical debt before adding features.</p>
+<p class="doc-p">Traduccion: Es hora de afrontar la deuda tecnica acumulada antes de agregar nuevas funciones.</p>
+<ul class="doc-list"><li>Get around to (encontrar el tiempo libre para llevar a cabo una tarea postergada)</li></ul>
+<p class="doc-p">Ejemplo: I finally got around to reviewing the architectural specifications.</p>
+<p class="doc-p">Traduccion: Finalmente encontre el tiempo para revisar las especificaciones de arquitectura.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. Idear una solución creativa: &#x27;come .......... with&#x27;</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">up</span>
+                </div>
+<div class="exercise-question">2. Tolerar una situación molesta: &#x27;put .......... with&#x27;</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">up</span>
+                </div>
+<div class="exercise-question">3. Afrontar una verdad incómoda: &#x27;face .......... to&#x27;</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">up</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. Los phrasal verbs de tres partículas son:</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">Inseparables en su totalidad</span><span class="opt-badge" onclick="selectOption(this)">Separables a voluntad</span><span class="opt-badge" onclick="selectOption(this)">Solo transitivos</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">Inseparables en su totalidad</span>
+                </div>
+
+            <div class="section-anchor" id="sec-43-colocaciones-avanzadas-de-alto-impacto"></div>
+            <h3 class="doc-h2">4.3. Colocaciones avanzadas de alto impacto</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">Combinaciones fijas de adverbio + adjetivo o verbo + sustantivo que transmiten precision linguistica superior.</p>
+<ul class="doc-list"><li><strong><em>Grossly underestimated</em></strong> (gravemente subestimado)</li></ul>
+<p class="doc-p">Ejemplo: The true cost of the cloud migration was <strong><em>grossly underestimated</em></strong> by the initial audit.</p>
+<ul class="doc-list"><li><strong><em>Staunchly defended</em></strong> (defendido con total firmeza)</li></ul>
+<p class="doc-p">Ejemplo: The principal architect <strong><em>staunchly defended</em></strong> the microservices decoupling strategy.</p>
+<ul class="doc-list"><li><strong><em>Play a pivotal role</em></strong> (desempenar un papel fundamental)</li></ul>
+<p class="doc-p">Ejemplo: Automated regression testing plays a pivotal role in high-velocity delivery.</p>
+<ul class="doc-list"><li><strong><em>Shed light on</em></strong> (arrojar luz o aclarar un fenomeno complejo)</li></ul>
+<p class="doc-p">Ejemplo: The newly aggregated distributed logs <strong><em>shed light on</em></strong> the memory leak.</p>
+<ul class="doc-list"><li><strong><em>Blissfully unaware</em></strong> (felizmente inconsciente de un peligro inminente)</li></ul>
+<p class="doc-p">Ejemplo: End users were <strong><em>blissfully unaware</em></strong> of the failover happening behind the scenes.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. Desempeñar un papel fundamental: &#x27;play a .......... role&#x27;</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">pivotal</span>
+                </div>
+<div class="exercise-question">2. Arrojar luz sobre un problema: &#x27;.......... light on&#x27;</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">shed</span>
+                </div>
+<div class="exercise-question">3. Gravemente subestimado: &#x27;grossly ..........&#x27;</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">underestimated</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. Estar &#x27;<strong><em>blissfully unaware</em></strong>&#x27; significa:</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">Ser felizmente ignorante de un peligro inminente.</span><span class="opt-badge" onclick="selectOption(this)">Estar muy bien informado.</span><span class="opt-badge" onclick="selectOption(this)">Tener miedo de un problema.</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">Ser felizmente ignorante de un peligro inminente.</span>
+                </div>
+
+            <div class="section-anchor" id="sec-44-falsos-cognados-sutiles-y-precision-lexica"></div>
+            <h3 class="doc-h2">4.4. Falsos cognados sutiles y precision lexica</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">Distinciones semanticas criticas que suelen delatar la interferencia del espanol en niveles intermedios.</p>
+<ul class="doc-list"><li><strong><em>Actually</em></strong> vs. <strong><em>Currently</em></strong></li></ul>
+<p class="doc-p">* <strong><code>Actually</code></strong> significa &#x27;en realidad, de hecho&#x27;. (Ejemplo: <strong><em>Actually</em></strong>, the bug was in the client cache).</p>
+<p class="doc-p">* <strong><code>Currently</code></strong> significa &#x27;actualmente, en este momento&#x27;. (Ejemplo: We are <strong><em>currently</em></strong> expanding into three new regions).</p>
+<ul class="doc-list"><li><strong><em>Eventually</em></strong> vs. Occasionally</li></ul>
+<p class="doc-p">* <strong><code>Eventually</code></strong> significa &#x27;al final, a la larga, tarde o temprano&#x27;. (Ejemplo: Hard work <strong><em>eventually</em></strong> pays off).</p>
+<p class="doc-p">* <strong><code>Occasionally</code></strong> significa &#x27;de vez en cuando, ocasionalmente&#x27;. (Ejemplo: We occasionally encounter connection drops).</p>
+<ul class="doc-list"><li><strong><em>Comprehensive</em></strong> vs. Understanding</li></ul>
+<p class="doc-p">* <strong><code>Comprehensive</code></strong> significa &#x27;exhaustivo, integral, que lo abarca todo&#x27;. (Ejemplo: A <strong><em>comprehensive</em></strong> audit).</p>
+<p class="doc-p">* <strong><code>Understanding</code></strong> significa &#x27;comprensivo, empatico&#x27;. (Ejemplo: My manager was very understanding).</p>
+<ul class="doc-list"><li><strong><em>Sensible</em></strong> vs. <strong><em>Sensitive</em></strong></li></ul>
+<p class="doc-p">* <strong><code>Sensible</code></strong> significa &#x27;sensato, razonable, con sentido comun&#x27;. (Ejemplo: That was a <strong><em>sensible</em></strong> engineering trade-off).</p>
+<p class="doc-p">* <strong><code>Sensitive</code></strong> significa &#x27;<strong><em>sensible</em></strong>, confidencial o susceptible&#x27;. (Ejemplo: This file contains <strong><em>sensitive</em></strong> customer data).</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. Para decir &#x27;actualmente (en este momento)&#x27;, la palabra correcta es: ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">currently</span>
+                </div>
+<div class="exercise-question">2. Para decir &#x27;a la larga / tarde o temprano&#x27;, la palabra correcta es: ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">eventually</span>
+                </div>
+<div class="exercise-question">3. Para decir &#x27;sensato / con sentido común&#x27;, la palabra correcta es: ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">sensible</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. La palabra &#x27;<strong><em>comprehensive</em></strong>&#x27; en inglés significa:</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">Exhaustivo</span><span class="opt-badge" onclick="selectOption(this)">integral</span><span class="opt-badge" onclick="selectOption(this)">Comprensivo</span><span class="opt-badge" onclick="selectOption(this)">tolerante</span><span class="opt-badge" onclick="selectOption(this)">Complicado</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">Exhaustivo / integral</span>
+                </div>
+
+                <div class="chapter-anchor chapter-separator" id="cap-5-escritura-y-estilo-avanzado"></div>
+                <h2 class="doc-h1">
+                  <span class="chapter-tag">CAPÍTULO</span>
+                  <span>5. ESCRITURA Y ESTILO AVANZADO</span>
+                </h2>
+
+            <div class="section-anchor" id="sec-51-control-del-registro-de-lo-conversacional-a-lo-"></div>
+            <h3 class="doc-h2">5.1. Control del registro: De lo conversacional a lo formal ejecutivo</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">Saber adaptar el tono exacto segun el canal (Slack vs. memorando oficial de directorio) es una competencia indispensable para perfiles senior.</p>
+<h4 class="doc-h3">Comparativa directa</h4>
+<ul class="doc-list"><li>Conversacional informal: We cannot afford to delay the launch any longer.</li><li>Formal C1: Further postponement of the launch would be detrimental to our market positioning.</li><li>Conversacional informal: I am writing to ask about the delivery date.</li><li>Formal C1: I am writing to enquire about the projected timeline for the aforementioned deliverables.</li><li>Conversacional informal: We fixed the problem right away.</li><li>Formal C1: The anomaly was identified and rectified with immediate effect.</li></ul>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. En registro formal, en lugar de &#x27;ask about&#x27; se suele usar: ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">enquire about</span>
+                </div>
+<div class="exercise-question">2. En registro formal, &#x27;fix the problem&#x27; se eleva a: &#x27;rectify the ..........&#x27;</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">anomaly / issue</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. En un correo ejecutivo, &#x27;We cannot do this now&#x27; se expresa mejor como:</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">Current constraints preclude us from undertaking this initiative.</span><span class="opt-badge" onclick="selectOption(this)">We have no time for your idea.</span><span class="opt-badge" onclick="selectOption(this)">Stop asking us for this.</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">Current constraints preclude us from undertaking this initiative.</span>
+                </div>
+
+            <div class="section-anchor" id="sec-52-cohesion-textual-compleja-y-variacion-sintactic"></div>
+            <h3 class="doc-h2">5.2. Cohesion textual compleja y variacion sintactica</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">Para evitar la monotonia de oraciones cortas Sujeto-Verbo-Objeto, utiliza conectores discursivos de alto nivel y estructuras paralelas.</p>
+<h4 class="doc-h3">Conectores formales avanzados</h4>
+<ul class="doc-list"><li><strong><em>Notwithstanding</em></strong> (a pesar de, no obstante):</li></ul>
+<p class="doc-p"><strong><em>Notwithstanding</em></strong> the unforeseen outage, customer trust remained exceptionally high.</p>
+<ul class="doc-list"><li><strong><em>Albeit</em></strong> (aunque, si bien):</li></ul>
+<p class="doc-p">The solution is effective, <strong><em>albeit</em></strong> demanding on memory consumption.</p>
+<ul class="doc-list"><li><strong><em>Whereas</em></strong> (mientras que, en contraste con):</li></ul>
+<p class="doc-p">Monolithic systems offer simplicity initially, <strong><em>whereas</em></strong> distributed architectures excel at horizontal scaling.</p>
+<ul class="doc-list"><li><strong><em>Hitherto</em></strong> (hasta ahora, hasta la fecha):</li></ul>
+<p class="doc-p"><strong><em>Hitherto</em></strong> uncharted territory, this new algorithm opens immense avenues for research.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. Conector formal que significa &#x27;a pesar de / no obstante&#x27;: ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">Notwithstanding</span>
+                </div>
+<div class="exercise-question">2. Conector formal que significa &#x27;si bien / aunque&#x27;: ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">Albeit</span>
+                </div>
+<div class="exercise-question">3. Conector formal que significa &#x27;hasta la fecha / hasta ahora&#x27;: ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">Hitherto</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. El conector &#x27;<strong><em>whereas</em></strong>&#x27; se utiliza principalmente para:</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">Contrastar dos realidades</span><span class="opt-badge" onclick="selectOption(this)">Indicar causa y efecto</span><span class="opt-badge" onclick="selectOption(this)">Dar un ejemplo</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">Contrastar dos realidades</span>
+                </div>
+
+            <div class="section-anchor" id="sec-53-eufemismos-y-lenguaje-asertivo"></div>
+            <h3 class="doc-h2">5.3. Eufemismos y lenguaje asertivo</h3>
+<h4 class="doc-h3">Idea general</h4>
+<p class="doc-p">El uso de eufemismos diplomaticos permite comunicar realidades complejas sin detonar conflictos innecesarios.</p>
+<ul class="doc-list"><li>&quot;We are streamlining our operations&quot; (Estamos reestructurando o reduciendo personal).</li><li>&quot;He was somewhat economical with the truth&quot; (No fue del todo sincero).</li><li>&quot;The feature underperformed expectations&quot; (La funcion tuvo un rendimiento deficiente).</li></ul>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. Eufemismo diplomático para despidos masivos: &#x27;.......... operations&#x27;</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">streamlining</span>
+                </div>
+<div class="exercise-question">2. Eufemismo para decir que alguien no dijo toda la verdad: &#x27;economical with the ..........&#x27;</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">truth</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. Decir que una función &#x27;underperformed expectations&#x27; significa que:</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">Tuvo un rendimiento deficiente o falló.</span><span class="opt-badge" onclick="selectOption(this)">Superó todas las expectativas.</span><span class="opt-badge" onclick="selectOption(this)">Funcionó a la perfección.</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">Tuvo un rendimiento deficiente o falló.</span>
+                </div>
+
+                <div class="chapter-anchor chapter-separator" id="cap-6-correccion-de-errores-del-hablante-avanzado"></div>
+                <h2 class="doc-h1">
+                  <span class="chapter-tag">CAPÍTULO</span>
+                  <span>6. CORRECCION DE ERRORES DEL HABLANTE AVANZADO</span>
+                </h2>
+
+            <div class="section-anchor" id="sec-61-calcos-sintacticos-sutiles-del-espanol"></div>
+            <h3 class="doc-h2">6.1. Calcos sintacticos sutiles del espanol</h3>
+<p class="doc-p">Error comun: &quot;I have a doubt.&quot;</p>
+<p class="doc-p">Correccion C1: &quot;I have a question&quot; o &quot;I have a concern.&quot;</p>
+<p class="doc-p">Explicacion: En ingles, <strong><code>doubt</code></strong> denota desconfianza o sospecha, no una simple pregunta o inquietud intelectual.</p>
+<p class="doc-p">Error comun: &quot;He explained me the architecture.&quot;</p>
+<p class="doc-p">Correccion C1: &quot;He explained the architecture to me.&quot;</p>
+<p class="doc-p">Explicacion: El verbo <strong><code>explain</code></strong> nunca toma un pronombre objeto directo de persona sin la preposicion <strong><code>to</code></strong>.</p>
+<p class="doc-p">Error comun: &quot;We need to discuss about the budget.&quot;</p>
+<p class="doc-p">Correccion C1: &quot;We need to discuss the budget.&quot;</p>
+<p class="doc-p">Explicacion: El verbo transitivo <strong><code>discuss</code></strong> toma el objeto directo de forma inmediata; agregar <strong><code>about</code></strong> es un calco del espanol &#x27;discutir sobre&#x27;.</p>
+<p class="doc-p">Error comun: &quot;It completely depends of the user traffic.&quot;</p>
+<p class="doc-p">Correccion C1: &quot;It completely depends on the user traffic.&quot;</p>
+<p class="doc-p">Explicacion: En ingles, la preposicion dependiente de <strong><code>depend</code></strong> es siempre <strong><code>on</code></strong> (o excepcionalmente <strong><code>upon</code></strong>), jamas <strong><code>of</code></strong>.</p>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. En lugar de &#x27;I have a doubt&#x27;, un nativo dice: &#x27;I have a ..........&#x27;</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">question</span>
+                </div>
+<div class="exercise-question">2. En lugar de &#x27;He explained me the bug&#x27;, se dice: &#x27;He explained the bug .......... me&#x27;</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">to</span>
+                </div>
+<div class="exercise-question">3. El verbo &#x27;discuss&#x27; nunca lleva la preposición: ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">about</span>
+                </div>
+<div class="exercise-question">4. La preposición dependiente de &#x27;depend&#x27; es: ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">on</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. ¿Cuál oración es gramaticalmente correcta en inglés?</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">We discussed the strategic budget.</span><span class="opt-badge" onclick="selectOption(this)">We discussed about the strategic budget.</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">We discussed the strategic budget.</span>
+                </div>
+
+            <div class="section-anchor" id="sec-62-regimen-preposicional-complejo"></div>
+            <h3 class="doc-h2">6.2. Regimen preposicional complejo</h3>
+<h4 class="doc-h3">Memoriza estos pares fijos de verbo + preposicion obligatoria:</h4>
+<ul class="doc-list"><li><strong><em>Consist of</em></strong> (constar de, estar compuesto por).</li><li><strong><em>Insist on</em></strong> (insistir en).</li><li><strong><em>Congratulate on</em></strong> (felicitar por un logro o acontecimiento).</li><li>Differ from (diferir de, ser distinto a).</li><li><strong><em>Comply with</em></strong> (cumplir con una norma o regulacion).</li><li><strong><em>Refrain from</em></strong> (abstenerse de realizar una accion).</li><li>Object to (oponerse a algo; nota que despues de &#x27;to&#x27; va gerundio o sustantivo: <strong><code>I object to paying extra</code></strong>).</li></ul>
+<h4 class="doc-h3">Practica guiada</h4>
+
+            <div class="callout-note">
+              <div class="callout-icon">💡</div>
+              <div class="callout-body">Completa los espacios con la forma correcta o **encierra la respuesta correcta** al estudiar en Word.</div>
+            </div>
+<div class="exercise-subheading"><strong><strong>Completa:</strong></strong></div>
+<div class="exercise-question">1. Consistir de: consist ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">of</span>
+                </div>
+<div class="exercise-question">2. Insistir en: insist ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">on</span>
+                </div>
+<div class="exercise-question">3. Cumplir con una norma: comply ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">with</span>
+                </div>
+<div class="exercise-question">4. Abstenerse de: refrain ..........</div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Respuesta sugerida:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">from</span>
+                </div>
+<div class="exercise-subheading"><strong><strong>Encierra la correcta:</strong></strong></div>
+<div class="exercise-question">1. La frase correcta con &#x27;congratulate&#x27; es:</div>
+<div class="exercise-options"><span class="opt-badge" onclick="selectOption(this)">I congratulated him on his promotion.</span><span class="opt-badge" onclick="selectOption(this)">I congratulated him for his promotion.</span></div>
+
+                <div class="exercise-answer-box">
+                  <span class="ans-label">Correcta:</span>
+                  <button class="btn-reveal" onclick="toggleAnswer(this)" title="Haz clic para ver la solución">👁️ Revelar solución</button>
+                  <span class="ans-text hidden-answer">I congratulated him on his promotion.</span>
+                </div>
+
+                <div class="chapter-anchor chapter-separator" id="cap-7-como-estudiar-este-material-leyendo-metodo-kale-"></div>
+                <h2 class="doc-h1">
+                  <span class="chapter-tag">CAPÍTULO</span>
+                  <span>7. COMO ESTUDIAR ESTE MATERIAL LEYENDO (METODO KALE ANDERS)</span>
+                </h2>
+<ol class="doc-ordered-list"><li>Comprension global sin traducir</li></ol>
+<p class="doc-p">Lee cada seccion de forma fluida de principio a fin sin interrumpir la lectura para buscar palabras individuales en el diccionario. Confia en el contexto para absorber el significado holistico.</p>
+<ol class="doc-ordered-list"><li>Identificacion de bloques (Chunks)</li></ol>
+<p class="doc-p">Vuelve a leer el texto identificando y subrayando patrones de 3 a 5 palabras (colocaciones, phrasal verbs, conectores). Almacena estos bloques completos en tu memoria de trabajo, no palabras aisladas.</p>
+<ol class="doc-ordered-list"><li>Shadowing y lectura en voz alta con connected speech</li></ol>
+<p class="doc-p">Lee las oraciones de ejemplo imitando activamente la union de consonantes con vocales (<strong><em>linking</em></strong>), la <strong><em>elision</em></strong> y el ritmo acentual. Graba tu voz dos minutos al dia y comparala objetivamente con la cadencia de un hablante nativo.</p>
+<ol class="doc-ordered-list"><li>Produccion activa e integracion personal</li></ol>
+<p class="doc-p">Escribe tres oraciones nuevas utilizando cada una de las estructuras avanzadas aprendidas (inversiones, condicionales mixtos, <strong><em>cleft sentences</em></strong>), pero contextualizadas en tu propio trabajo, metas o experiencia cotidiana.</p>
+<ol class="doc-ordered-list"><li>Revision espaciada regular</li></ol>
+<p class="doc-p">Programa repasos estrategicos utilizando la regla de los tres intervalos: 24 horas despues (Repaso 1), 3 dias despues (Repaso 2) y 7 dias despues (Repaso 3). De este modo consolidaras las estructuras directamente en la memoria a largo plazo.</p>
+        </div>
+
+        <!-- Navegación final del documento -->
+        <div style="margin-top: 50px; padding: 24px; border-radius: 14px; background: var(--bg-alt); border: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+          <div>
+            <h4 style="font-size: 16px; font-weight: 800; color: var(--text);">¿Listo para continuar tu estudio?</h4>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Practica tu vocabulario en el Dashboard con Flashcards SRS, Quizzes o explora otros niveles.</p>
+          </div>
+          <a href="index.html" class="btn-return-app" style="padding: 10px 22px; font-size: 14px;">
+            ← Volver a la App Principal
+          </a>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Botón Volver Arriba -->
+  <button class="btn-back-to-top" id="btn-back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Subir al inicio">
+    ↑
+  </button>
+
+  <script>
+    // Inicializar Tema
+    function initTheme() {
+      const saved = localStorage.getItem('lexicore_theme') || 'light';
+      if (saved === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+      }
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      document.documentElement.classList.toggle('light', !isDark);
+      localStorage.setItem('lexicore_theme', isDark ? 'dark' : 'light');
+    }
+
+    // Soluciones en Ejercicios
+    function toggleAnswer(btn) {
+      const ansSpan = btn.nextElementSibling;
+      if (!ansSpan) return;
+      const isHidden = ansSpan.classList.contains('hidden-answer');
+      if (isHidden) {
+        ansSpan.classList.remove('hidden-answer');
+        btn.textContent = '🙈 Ocultar solución';
+      } else {
+        ansSpan.classList.add('hidden-answer');
+        btn.textContent = '👁️ Revelar solución';
+      }
+    }
+
+    // Selección interactiva de opciones
+    function selectOption(el) {
+      const parent = el.parentElement;
+      parent.querySelectorAll('.opt-badge').forEach(b => b.classList.remove('selected'));
+      el.classList.add('selected');
+    }
+
+    // ToC en Móviles
+    function toggleMobileToc() {
+      const sidebar = document.getElementById('sidebar-toc');
+      if (sidebar) sidebar.classList.toggle('open');
+    }
+
+    function closeMobileToc() {
+      const sidebar = document.getElementById('sidebar-toc');
+      if (sidebar && window.innerWidth <= 900) {
+        sidebar.classList.remove('open');
+      }
+    }
+
+    // Filtrar temas en el ToC
+    function filterToc(query) {
+      const q = query.toLowerCase().trim();
+      document.querySelectorAll('#toc-list li').forEach(li => {
+        const text = li.textContent.toLowerCase();
+        li.style.display = (!q || text.includes(q)) ? 'block' : 'none';
+      });
+    }
+
+    // Botón Volver Arriba
+    window.addEventListener('scroll', () => {
+      const btn = document.getElementById('btn-back-to-top');
+      if (window.scrollY > 400) {
+        btn.classList.add('visible');
+      } else {
+        btn.classList.remove('visible');
+      }
+    });
+
+    initTheme();
+  </script>
+</body>
+</html>

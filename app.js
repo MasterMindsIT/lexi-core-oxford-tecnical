@@ -174,6 +174,8 @@ const NavigationController = (() => {
       TechHubController.init();
     } else if (viewId === 'settings') {
       SettingsController.init();
+    } else if (viewId === 'resources') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     // Re-renderizar iconos de Lucide

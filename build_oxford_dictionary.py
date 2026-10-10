@@ -404,6 +404,29 @@ def build_printable_html(dataset, output_path):
       background: #3730a3;
     }}
 
+    .btn-return-app {{
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--primary);
+      color: white;
+      border: 1px solid var(--primary);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13px;
+      text-decoration: none;
+      transition: all 0.2s;
+      white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }}
+
+    .btn-return-app:hover {{
+      background: #3730a3;
+      transform: translateX(-2px);
+      color: white;
+    }}
+
     /* Contenedor principal de libro */
     .book-container {{
       max-width: 1200px;
@@ -668,7 +691,12 @@ def build_printable_html(dataset, output_path):
 
   <!-- Barra de utilidades web -->
   <header class="top-toolbar">
-    <div class="title">📖 LexiCore 80/20 &bull; Oxford 3000 Study Book</div>
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="index.html" class="btn-return-app" title="Regresar a LexiCore">
+        ← Volver a LexiCore App
+      </a>
+      <div class="title">📖 LexiCore 80/20 &bull; Oxford 3000 Study Book</div>
+    </div>
     <div style="display: flex; align-items: center; gap: 12px;">
       <input type="text" id="filter-input" class="search-input" placeholder="Buscar palabra en inglés o español..." oninput="filterWords(this.value)">
       <button class="btn-print" onclick="window.print()">
